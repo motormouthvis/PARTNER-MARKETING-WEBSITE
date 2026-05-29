@@ -97,38 +97,41 @@
           </p>
         </div>
 
-        <div class="demo-controls">
-          <div class="demo-toggle">
-            <button class="toggle-btn active" data-mode="embed">Embedded on Listing</button>
-            <button class="toggle-btn" data-mode="popup">Popup Explorer</button>
-          </div>
+        <!-- Demo Tabs -->
+        <div class="demo-tabs">
+          <button class="demo-tab active" data-mode="embed">Embedded Explorer</button>
+          <button class="demo-tab" data-mode="popup">Popup Explorer</button>
         </div>
 
+        <!-- Embedded View -->
         <div id="demo-embed-view" class="demo-view active">
-          <div class="demo-listing">
+          <div class="demo-listing full-width-demo">
             <div class="demo-listing__header">
               <div class="demo-listing__photo"></div>
               <div class="demo-listing__info">
-                <div class="demo-listing__price">$685,000</div>
-                <div class="demo-listing__meta">4 bd · 3 ba · 2,480 sq ft · Austin, TX</div>
+                <div class="demo-listing__price">$1,295,000</div>
+                <div class="demo-listing__meta">4 bd · 3.5 ba · 3,200 sq ft · St. Lucie Village, FL</div>
+                <div class="demo-listing__address">3309 N. Indian River Drive, St. Lucie Village, FL 34946</div>
               </div>
             </div>
 
-            <!-- Real Embed Explorer - Full width -->
-            <div id="dn-explorer" style="width: 100%; min-height: 320px;"></div>
+            <!-- Real full-width Embedded Explorer -->
+            <div id="dn-explorer" style="width: 100%;"></div>
           </div>
           <p class="demo-caption">
-            <strong>Embedded Explorer</strong> (Staging) — This is the real embed code.
+            This is how the <strong>Embedded Explorer</strong> appears directly on a listing page (full width so map + data show together).
           </p>
         </div>
 
+        <!-- Popup View -->
         <div id="demo-popup-view" class="demo-view">
           <div class="demo-listing">
             <div class="demo-listing__header">
               <div class="demo-listing__photo"></div>
               <div class="demo-listing__info">
-                <div class="demo-listing__price">$685,000</div>
-                <div class="demo-listing__meta">4 bd · 3 ba · 2,480 sq ft · Austin, TX</div>
+                <div class="demo-listing__price">$1,295,000</div>
+                <div class="demo-listing__meta">4 bd · 3.5 ba · 3,200 sq ft · St. Lucie Village, FL</div>
+                <div class="demo-listing__address">3309 N. Indian River Drive, St. Lucie Village, FL 34946</div>
               </div>
             </div>
 
@@ -137,7 +140,7 @@
             </button>
           </div>
           <p class="demo-caption">
-            <strong>Popup Explorer</strong> (Staging) — Click the button to open the real popup version.
+            This is how the <strong>Popup Explorer</strong> is triggered from a listing page.
           </p>
         </div>
       </div>
@@ -897,6 +900,59 @@
       </div>
     </footer>
 
+    <!-- Additional clean toggle script (overrides older logic) -->
+    <script>
+      (function() {
+        const embedView = document.getElementById('demo-embed-view');
+        const popupView = document.getElementById('demo-popup-view');
+        const tabs = document.querySelectorAll('.demo-tab');
+        const launchBtn = document.getElementById('launch-popup-btn');
+        const modal = document.getElementById('explorer-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+
+        if (!tabs.length) return;
+
+        tabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            const mode = tab.dataset.mode;
+
+            if (mode === 'embed') {
+              embedView.style.display = 'block';
+              popupView.style.display = 'none';
+            } else {
+              embedView.style.display = 'none';
+              popupView.style.display = 'block';
+            }
+          });
+        });
+
+        // Default to Embedded
+        embedView.style.display = 'block';
+        popupView.style.display = 'none';
+
+        if (launchBtn) {
+          launchBtn.addEventListener('click', () => {
+            if (window.DNExplorer && typeof window.DNExplorer.open === 'function') {
+              window.DNExplorer.open();
+            } else if (modal) {
+              modal.style.display = 'block';
+            }
+          });
+        }
+
+        if (closeModalBtn && modal) {
+          closeModalBtn.addEventListener('click', () => modal.style.display = 'none');
+        }
+        if (modal) {
+          const overlay = modal.querySelector('.explorer-modal__overlay');
+          if (overlay) overlay.addEventListener('click', () => modal.style.display = 'none');
+        }
+      })();
+    </script>
+
     <!-- Real Production Explorer Scripts (in body) -->
     <!-- Embed -->
     <script src="https://app.dreamneighborhood.com/explorer/inline.js" async></script>
@@ -933,7 +989,7 @@
       (function() {
         const embedView = document.getElementById('demo-embed-view');
         const popupView = document.getElementById('demo-popup-view');
-        const toggleBtns = document.querySelectorAll('.demo-toggle .toggle-btn');
+        const tabs = document.querySelectorAll('.demo-tab');
         const launchBtn = document.getElementById('launch-popup-btn');
         const modal = document.getElementById('explorer-modal');
         const closeModalBtn = document.getElementById('close-modal');
