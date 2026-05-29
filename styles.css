@@ -451,8 +451,8 @@ a {
 
 /* Extra height for Bill's Partners hero so the rich skyline isn't squished */
 .hero--rich-skyline {
-  padding-bottom: 120px;
-  min-height: 620px;
+  padding-bottom: 140px;
+  min-height: 680px;
 }
 
 @media (min-width: 900px) {
@@ -690,7 +690,11 @@ a {
 
 /* ---------- SECTION BASE ---------- */
 .section {
-  padding: 100px 0;
+  padding: 96px 0;
+}
+
+.section--alt {
+  background: #f8fafc;
 }
 
 .section--alt {
@@ -2604,6 +2608,15 @@ a.review-link[href="/"]:hover {
   font-size: 15px;
   color: #475569;
   margin-top: 16px;
+}
+
+/* Section-level CTAs for better distribution */
+.section-cta {
+  margin-top: 32px;
+  text-align: center;
+}
+.section-cta .btn {
+  margin: 0 8px 8px 0;
 }
 .two-col-grid {
   columns: 2;
