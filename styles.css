@@ -2418,3 +2418,22 @@ a {
   font-size: 15px;
   line-height: 1.65;
 }
+
+/* =========================================================
+   Review mode switcher (temporary for /bill/ review version)
+   ========================================================= */
+.review-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: #127d6b;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: #ebf8d1;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.review-link:hover {
+  background: #d5f25e;
+  color: #0d5a4d;
+}
