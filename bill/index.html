@@ -114,23 +114,12 @@
               </div>
             </div>
 
-            <div class="demo-embed-widget">
-              <div class="widget-header">
-                <span class="widget-title">Neighborhood Explorer</span>
-                <span class="widget-badge">Live</span>
-              </div>
-              <div class="widget-body">
-                <div class="widget-mock-map"></div>
-                <div class="widget-stats">
-                  <div class="widget-stat"><strong>38</strong> data points</div>
-                  <div class="widget-stat">Walk Score: <strong>92</strong></div>
-                  <div class="widget-stat">Schools: <strong>A+</strong></div>
-                </div>
-                <button class="widget-btn">Explore full neighborhood</button>
-              </div>
-            </div>
+            <!-- Real Embed will be injected here by JS -->
+            <div id="demo-embed-container" class="dn-embed-wrapper"></div>
           </div>
-          <p class="demo-caption">This is how the explorer appears embedded directly on a listing page.</p>
+          <p class="demo-caption">
+            This is the <strong>embedded</strong> version of the Neighborhood Explorer (using staging scripts).
+          </p>
         </div>
 
         <div id="demo-popup-view" class="demo-view">
@@ -147,7 +136,9 @@
               Open Neighborhood Explorer (Popup)
             </button>
           </div>
-          <p class="demo-caption">This is the popup experience triggered from a listing page.</p>
+          <p class="demo-caption">
+            This is the <strong>popup</strong> version of the Neighborhood Explorer (using staging scripts).
+          </p>
         </div>
       </div>
     </section>
@@ -931,50 +922,94 @@
     </div>
 
     <script>
-      // Simple demo toggle + modal for "See How It Works"
+      // "See How It Works" - Real Staging Scripts with Toggle
       (function() {
         const embedView = document.getElementById('demo-embed-view');
         const popupView = document.getElementById('demo-popup-view');
         const toggleBtns = document.querySelectorAll('.demo-toggle .toggle-btn');
-        const launchBtn = document.getElementById('launch-popup-btn');
-        const modal = document.getElementById('explorer-modal');
-        const closeModal = document.getElementById('close-modal');
 
-        // Toggle between embed and popup views
+        const embedContainer = document.getElementById('demo-embed-container');
+        const popupContainer = document.getElementById('demo-popup-container');
+        const launchBtn = document.getElementById('launch-popup-btn');
+
+        const EMBED_SCRIPT = 'https://staging.dreamneighborhood.com/explorer/inline.js';
+        const POPUP_SCRIPT = 'https://staging.dreamneighborhood.com/explorer/sdk.js';
+
+        let embedLoaded = false;
+        let popupLoaded = false;
+
+        function loadScript(src, onLoad) {
+          // Prevent loading the same script twice
+          if (document.querySelector(`script[src="${src}"]`)) {
+            if (onLoad) onLoad();
+            return;
+          }
+          const script = document.createElement('script');
+          script.src = src;
+          script.async = true;
+          if (onLoad) script.onload = onLoad;
+          document.head.appendChild(script);
+        }
+
+        function showEmbed() {
+          embedView.style.display = 'block';
+          popupView.style.display = 'none';
+
+          if (!embedLoaded) {
+            embedContainer.innerHTML = `
+              <div id="dn-explorer"></div>
+            `;
+            loadScript(EMBED_SCRIPT, () => {
+              embedLoaded = true;
+              console.log('%c[DN Demo] Staging Embed script loaded.', 'color:#166534');
+            });
+          }
+        }
+
+        function showPopup() {
+          embedView.style.display = 'none';
+          popupView.style.display = 'block';
+
+          if (!popupLoaded) {
+            popupContainer.innerHTML = ''; // Clear any previous content
+            loadScript(POPUP_SCRIPT, () => {
+              popupLoaded = true;
+              console.log('%c[DN Demo] Staging SDK (popup) loaded.', 'color:#166534');
+            });
+          }
+        }
+
+        // Tab toggle logic
         toggleBtns.forEach(btn => {
           btn.addEventListener('click', () => {
             toggleBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            const mode = btn.dataset.mode;
-            if (mode === 'embed') {
-              embedView.classList.add('active');
-              popupView.classList.remove('active');
+            if (btn.dataset.mode === 'embed') {
+              showEmbed();
             } else {
-              embedView.classList.remove('active');
-              popupView.classList.add('active');
+              showPopup();
             }
           });
         });
 
-        // Open popup modal
+        // Initial state: show embed
+        showEmbed();
+
+        // Popup trigger button
         if (launchBtn) {
           launchBtn.addEventListener('click', () => {
-            modal.style.display = 'block';
-          });
-        }
-
-        // Close modal
-        if (closeModal) {
-          closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
-          });
-        }
-
-        // Close modal when clicking overlay
-        if (modal) {
-          modal.querySelector('.explorer-modal__overlay').addEventListener('click', () => {
-            modal.style.display = 'none';
+            // The SDK should handle this. Common patterns:
+            if (window.DNExplorer && typeof window.DNExplorer.open === 'function') {
+              window.DNExplorer.open();
+            } else if (typeof window.openDNExplorer === 'function') {
+              window.openDNExplorer();
+            } else {
+              // Fallback for testing
+              alert('The popup SDK has loaded. In production this button would open the full Neighborhood Explorer.\n\n(If nothing happens, the SDK may require a specific trigger element or data attribute on the page.)');
+              console.log('%c[DN Demo] Available window keys containing "dn" or "explorer":', 'color:#64748b',
+                Object.keys(window).filter(k => /dn|explorer/i.test(k)));
+            }
           });
         }
       })();
