@@ -34,7 +34,6 @@
         <nav class="nav__links" aria-label="Primary">
           <a href="/bill/" class="nav__main">For Realtors &amp; Brokerages</a>
           <a href="/bill/partners.html" class="nav__main">For Partners</a>
-          <a href="#see-how-it-works" class="nav__main">See How It Works</a>
           <a href="/" class="review-link">Switch to Main Site</a>
         </nav>
 
@@ -76,19 +75,10 @@
           </ul>
 
           <div class="hero__ctas">
-            <a class="btn btn--primary btn--lg" href="#see-how-it-works">See It In Action</a>
+            <a class="btn btn--primary btn--lg" href="#" data-video-open>Watch Video</a>
             <a class="btn btn--lime btn--lg" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ============== SEE HOW IT WORKS (clean embedded only) ============== -->
-    <section id="see-how-it-works" class="section">
-      <div class="container" style="max-width: 100%; padding: 0;">
-        <!-- Clean full-width embedded explorer only -->
-        <div id="dn-explorer" style="width: 100%;"></div>
-        <script src="https://app.dreamneighborhood.com/explorer/inline.js" async></script>
       </div>
     </section>
 
@@ -334,7 +324,7 @@
 
           <div class="hero__ctas" style="margin-top: 24px">
             <a class="btn btn--primary btn--lg" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
-            <a class="btn btn--ghost btn--lg" href="#see-how-it-works">Try the Widget</a>
+            <a class="btn btn--ghost btn--lg" href="#" data-video-open>Watch Video</a>
           </div>
         </div>
 
@@ -656,7 +646,7 @@
               <li>Invite all your Team Members</li>
               <li>Brokerage-wide widgets &amp; templates</li>
               <li>Lead &amp; usage analytics</li>
-              <li><strong>25,000 views per month</strong></li>
+              <li><strong>Up to 25,000 views per month</strong></li>
               <li>24/7 Support</li>
             </ul>
             <a class="btn btn--lime" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
@@ -814,8 +804,6 @@
         <div class="footer__cols">
           <div>
             <h4>Product</h4>
-            <a href="#see-how-it-works">Neighborhood Explorer</a>
-            <a href="#demo">PDF Reports</a>
             <a href="#lead-forms">Lead Forms</a>
             <a href="#pricing">Pricing</a>
           </div>
@@ -823,11 +811,9 @@
             <h4>Partners</h4>
             <a href="/bill/partners.html">Become a Partner</a>
             <a href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
-            <a href="#faq">Documentation</a>
           </div>
           <div>
             <h4>Company</h4>
-            <a href="#why">About</a>
             <a href="#contact">Contact</a>
             <a href="mailto:support@dreamneighborhood.com"
               >support@dreamneighborhood.com</a
@@ -845,5 +831,54 @@
         </div>
       </div>
     </footer>
+
+    <!-- ============== VIDEO MODAL (button-triggered, no fixed preview) ============== -->
+    <style>
+      .dnv-modal{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;padding:24px}
+      .dnv-modal[hidden]{display:none}
+      .dnv-modal__overlay{position:absolute;inset:0;background:rgba(8,20,16,.78)}
+      .dnv-modal__dialog{position:relative;width:min(960px,100%)}
+      .dnv-modal__frame{position:relative;padding-top:56.25%;background:#000;border-radius:16px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.45)}
+      .dnv-modal__frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+      .dnv-modal__close{position:absolute;top:-46px;right:0;width:40px;height:40px;border:0;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:26px;line-height:1;cursor:pointer}
+      .dnv-modal__close:hover{background:rgba(255,255,255,.26)}
+    </style>
+    <div id="dnv-modal" class="dnv-modal" hidden>
+      <div class="dnv-modal__overlay" data-dnv-close></div>
+      <div class="dnv-modal__dialog" role="dialog" aria-modal="true" aria-label="Video player">
+        <button class="dnv-modal__close" type="button" data-dnv-close aria-label="Close video">&times;</button>
+        <div class="dnv-modal__frame">
+          <iframe id="dnv-iframe" src="" title="Dream Neighborhood video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var VIDEO_ID = 'j01aKyHJ2E8';
+        var modal = document.getElementById('dnv-modal');
+        var iframe = document.getElementById('dnv-iframe');
+        if (!modal || !iframe) return;
+        function openVideo(e) {
+          if (e) e.preventDefault();
+          iframe.src = 'https://www.youtube-nocookie.com/embed/' + VIDEO_ID + '?autoplay=1&rel=0';
+          modal.hidden = false;
+          document.body.style.overflow = 'hidden';
+        }
+        function closeVideo() {
+          modal.hidden = true;
+          iframe.src = '';
+          document.body.style.overflow = '';
+        }
+        document.querySelectorAll('[data-video-open]').forEach(function (btn) {
+          btn.addEventListener('click', openVideo);
+        });
+        modal.querySelectorAll('[data-dnv-close]').forEach(function (el) {
+          el.addEventListener('click', closeVideo);
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && !modal.hidden) closeVideo();
+        });
+      })();
+    </script>
   </body>
 </html>

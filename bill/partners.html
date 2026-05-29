@@ -34,7 +34,6 @@
         <nav class="nav__links" aria-label="Primary">
           <a href="/bill/" class="nav__main">For Realtors &amp; Brokerages</a>
           <a href="/bill/partners.html" class="nav__main">For Partners</a>
-          <a href="/bill/#see-how-it-works" class="nav__main">See How It Works</a>
           <a href="/" class="review-link">Switch to Main Site</a>
         </nav>
 
@@ -76,6 +75,7 @@
           <div class="hero__ctas">
             <a class="btn btn--primary btn--lg" href="#contact">Become a Partner</a>
             <a class="btn btn--lime btn--lg" href="#contact">Book a Demo</a>
+            <a class="btn btn--ghost btn--lg" href="#" data-video-open>Watch Video</a>
           </div>
         </div>
 
@@ -447,19 +447,17 @@
         <div class="footer__cols">
           <div>
             <h4>Product</h4>
-            <a href="#">Neighborhood Explorer</a>
-            <a href="#">Documentation</a>
+            <a href="/bill/#pricing">Pricing</a>
           </div>
           <div>
             <h4>Partners</h4>
-            <a href="#">Become a Partner</a>
-            <a href="#">Book a Demo</a>
+            <a href="#contact">Become a Partner</a>
+            <a href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
           </div>
           <div>
             <h4>Company</h4>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-            <a href="#">support@dreamneighborhood.com</a>
+            <a href="#contact">Contact</a>
+            <a href="mailto:support@dreamneighborhood.com">support@dreamneighborhood.com</a>
           </div>
         </div>
       </div>
@@ -467,11 +465,60 @@
         <div class="container footer__legal-inner">
           <span>© 2026 Dream Neighborhood. All rights reserved.</span>
           <div>
-            <a href="#">Terms of Service</a>
-            <a href="#">Privacy Policy</a>
+            <a href="https://www.dreamneighborhood.com/terms-of-service" target="_blank" rel="noopener">Terms of Service</a>
+            <a href="https://www.dreamneighborhood.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
           </div>
         </div>
       </div>
     </footer>
+
+    <!-- ============== VIDEO MODAL (button-triggered, no fixed preview) ============== -->
+    <style>
+      .dnv-modal{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;padding:24px}
+      .dnv-modal[hidden]{display:none}
+      .dnv-modal__overlay{position:absolute;inset:0;background:rgba(8,20,16,.78)}
+      .dnv-modal__dialog{position:relative;width:min(960px,100%)}
+      .dnv-modal__frame{position:relative;padding-top:56.25%;background:#000;border-radius:16px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.45)}
+      .dnv-modal__frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+      .dnv-modal__close{position:absolute;top:-46px;right:0;width:40px;height:40px;border:0;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:26px;line-height:1;cursor:pointer}
+      .dnv-modal__close:hover{background:rgba(255,255,255,.26)}
+    </style>
+    <div id="dnv-modal" class="dnv-modal" hidden>
+      <div class="dnv-modal__overlay" data-dnv-close></div>
+      <div class="dnv-modal__dialog" role="dialog" aria-modal="true" aria-label="Video player">
+        <button class="dnv-modal__close" type="button" data-dnv-close aria-label="Close video">&times;</button>
+        <div class="dnv-modal__frame">
+          <iframe id="dnv-iframe" src="" title="Dream Neighborhood partner video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var VIDEO_ID = '4Vixhq4Vsig';
+        var modal = document.getElementById('dnv-modal');
+        var iframe = document.getElementById('dnv-iframe');
+        if (!modal || !iframe) return;
+        function openVideo(e) {
+          if (e) e.preventDefault();
+          iframe.src = 'https://www.youtube-nocookie.com/embed/' + VIDEO_ID + '?autoplay=1&rel=0';
+          modal.hidden = false;
+          document.body.style.overflow = 'hidden';
+        }
+        function closeVideo() {
+          modal.hidden = true;
+          iframe.src = '';
+          document.body.style.overflow = '';
+        }
+        document.querySelectorAll('[data-video-open]').forEach(function (btn) {
+          btn.addEventListener('click', openVideo);
+        });
+        modal.querySelectorAll('[data-dnv-close]').forEach(function (el) {
+          el.addEventListener('click', closeVideo);
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && !modal.hidden) closeVideo();
+        });
+      })();
+    </script>
   </body>
 </html>
