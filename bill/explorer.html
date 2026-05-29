@@ -3,11 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex" />
-    <title>Neighborhood Explorer — Dream Neighborhood</title>
+    <title>See It In Action — Dream Neighborhood</title>
     <meta
       name="description"
-      content="Standalone embedded Neighborhood Explorer demo page."
+      content="See the Dream Neighborhood Explorer in action — a full-width example of the embedded neighborhood explorer."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,12 +19,83 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <!-- Standalone, intentionally unlinked page that hosts ONLY the embedded explorer. -->
-    <section class="section">
-      <div class="container" style="max-width: 100%; padding: 0;">
-        <div id="dn-explorer" style="width: 100%;"></div>
-        <script src="https://app.dreamneighborhood.com/explorer/inline.js" async></script>
+    <!-- ============== NAVIGATION ============== -->
+    <header class="nav">
+      <div class="container nav__inner">
+        <a class="nav__logo" href="/bill/">
+          <img
+            src="https://cdn.prod.website-files.com/68d4266c1bda64aac3888ce1/68d4278d2e08c6f1a213ea51_nav_logo.svg"
+            alt="Dream Neighborhood"
+            width="220"
+            height="54"
+          />
+        </a>
+
+        <nav class="nav__links" aria-label="Primary">
+          <a href="/bill/" class="nav__main">For Realtors &amp; Brokerages</a>
+          <a href="/bill/partners.html" class="nav__main">For Partners</a>
+          <a href="/bill/explorer.html" class="nav__main" aria-current="page">See It In Action</a>
+          <a href="/" class="review-link">Switch to Main Site</a>
+        </nav>
+
+        <div class="nav__cta">
+          <a class="btn btn--ghost" href="https://realtor.dreamneighborhood.com/accounts/login/" target="_blank" rel="noopener">Log in</a>
+          <a class="btn btn--primary" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
+        </div>
       </div>
+    </header>
+
+    <!-- ============== EMBEDDED EXPLORER ============== -->
+    <section class="section">
+      <div class="container" style="text-align: center;">
+        <h1 class="section-title">Example Embedded Explorer</h1>
+      </div>
+
+      <!-- Full-width embedded Neighborhood Explorer -->
+      <div id="dn-explorer" style="width: 100%;"></div>
+      <script src="https://app.dreamneighborhood.com/explorer/inline.js" async></script>
     </section>
+
+    <!-- ============== FOOTER ============== -->
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="footer__brand">
+          <img
+            src="https://cdn.prod.website-files.com/68d4266c1bda64aac3888ce1/68d4278d2e08c6f1a213ea51_nav_logo.svg"
+            alt="Dream Neighborhood"
+            width="200"
+            height="48"
+          />
+          <p>The #1 neighborhood data provider for real estate.</p>
+        </div>
+
+        <div class="footer__cols">
+          <div>
+            <h4>Product</h4>
+            <a href="/bill/#lead-forms">Lead Forms</a>
+            <a href="/bill/#pricing">Pricing</a>
+          </div>
+          <div>
+            <h4>Partners</h4>
+            <a href="/bill/partners.html">Become a Partner</a>
+            <a href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
+          </div>
+          <div>
+            <h4>Company</h4>
+            <a href="/bill/#contact">Contact</a>
+            <a href="mailto:support@dreamneighborhood.com">support@dreamneighborhood.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <div class="container footer__legal-inner">
+          <span>© 2026 Dream Neighborhood. All rights reserved.</span>
+          <div>
+            <a href="https://www.dreamneighborhood.com/terms-of-service" target="_blank" rel="noopener">Terms of Service</a>
+            <a href="https://www.dreamneighborhood.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

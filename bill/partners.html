@@ -34,6 +34,7 @@
         <nav class="nav__links" aria-label="Primary">
           <a href="/bill/" class="nav__main">For Realtors &amp; Brokerages</a>
           <a href="/bill/partners.html" class="nav__main">For Partners</a>
+          <a href="/bill/explorer.html" class="nav__main">See It In Action</a>
           <a href="/" class="review-link">Switch to Main Site</a>
         </nav>
 
@@ -487,26 +488,29 @@
       <div class="dnv-modal__overlay" data-dnv-close></div>
       <div class="dnv-modal__dialog" role="dialog" aria-modal="true" aria-label="Video player">
         <button class="dnv-modal__close" type="button" data-dnv-close aria-label="Close video">&times;</button>
-        <div class="dnv-modal__frame">
-          <iframe id="dnv-iframe" src="" title="Dream Neighborhood partner video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
+        <div class="dnv-modal__frame" id="dnv-frame"></div>
       </div>
     </div>
     <script>
       (function () {
         var VIDEO_ID = '4Vixhq4Vsig';
         var modal = document.getElementById('dnv-modal');
-        var iframe = document.getElementById('dnv-iframe');
-        if (!modal || !iframe) return;
+        var frame = document.getElementById('dnv-frame');
+        if (!modal || !frame) return;
         function openVideo(e) {
           if (e) e.preventDefault();
-          iframe.src = 'https://www.youtube-nocookie.com/embed/' + VIDEO_ID + '?autoplay=1&rel=0';
+          // Rebuild the iframe each time so the video plays on every open.
+          frame.innerHTML =
+            '<iframe src="https://www.youtube-nocookie.com/embed/' + VIDEO_ID +
+            '?autoplay=1&rel=0" title="Dream Neighborhood partner video" ' +
+            'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+            'allowfullscreen></iframe>';
           modal.hidden = false;
           document.body.style.overflow = 'hidden';
         }
         function closeVideo() {
           modal.hidden = true;
-          iframe.src = '';
+          frame.innerHTML = '';
           document.body.style.overflow = '';
         }
         document.querySelectorAll('[data-video-open]').forEach(function (btn) {
