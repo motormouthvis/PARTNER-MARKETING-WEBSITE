@@ -2646,3 +2646,29 @@ a.review-link[href="/"]:hover {
     columns: 1;
   }
 }
+
+/* New Benefits Grid for Value section */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+.benefit {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+.benefit h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #127d6b;
+}
+.benefit p {
+  margin: 0;
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.4;
+}
