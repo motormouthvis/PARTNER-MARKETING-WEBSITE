@@ -105,13 +105,18 @@
 
         <!-- Embedded View -->
         <div id="demo-embed-view" class="demo-view active">
-          <div class="demo-listing full-width-demo">
-            <div class="demo-listing__header">
-              <div class="demo-listing__photo"></div>
-              <div class="demo-listing__info">
-                <div class="demo-listing__price">$1,295,000</div>
-                <div class="demo-listing__meta">4 bd · 3.5 ba · 3,200 sq ft · St. Lucie Village, FL</div>
-                <div class="demo-listing__address">3309 N. Indian River Drive, St. Lucie Village, FL 34946</div>
+          <div class="real-listing-demo">
+            <!-- Fake Listing Header -->
+            <div class="real-listing-header">
+              <div class="real-listing-photo"></div>
+              <div class="real-listing-details">
+                <div class="real-listing-price">$1,295,000</div>
+                <div class="real-listing-meta">4 bd • 3.5 ba • 3,180 sqft</div>
+                <div class="real-listing-address">3309 N Indian River Dr, Fort Pierce, FL 34946</div>
+                <div class="real-listing-desc">
+                  Charming riverfront home in historic St. Lucie Village with mature oaks, 
+                  private dock, and stunning water views. Minutes to downtown Fort Pierce.
+                </div>
               </div>
             </div>
 
@@ -119,28 +124,33 @@
             <div id="dn-explorer" style="width: 100%;"></div>
           </div>
           <p class="demo-caption">
-            This is how the <strong>Embedded Explorer</strong> appears directly on a listing page (full width so map + data show together).
+            This is how the <strong>Embedded Explorer</strong> appears on a real estate listing page.
           </p>
         </div>
 
         <!-- Popup View -->
         <div id="demo-popup-view" class="demo-view">
-          <div class="demo-listing">
-            <div class="demo-listing__header">
-              <div class="demo-listing__photo"></div>
-              <div class="demo-listing__info">
-                <div class="demo-listing__price">$1,295,000</div>
-                <div class="demo-listing__meta">4 bd · 3.5 ba · 3,200 sq ft · St. Lucie Village, FL</div>
-                <div class="demo-listing__address">3309 N. Indian River Drive, St. Lucie Village, FL 34946</div>
+          <div class="real-listing-demo">
+            <!-- Fake Listing Header -->
+            <div class="real-listing-header">
+              <div class="real-listing-photo"></div>
+              <div class="real-listing-details">
+                <div class="real-listing-price">$1,295,000</div>
+                <div class="real-listing-meta">4 bd • 3.5 ba • 3,180 sqft</div>
+                <div class="real-listing-address">3309 N Indian River Dr, Fort Pierce, FL 34946</div>
+                <div class="real-listing-desc">
+                  Charming riverfront home in historic St. Lucie Village with mature oaks, 
+                  private dock, and stunning water views.
+                </div>
               </div>
             </div>
 
-            <button id="launch-popup-btn" class="widget-btn widget-btn--large">
-              Open Neighborhood Explorer (Popup)
+            <button id="launch-popup-btn" class="widget-btn widget-btn--large" style="margin-top: 16px;">
+              Open Neighborhood Explorer
             </button>
           </div>
           <p class="demo-caption">
-            This is how the <strong>Popup Explorer</strong> is triggered from a listing page.
+            This is how the <strong>Popup Explorer</strong> appears when triggered from a listing.
           </p>
         </div>
       </div>

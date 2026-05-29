@@ -2682,7 +2682,7 @@ a.review-link[href="/"]:hover {
   line-height: 1.4;
 }
 
-/* See How It Works Demo Section - Improved for full width explorer */
+/* See How It Works Demo Section - Realistic Listing + Full Width Explorer */
 .demo-tabs {
   display: flex;
   gap: 8px;
@@ -2717,71 +2717,71 @@ a.review-link[href="/"]:hover {
   display: block;
 }
 
-/* Make the demo listing area wider / full width for the explorer */
-.full-width-demo,
-#demo-embed-view .demo-listing {
-  max-width: 100%;
-  width: 100%;
-}
-
-.demo-listing {
+/* Realistic listing card for the demo */
+.real-listing-demo {
   background: white;
   border: 1px solid #e2e8f0;
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
   margin-bottom: 12px;
 }
 
-#demo-embed-view .demo-listing {
-  /* Full width for the explorer so map + data show side by side */
-  max-width: 100% !important;
-  width: 100% !important;
-  padding-bottom: 8px;
-}
-
-#demo-embed-view .demo-listing #dn-explorer {
-  width: 100% !important;
-  min-height: 380px;
-}
-
-.demo-listing__header {
+.real-listing-header {
   display: flex;
   padding: 16px;
   gap: 16px;
   border-bottom: 1px solid #f1f5f9;
 }
 
-.demo-listing__photo {
-  width: 120px;
-  height: 90px;
-  background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+.real-listing-photo {
+  width: 160px;
+  height: 110px;
+  background: linear-gradient(135deg, #64748b, #475569);
   border-radius: 8px;
   flex-shrink: 0;
+  background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56b773?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=60'); /* placeholder riverfront home */
+  background-size: cover;
+  background-position: center;
 }
 
-.demo-listing__info {
+.real-listing-details {
   flex: 1;
   min-width: 0;
 }
 
-.demo-listing__price {
-  font-size: 22px;
+.real-listing-price {
+  font-size: 24px;
   font-weight: 700;
   color: #0f172a;
+  line-height: 1.1;
 }
 
-.demo-listing__meta {
-  font-size: 13px;
+.real-listing-meta {
+  font-size: 14px;
   color: #64748b;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
-.demo-listing__address {
+.real-listing-address {
+  font-size: 14px;
+  color: #334155;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.real-listing-desc {
   font-size: 13px;
   color: #475569;
-  margin-top: 4px;
-  font-weight: 500;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+/* Full width explorer inside the realistic listing demo */
+.real-listing-demo #dn-explorer {
+  width: 100% !important;
+  min-height: 420px;
+  display: block;
 }
 
 .demo-caption {
