@@ -94,8 +94,9 @@
           <h2 class="section-title">Embedded Explorer on a Real Estate Website</h2>
         </div>
 
-        <!-- Clean full-width embedded explorer - no listing wrapper, no tabs -->
-        <div id="dn-explorer-realtor" style="width: 100%; min-height: 420px; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;"></div>
+        <!-- Live Embedded Explorer -->
+        <div id="dn-explorer" style="width: 100%;"></div>
+        <script src="https://app.dreamneighborhood.com/explorer/inline.js" async></script>
 
         <p class="demo-caption" style="margin-top: 16px;">
           This is exactly how the Neighborhood Explorer appears embedded on a real estate listing page.
@@ -103,78 +104,7 @@
       </div>
     </section>
 
-    <!-- ============== SEE HOW IT WORKS (detailed with tabs) ============== -->
-    <section id="see-how-it-works" class="section section--alt">
-      <div class="container">
-        <div class="section-head">
-          <span class="pill pill--solid">
-            <span class="pill__dot" aria-hidden="true"></span>
-            LIVE DEMO
-          </span>
-          <h2 class="section-title">See How It Works</h2>
-          <p class="section-lead">
-            Experience the Neighborhood Explorer exactly as your clients' buyers will.
-          </p>
-        </div>
 
-        <!-- Demo Tabs -->
-        <div class="demo-tabs">
-          <button class="demo-tab active" data-mode="embed">Embedded Explorer</button>
-          <button class="demo-tab" data-mode="popup">Popup Explorer</button>
-        </div>
-
-        <!-- Embedded View -->
-        <div id="demo-embed-view" class="demo-view active">
-          <div class="real-listing-demo">
-            <!-- Fake Listing Header -->
-            <div class="real-listing-header">
-              <div class="real-listing-photo"></div>
-              <div class="real-listing-details">
-                <div class="real-listing-price">$1,295,000</div>
-                <div class="real-listing-meta">4 bd • 3.5 ba • 3,180 sqft</div>
-                <div class="real-listing-address">3309 N Indian River Dr, Fort Pierce, FL 34946</div>
-                <div class="real-listing-desc">
-                  Charming riverfront home in historic St. Lucie Village with mature oaks, 
-                  private dock, and stunning water views. Minutes to downtown Fort Pierce.
-                </div>
-              </div>
-            </div>
-
-            <!-- Real full-width Embedded Explorer -->
-            <div id="dn-explorer" style="width: 100%;"></div>
-          </div>
-          <p class="demo-caption">
-            This is how the <strong>Embedded Explorer</strong> appears on a real estate listing page.
-          </p>
-        </div>
-
-        <!-- Popup View -->
-        <div id="demo-popup-view" class="demo-view">
-          <div class="real-listing-demo">
-            <!-- Fake Listing Header -->
-            <div class="real-listing-header">
-              <div class="real-listing-photo"></div>
-              <div class="real-listing-details">
-                <div class="real-listing-price">$1,295,000</div>
-                <div class="real-listing-meta">4 bd • 3.5 ba • 3,180 sqft</div>
-                <div class="real-listing-address">3309 N Indian River Dr, Fort Pierce, FL 34946</div>
-                <div class="real-listing-desc">
-                  Charming riverfront home in historic St. Lucie Village with mature oaks, 
-                  private dock, and stunning water views.
-                </div>
-              </div>
-            </div>
-
-            <button id="launch-popup-btn" class="widget-btn widget-btn--large" style="margin-top: 16px;">
-              Open Neighborhood Explorer
-            </button>
-          </div>
-          <p class="demo-caption">
-            This is how the <strong>Popup Explorer</strong> appears when triggered from a listing.
-          </p>
-        </div>
-      </div>
-    </section>
 
     <!-- ============== WHY IT MATTERS (stat banner) ============== -->
     <section id="why" class="stat-banner">
