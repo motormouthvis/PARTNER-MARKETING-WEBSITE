@@ -418,6 +418,29 @@ a {
   display: block;
 }
 
+/* Rich illustrated skyline for Partners page (replaces crude rect version) */
+.hero__skyline-illustration {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -80px;           /* Pull it up so buildings sit nicely under content */
+  width: 100%;
+  height: auto;
+  min-height: 420px;
+  object-fit: cover;
+  object-position: bottom;
+  opacity: 0.9;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .hero__skyline-illustration {
+    bottom: -40px;
+    min-height: 320px;
+  }
+}
+
 /* Partner card (Realty Candy showcase) */
 .partner-card {
   background: #ffffff;
@@ -2423,17 +2446,32 @@ a {
    Review mode switcher (temporary for /bill/ review version)
    ========================================================= */
 .review-link {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: #127d6b;
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: 9999px;
   background: #ebf8d1;
   transition: all 0.2s ease;
   white-space: nowrap;
+  line-height: 1;
 }
 
 .review-link:hover {
   background: #d5f25e;
   color: #0d5a4d;
+}
+
+/* Stronger treatment when on the review version itself */
+.bill-review .review-link,
+a.review-link[href="/"] {
+  background: #127d6b;
+  color: #ebf8d1;
+  border: 1px solid rgba(235, 248, 209, 0.3);
+}
+
+.bill-review .review-link:hover,
+a.review-link[href="/"]:hover {
+  background: #0d5a4d;
+  color: white;
 }
