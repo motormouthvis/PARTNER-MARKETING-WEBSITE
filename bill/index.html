@@ -32,11 +32,9 @@
         </a>
 
         <nav class="nav__links" aria-label="Primary">
-          <a href="#why">Why DN</a>
-          <a href="#demo">Demo</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#faq">FAQ</a>
-          <a href="/bill/partners.html">Partners</a>
+          <a href="/bill/" class="nav__main">For Realtors &amp; Brokerages</a>
+          <a href="/bill/partners.html" class="nav__main">For Partners</a>
+          <a href="#see-how-it-works" class="nav__main">See How It Works</a>
           <a href="/" class="review-link">Switch to Main Site</a>
         </nav>
 
@@ -81,6 +79,75 @@
             <a class="btn btn--primary btn--lg" href="#demo">Watch Video</a>
             <a class="btn btn--lime btn--lg" href="#contact">Book a Demo</a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== SEE HOW IT WORKS ============== -->
+    <section id="see-how-it-works" class="section section--alt">
+      <div class="container">
+        <div class="section-head">
+          <span class="pill pill--solid">
+            <span class="pill__dot" aria-hidden="true"></span>
+            LIVE DEMO
+          </span>
+          <h2 class="section-title">See How It Works</h2>
+          <p class="section-lead">
+            Experience the Neighborhood Explorer exactly as your clients' buyers will.
+          </p>
+        </div>
+
+        <div class="demo-controls">
+          <div class="demo-toggle">
+            <button class="toggle-btn active" data-mode="embed">Embedded on Listing</button>
+            <button class="toggle-btn" data-mode="popup">Popup Explorer</button>
+          </div>
+        </div>
+
+        <div id="demo-embed-view" class="demo-view active">
+          <div class="demo-listing">
+            <div class="demo-listing__header">
+              <div class="demo-listing__photo"></div>
+              <div class="demo-listing__info">
+                <div class="demo-listing__price">$685,000</div>
+                <div class="demo-listing__meta">4 bd · 3 ba · 2,480 sq ft · Austin, TX</div>
+              </div>
+            </div>
+
+            <div class="demo-embed-widget">
+              <div class="widget-header">
+                <span class="widget-title">Neighborhood Explorer</span>
+                <span class="widget-badge">Live</span>
+              </div>
+              <div class="widget-body">
+                <div class="widget-mock-map"></div>
+                <div class="widget-stats">
+                  <div class="widget-stat"><strong>38</strong> data points</div>
+                  <div class="widget-stat">Walk Score: <strong>92</strong></div>
+                  <div class="widget-stat">Schools: <strong>A+</strong></div>
+                </div>
+                <button class="widget-btn">Explore full neighborhood</button>
+              </div>
+            </div>
+          </div>
+          <p class="demo-caption">This is how the explorer appears embedded directly on a listing page.</p>
+        </div>
+
+        <div id="demo-popup-view" class="demo-view">
+          <div class="demo-listing">
+            <div class="demo-listing__header">
+              <div class="demo-listing__photo"></div>
+              <div class="demo-listing__info">
+                <div class="demo-listing__price">$685,000</div>
+                <div class="demo-listing__meta">4 bd · 3 ba · 2,480 sq ft · Austin, TX</div>
+              </div>
+            </div>
+
+            <button id="launch-popup-btn" class="widget-btn widget-btn--large">
+              Open Neighborhood Explorer (Popup)
+            </button>
+          </div>
+          <p class="demo-caption">This is the popup experience triggered from a listing page.</p>
         </div>
       </div>
     </section>
@@ -631,6 +698,7 @@
               <li>Use the Explorer Pop Up on your website</li>
               <li>Generate Neighborhood PDF Reports</li>
               <li>Unlimited shareable widget links</li>
+              <li><strong>5,000 views per month</strong></li>
               <li>24/7 Support</li>
             </ul>
             <a class="btn btn--primary" href="#contact">Book a Demo</a>
@@ -648,6 +716,7 @@
               <li>Invite all your Team Members</li>
               <li>Brokerage-wide widgets &amp; templates</li>
               <li>Lead &amp; usage analytics</li>
+              <li><strong>25,000 views per month</strong></li>
               <li>24/7 Support</li>
             </ul>
             <a class="btn btn--lime" href="#contact">Book a Demo</a>
@@ -666,6 +735,7 @@
               <li>Revenue share opportunities</li>
               <li>Enterprise deployments</li>
               <li>Dedicated partner manager</li>
+              <li><strong>More than 25,000 views per month</strong></li>
             </ul>
             <a class="btn btn--primary" href="/bill/partners.html">Learn More</a>
           </div>
@@ -835,5 +905,79 @@
         </div>
       </div>
     </footer>
+
+    <!-- Demo Popup Modal -->
+    <div id="explorer-modal" class="explorer-modal" style="display:none;">
+      <div class="explorer-modal__overlay"></div>
+      <div class="explorer-modal__content">
+        <div class="explorer-modal__header">
+          <span>Neighborhood Explorer — 123 Main St, Austin, TX</span>
+          <button class="explorer-modal__close" id="close-modal">×</button>
+        </div>
+        <div class="explorer-modal__body">
+          <div class="modal-mock-map"></div>
+          <div class="modal-stats-grid">
+            <div class="modal-stat"><strong>Schools</strong><span>A+ rated district</span></div>
+            <div class="modal-stat"><strong>Walk Score</strong><span>92 — Very Walkable</span></div>
+            <div class="modal-stat"><strong>Safety</strong><span>Top 15% in county</span></div>
+            <div class="modal-stat"><strong>Commute</strong><span>18 min to downtown</span></div>
+          </div>
+          <div class="modal-actions">
+            <button class="btn btn--primary">Generate PDF Report</button>
+            <button class="btn btn--ghost">Share this neighborhood</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Simple demo toggle + modal for "See How It Works"
+      (function() {
+        const embedView = document.getElementById('demo-embed-view');
+        const popupView = document.getElementById('demo-popup-view');
+        const toggleBtns = document.querySelectorAll('.demo-toggle .toggle-btn');
+        const launchBtn = document.getElementById('launch-popup-btn');
+        const modal = document.getElementById('explorer-modal');
+        const closeModal = document.getElementById('close-modal');
+
+        // Toggle between embed and popup views
+        toggleBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            toggleBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const mode = btn.dataset.mode;
+            if (mode === 'embed') {
+              embedView.classList.add('active');
+              popupView.classList.remove('active');
+            } else {
+              embedView.classList.remove('active');
+              popupView.classList.add('active');
+            }
+          });
+        });
+
+        // Open popup modal
+        if (launchBtn) {
+          launchBtn.addEventListener('click', () => {
+            modal.style.display = 'block';
+          });
+        }
+
+        // Close modal
+        if (closeModal) {
+          closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+          });
+        }
+
+        // Close modal when clicking overlay
+        if (modal) {
+          modal.querySelector('.explorer-modal__overlay').addEventListener('click', () => {
+            modal.style.display = 'none';
+          });
+        }
+      })();
+    </script>
   </body>
 </html>

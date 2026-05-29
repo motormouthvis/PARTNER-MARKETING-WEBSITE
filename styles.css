@@ -1667,6 +1667,15 @@ a {
   font-weight: 500;
   transition: color 0.15s ease;
 }
+.nav__links a.nav__main {
+  font-weight: 600;
+  color: #0f172a;
+  font-size: 15px;
+}
+.nav__links a.nav__main:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
 
 @media (max-width: 900px) {
   .nav__links {
@@ -2671,4 +2680,211 @@ a.review-link[href="/"]:hover {
   font-size: 14px;
   color: #475569;
   line-height: 1.4;
+}
+
+/* See How It Works Demo Section */
+.demo-controls {
+  margin: 32px 0 24px;
+  text-align: center;
+}
+.demo-toggle {
+  display: inline-flex;
+  background: #f1f5f9;
+  border-radius: 9999px;
+  padding: 4px;
+}
+.toggle-btn {
+  padding: 10px 24px;
+  border: none;
+  background: transparent;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.toggle-btn.active {
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  color: #0f172a;
+}
+.demo-view {
+  display: none;
+}
+.demo-view.active {
+  display: block;
+}
+.demo-listing {
+  max-width: 520px;
+  margin: 0 auto;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+}
+.demo-listing__header {
+  display: flex;
+  padding: 16px;
+  gap: 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+.demo-listing__photo {
+  width: 110px;
+  height: 80px;
+  background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.demo-listing__info {
+  flex: 1;
+}
+.demo-listing__price {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+}
+.demo-listing__meta {
+  font-size: 13px;
+  color: #64748b;
+}
+.demo-embed-widget {
+  padding: 16px;
+  border-top: 1px solid #f1f5f9;
+}
+.widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.widget-title {
+  font-weight: 600;
+  font-size: 15px;
+}
+.widget-badge {
+  font-size: 11px;
+  background: #dcfce7;
+  color: #166534;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.widget-mock-map {
+  height: 140px;
+  background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  position: relative;
+}
+.widget-mock-map:after {
+  content: "📍";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28px;
+}
+.widget-stats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 14px;
+  font-size: 13px;
+}
+.widget-stat {
+  color: #475569;
+}
+.widget-btn {
+  width: 100%;
+  background: #127d6b;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.widget-btn--large {
+  font-size: 15px;
+  padding: 14px;
+}
+.demo-caption {
+  text-align: center;
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 12px;
+}
+
+/* Popup Modal */
+.explorer-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+.explorer-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+}
+.explorer-modal__content {
+  position: relative;
+  max-width: 520px;
+  margin: 60px auto;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+.explorer-modal__header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e2e8f0;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+}
+.explorer-modal__close {
+  font-size: 28px;
+  line-height: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #64748b;
+}
+.explorer-modal__body {
+  padding: 20px;
+}
+.modal-mock-map {
+  height: 220px;
+  background: linear-gradient(180deg, #bae6fd, #7dd3fc);
+  border-radius: 10px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+}
+.modal-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.modal-stat {
+  background: #f8fafc;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+.modal-stat strong {
+  display: block;
+  font-size: 14px;
+  color: #0f172a;
+}
+.modal-actions {
+  display: flex;
+  gap: 12px;
+}
+.modal-actions .btn {
+  flex: 1;
 }
