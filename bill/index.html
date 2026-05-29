@@ -114,11 +114,11 @@
               </div>
             </div>
 
-            <!-- Real Embed will be injected here by JS -->
-            <div id="demo-embed-container" class="dn-embed-wrapper"></div>
+            <!-- Real Embed Explorer - Full width -->
+            <div id="dn-explorer" style="width: 100%; min-height: 320px;"></div>
           </div>
           <p class="demo-caption">
-            This is the <strong>embedded</strong> version of the Neighborhood Explorer (using staging scripts).
+            <strong>Embedded Explorer</strong> (Staging) — This is the real embed code.
           </p>
         </div>
 
@@ -137,7 +137,7 @@
             </button>
           </div>
           <p class="demo-caption">
-            This is the <strong>popup</strong> version of the Neighborhood Explorer (using staging scripts).
+            <strong>Popup Explorer</strong> (Staging) — Click the button to open the real popup version.
           </p>
         </div>
       </div>
@@ -897,6 +897,12 @@
       </div>
     </footer>
 
+    <!-- Real Staging Explorer Scripts (in body) -->
+    <!-- Embed -->
+    <script src="https://staging.dreamneighborhood.com/explorer/inline.js" async></script>
+    <!-- Popup -->
+    <script src="https://staging.dreamneighborhood.com/explorer/sdk.js" async></script>
+
     <!-- Demo Popup Modal -->
     <div id="explorer-modal" class="explorer-modal" style="display:none;">
       <div class="explorer-modal__overlay"></div>
@@ -922,21 +928,15 @@
     </div>
 
     <script>
-      // "See How It Works" - Real Staging Scripts with Toggle
+      // Simple toggle for Embed vs Popup views
+      // Real scripts are loaded statically in the body above (as requested)
       (function() {
         const embedView = document.getElementById('demo-embed-view');
         const popupView = document.getElementById('demo-popup-view');
         const toggleBtns = document.querySelectorAll('.demo-toggle .toggle-btn');
-
-        const embedContainer = document.getElementById('demo-embed-container');
-        const popupContainer = document.getElementById('demo-popup-container');
         const launchBtn = document.getElementById('launch-popup-btn');
-
-        const EMBED_SCRIPT = 'https://staging.dreamneighborhood.com/explorer/inline.js';
-        const POPUP_SCRIPT = 'https://staging.dreamneighborhood.com/explorer/sdk.js';
-
-        let embedLoaded = false;
-        let popupLoaded = false;
+        const modal = document.getElementById('explorer-modal');
+        const closeModalBtn = document.getElementById('close-modal');
 
         function loadScript(src, onLoad) {
           // Prevent loading the same script twice
