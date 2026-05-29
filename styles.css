@@ -2504,3 +2504,113 @@ a.review-link[href="/"]:hover {
   background: #0d5a4d;
   color: white;
 }
+
+/* =========================================================
+   New sections for Bill's review Partners page
+   ========================================================= */
+
+/* Metrics strip */
+.metrics-strip {
+  padding: 48px 0;
+  background: #f8fafc;
+}
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+  margin-bottom: 16px;
+}
+.metric__num {
+  font-size: 28px;
+  font-weight: 700;
+  color: #127d6b;
+  line-height: 1.1;
+}
+.metric__label {
+  font-size: 14px;
+  color: #475569;
+  margin-top: 4px;
+}
+.metrics-note {
+  font-size: 14px;
+  color: #64748b;
+  max-width: 700px;
+}
+
+/* Partner types */
+.partner-types {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+.partner-type {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+}
+.partner-type h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  color: #0f172a;
+}
+.partner-type p {
+  margin: 0;
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+/* Revenue grid */
+.revenue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 32px;
+}
+.revenue-item {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 20px;
+}
+.revenue-item h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: #127d6b;
+}
+.revenue-item p {
+  margin: 0;
+  font-size: 14px;
+  color: #475569;
+}
+
+/* General content improvements */
+.content-wide {
+  max-width: 780px;
+  margin: 0 auto;
+}
+.big-lead {
+  font-size: 21px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 16px;
+}
+.emphasis {
+  font-weight: 600;
+  color: #0f172a;
+}
+.ecosystem-list {
+  font-size: 15px;
+  color: #475569;
+  margin-top: 16px;
+}
+.two-col-grid {
+  columns: 2;
+  column-gap: 40px;
+}
+@media (max-width: 700px) {
+  .two-col-grid {
+    columns: 1;
+  }
+}
