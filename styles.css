@@ -418,26 +418,55 @@ a {
   display: block;
 }
 
-/* Rich illustrated skyline for Partners page (replaces crude rect version) */
+/* Rich illustrated skyline for Bill's Partners page */
 .hero__skyline-illustration {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -80px;           /* Pull it up so buildings sit nicely under content */
+  bottom: 0;
   width: 100%;
-  height: auto;
-  min-height: 420px;
+  height: 380px;           /* Fixed height to prevent squishing */
   object-fit: cover;
-  object-position: bottom;
-  opacity: 0.9;
+  object-position: 50% 70%; /* Focus more on the buildings */
+  opacity: 0.85;
   z-index: 1;
   pointer-events: none;
 }
 
-@media (max-width: 900px) {
+/* Better treatment specifically inside the Partners hero (two-column layout) */
+.hero .hero__skyline-illustration {
+  height: 340px;
+  bottom: -20px;
+  object-position: 50% 65%;
+}
+
+/* On desktop, give the Partners hero more breathing room */
+@media (min-width: 900px) {
+  .hero .hero__skyline-illustration {
+    height: 420px;
+    bottom: -60px;
+    object-position: 50% 75%;
+  }
+}
+
+/* Extra height for Bill's Partners hero so the rich skyline isn't squished */
+.hero--rich-skyline {
+  padding-bottom: 120px;
+  min-height: 620px;
+}
+
+@media (min-width: 900px) {
+  .hero--rich-skyline {
+    padding-bottom: 160px;
+    min-height: 720px;
+  }
+}
+
+@media (max-width: 700px) {
   .hero__skyline-illustration {
-    bottom: -40px;
-    min-height: 320px;
+    height: 260px;
+    bottom: 0;
+    object-position: 50% 60%;
   }
 }
 
