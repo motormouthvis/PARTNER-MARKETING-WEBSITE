@@ -94,9 +94,11 @@
           <h2 class="section-title">Embedded Explorer on a Real Estate Website</h2>
         </div>
 
-        <!-- Live Embedded Explorer -->
-        <div id="dn-explorer" style="width: 100%;"></div>
-        <script src="https://app.dreamneighborhood.com/explorer/inline.js" async></script>
+        <div class="clean-embed-placeholder">
+          <div style="background: #f1f5f9; padding: 40px; text-align: center; border-radius: 8px; color: #64748b;">
+            [Full Width Embedded Neighborhood Explorer would render here on your listing pages]
+          </div>
+        </div>
 
         <p class="demo-caption" style="margin-top: 16px;">
           This is exactly how the Neighborhood Explorer appears embedded on a real estate listing page.
@@ -104,7 +106,66 @@
       </div>
     </section>
 
+    <!-- ============== SEE HOW IT WORKS (detailed with tabs) ============== -->
+    <section id="see-how-it-works" class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="pill pill--solid">
+            <span class="pill__dot" aria-hidden="true"></span>
+            SEE HOW IT WORKS
+          </span>
+          <h2 class="section-title">See the Explorer on a Real Listing</h2>
+          <p class="section-lead">
+            See exactly how the Neighborhood Explorer appears on a live real estate website.
+          </p>
+        </div>
 
+        <!-- Tabs -->
+        <div class="demo-tabs">
+          <button class="demo-tab active" data-mode="embed">Embedded Explorer</button>
+          <button class="demo-tab" data-mode="popup">Popup Explorer</button>
+        </div>
+
+        <!-- Embedded View with realistic fake listing for user's house -->
+        <div id="demo-embed-view" class="demo-view active">
+          <div class="fake-listing-card">
+            <div class="fake-listing-photo" style="background-image: url('https://picsum.photos/id/1016/800/300'); background-size: cover; background-position: center;"></div>
+            <div class="fake-listing-body">
+              <div class="fake-listing-price">$1,615,000</div>
+              <div class="fake-listing-meta">4 bd • 3 ba • 2,544 sqft</div>
+              <div class="fake-listing-address">3309 N Indian River Dr, Fort Pierce, FL 34946</div>
+              <div class="fake-listing-desc">
+                Sensational direct riverfront home on nearly 3 acres. Completely remodeled with intercoastal views and private dock.
+              </div>
+            </div>
+
+            <!-- Real full width embed (the widget will render here) -->
+            <div id="dn-explorer" style="width: 100%;"></div>
+          </div>
+          <p class="demo-caption">The Embedded Explorer appears full width directly on the listing page.</p>
+        </div>
+
+        <!-- Popup View -->
+        <div id="demo-popup-view" class="demo-view">
+          <div class="fake-listing-card">
+            <div class="fake-listing-photo" style="background-image: url('https://picsum.photos/id/1016/800/300'); background-size: cover; background-position: center;"></div>
+            <div class="fake-listing-body">
+              <div class="fake-listing-price">$1,615,000</div>
+              <div class="fake-listing-meta">4 bd • 3 ba • 2,544 sqft</div>
+              <div class="fake-listing-address">3309 N Indian River Dr, Fort Pierce, FL 34946</div>
+              <div class="fake-listing-desc">
+                Sensational direct riverfront home on nearly 3 acres. Completely remodeled with intercoastal views and private dock.
+              </div>
+            </div>
+
+            <button id="launch-popup-btn" class="widget-btn widget-btn--large" style="margin-top: 16px; width: 100%;">
+              Open Neighborhood Explorer (Popup)
+            </button>
+          </div>
+          <p class="demo-caption">The Popup Explorer is triggered from the listing page.</p>
+        </div>
+      </div>
+    </section>
 
     <!-- ============== WHY IT MATTERS (stat banner) ============== -->
     <section id="why" class="stat-banner">

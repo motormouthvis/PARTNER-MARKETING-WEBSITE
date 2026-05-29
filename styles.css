@@ -2777,6 +2777,52 @@ a.review-link[href="/"]:hover {
   line-height: 1.4;
 }
 
+/* Fake listing card for See How It Works demo */
+.fake-listing-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+  margin-bottom: 12px;
+}
+
+.fake-listing-photo {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+}
+
+.fake-listing-body {
+  padding: 16px;
+}
+
+.fake-listing-price {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.fake-listing-meta {
+  font-size: 14px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.fake-listing-address {
+  font-size: 14px;
+  color: #334155;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.fake-listing-desc {
+  font-size: 13px;
+  color: #475569;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
 /* Full width explorer inside the realistic listing demo */
 .real-listing-demo #dn-explorer {
   width: 100% !important;
