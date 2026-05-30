@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio — Dream Neighborhood</title>
+    <meta
+      name="description"
+      content="Live customer sites running Dream Neighborhood across IDX platforms and markets nationwide."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/styles.css" />
+
+    <style>
+      /* ----- See It In Action nav dropdown (page-scoped; main site untouched) ----- */
+      .nav__item { position: relative; display: inline-flex; align-items: center; }
+      .nav__dropdown-toggle {
+        font: inherit; color: inherit; background: none; border: 0; cursor: pointer;
+        padding: 0; display: inline-flex; align-items: center; gap: 7px;
+      }
+      .nav__dropdown-toggle::after {
+        content: ""; width: 6px; height: 6px; border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor; transform: rotate(45deg); margin-top: -3px; opacity: .55;
+      }
+      .nav__dropdown-menu {
+        position: absolute; top: calc(100% + 10px); left: 0; min-width: 300px;
+        background: #fff; border: 1px solid rgba(15,23,42,.08); border-radius: 12px;
+        box-shadow: 0 18px 44px rgba(15,23,42,.16); padding: 8px; z-index: 80;
+        opacity: 0; visibility: hidden; transform: translateY(-6px); transition: all .16s ease;
+      }
+      .nav__dropdown-menu::before { content: ""; position: absolute; top: -10px; left: 0; right: 0; height: 10px; }
+      .nav__item:hover .nav__dropdown-menu,
+      .nav__item:focus-within .nav__dropdown-menu {
+        opacity: 1; visibility: visible; transform: translateY(0);
+      }
+      .nav__dropdown-menu a {
+        display: block; padding: 11px 14px; border-radius: 8px; white-space: nowrap;
+        color: #0f172a; font-weight: 600; font-size: 14px;
+      }
+      .nav__dropdown-menu a:hover { background: #f1f5f9; color: #127d6b; }
+
+      /* ----- Portfolio grid ----- */
+      .pf-intro { max-width: 760px; margin: 0 auto 36px; text-align: center; }
+      .pf-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 22px;
+      }
+      .pf-card {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 8px 26px rgba(15, 23, 42, 0.07);
+        display: flex;
+        flex-direction: column;
+      }
+      .pf-card__badge {
+        align-self: flex-start;
+        font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+        color: #127d6b; background: #eafaf2; padding: 5px 11px; border-radius: 999px;
+      }
+      .pf-card__name { font-size: 20px; font-weight: 800; color: #0f172a; margin-top: 14px; }
+      .pf-card__market { font-size: 14px; color: #334155; margin-top: 4px; font-weight: 600; }
+      .pf-card__note { font-size: 13px; color: #64748b; margin-top: 12px; line-height: 1.55; flex: 1; }
+      .pf-card__cta { margin-top: 18px; }
+      .pf-card__cta .btn { width: 100%; }
+    </style>
+  </head>
+  <body>
+    <!-- ============== NAVIGATION ============== -->
+    <header class="nav">
+      <div class="container nav__inner">
+        <a class="nav__logo" href="/bill/">
+          <img
+            src="https://cdn.prod.website-files.com/68d4266c1bda64aac3888ce1/68d4278d2e08c6f1a213ea51_nav_logo.svg"
+            alt="Dream Neighborhood"
+            width="220"
+            height="54"
+          />
+        </a>
+
+        <nav class="nav__links" aria-label="Primary">
+          <a href="/bill/" class="nav__main">For Realtors &amp; Brokerages</a>
+          <a href="/bill/partners.html" class="nav__main">For Partners</a>
+          <div class="nav__item">
+            <button class="nav__main nav__dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">See It In Action</button>
+            <div class="nav__dropdown-menu">
+              <a href="/bill/popup/3309-n-indian-river-drive-fort-pierce-fl-34946/">See the Popup Explorer In Action</a>
+              <a href="/bill/embed/3309-n-indian-river-drive-fort-pierce-fl-34946/">See the Embedded Explorer In Action</a>
+            </div>
+          </div>
+          <a href="/bill/portfolio.html" class="nav__main" aria-current="page">Portfolio</a>
+          <a href="/" class="review-link">Switch to Main Site</a>
+        </nav>
+
+        <div class="nav__cta">
+          <a class="btn btn--ghost" href="https://realtor.dreamneighborhood.com/accounts/login/" target="_blank" rel="noopener">Log in</a>
+          <a class="btn btn--primary" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============== PORTFOLIO ============== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head pf-intro">
+          <span class="pill pill--solid">
+            <span class="pill__dot" aria-hidden="true"></span>
+            PORTFOLIO
+          </span>
+          <h1 class="section-title">Live Customer Sites Running Dream Neighborhood</h1>
+          <p class="section-lead">
+            Real estate brokerages and teams across the country use Dream Neighborhood to add
+            hyperlocal neighborhood data to their listings — across different IDX platforms and
+            markets. Explore a few of them live.
+          </p>
+        </div>
+
+        <div class="pf-grid">
+          <article class="pf-card">
+            <span class="pf-card__badge">IDX Listing</span>
+            <div class="pf-card__name">Winn Team Realtors</div>
+            <div class="pf-card__market">Clearwater Beach / Tampa Bay, FL</div>
+            <p class="pf-card__note">
+              "Your Home Sold Guaranteed Realty" team showcasing Dream Neighborhood on a live
+              Gulf-front IDX listing page.
+            </p>
+            <div class="pf-card__cta">
+              <a class="btn btn--primary" href="https://homes.winnteamrealtors.com/idx/details/listing/d003/TB8501024" target="_blank" rel="noopener">View live site</a>
+            </div>
+          </article>
+
+          <article class="pf-card">
+            <span class="pf-card__badge">Luxury · eXp</span>
+            <div class="pf-card__name">Team Doherty</div>
+            <div class="pf-card__market">Mission Viejo / Orange County, CA</div>
+            <p class="pf-card__note">
+              Luxury real estate group at eXp Realty using Dream Neighborhood on its
+              property detail pages.
+            </p>
+            <div class="pf-card__cta">
+              <a class="btn btn--primary" href="https://teamdoherty.com/details/?address=10611-Bergamot-San-Diego-CA-92126&amp;id=260012679SD" target="_blank" rel="noopener">View live site</a>
+            </div>
+          </article>
+
+          <article class="pf-card">
+            <span class="pf-card__badge">Brokerage Site</span>
+            <div class="pf-card__name">Burton Real Estate</div>
+            <div class="pf-card__market">Frontenac, KS · SE Kansas / SW Missouri</div>
+            <p class="pf-card__note">
+              Family-owned brokerage showcasing Dream Neighborhood across its community pages.
+            </p>
+            <div class="pf-card__cta">
+              <a class="btn btn--primary" href="https://link.locallysavvybizsolutions.com/preview/csiMv7wHCF2R9XmUGhKz?id=2622329_76" target="_blank" rel="noopener">View live site</a>
+            </div>
+          </article>
+
+          <article class="pf-card">
+            <span class="pf-card__badge">KW · Atlanta</span>
+            <div class="pf-card__name">Coach &amp; Carlson</div>
+            <div class="pf-card__market">Atlanta, GA</div>
+            <p class="pf-card__note">
+              Keller Williams team featuring Dream Neighborhood on their dedicated
+              "The Neighborhood" page.
+            </p>
+            <div class="pf-card__cta">
+              <a class="btn btn--primary" href="https://www.coachandcarlson.com/the-neighborhood" target="_blank" rel="noopener">View live site</a>
+            </div>
+          </article>
+
+          <article class="pf-card">
+            <span class="pf-card__badge">IDX Listing</span>
+            <div class="pf-card__name">See Nashville Homes</div>
+            <div class="pf-card__market">Nashville, TN · Benchmark Realty</div>
+            <p class="pf-card__note">
+              Nashville-area home search powered by Benchmark Realty, with Dream Neighborhood
+              on its live listing detail pages.
+            </p>
+            <div class="pf-card__cta">
+              <a class="btn btn--primary" href="https://search.seenashvillehomes.com/search/detail/264842300" target="_blank" rel="noopener">View live site</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== FOOTER ============== -->
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="footer__brand">
+          <img
+            src="https://cdn.prod.website-files.com/68d4266c1bda64aac3888ce1/68d4278d2e08c6f1a213ea51_nav_logo.svg"
+            alt="Dream Neighborhood"
+            width="200"
+            height="48"
+          />
+          <p>The #1 neighborhood data provider for real estate.</p>
+        </div>
+
+        <div class="footer__cols">
+          <div>
+            <h4>Product</h4>
+            <a href="/bill/#lead-forms">Lead Forms</a>
+            <a href="/bill/#pricing">Pricing</a>
+          </div>
+          <div>
+            <h4>Partners</h4>
+            <a href="/bill/partners.html">Become a Partner</a>
+            <a href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
+          </div>
+          <div>
+            <h4>Company</h4>
+            <a href="/bill/#contact">Contact</a>
+            <a href="mailto:support@dreamneighborhood.com">support@dreamneighborhood.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <div class="container footer__legal-inner">
+          <span>© 2026 Dream Neighborhood. All rights reserved.</span>
+          <div>
+            <a href="https://www.dreamneighborhood.com/terms-of-service" target="_blank" rel="noopener">Terms of Service</a>
+            <a href="https://www.dreamneighborhood.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
