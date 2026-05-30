@@ -17,35 +17,10 @@
     />
 
     <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/bill/nav.css" />
+    <script defer src="/bill/nav.js"></script>
 
     <style>
-      /* ----- See It In Action nav dropdown (page-scoped; main site untouched) ----- */
-      .nav__item { position: relative; display: inline-flex; align-items: center; }
-      .nav__dropdown-toggle {
-        font: inherit; color: inherit; background: none; border: 0; cursor: pointer;
-        padding: 0; display: inline-flex; align-items: center; gap: 7px;
-      }
-      .nav__dropdown-toggle::after {
-        content: ""; width: 6px; height: 6px; border-right: 2px solid currentColor;
-        border-bottom: 2px solid currentColor; transform: rotate(45deg); margin-top: -3px; opacity: .55;
-      }
-      .nav__dropdown-menu {
-        position: absolute; top: calc(100% + 10px); left: 0; min-width: 300px;
-        background: #fff; border: 1px solid rgba(15,23,42,.08); border-radius: 12px;
-        box-shadow: 0 18px 44px rgba(15,23,42,.16); padding: 8px; z-index: 80;
-        opacity: 0; visibility: hidden; transform: translateY(-6px); transition: all .16s ease;
-      }
-      .nav__dropdown-menu::before { content: ""; position: absolute; top: -10px; left: 0; right: 0; height: 10px; }
-      .nav__item:hover .nav__dropdown-menu,
-      .nav__item:focus-within .nav__dropdown-menu {
-        opacity: 1; visibility: visible; transform: translateY(0);
-      }
-      .nav__dropdown-menu a {
-        display: block; padding: 11px 14px; border-radius: 8px; white-space: nowrap;
-        color: #0f172a; font-weight: 600; font-size: 14px;
-      }
-      .nav__dropdown-menu a:hover { background: #f1f5f9; color: #127d6b; }
-
       /* ----- Portfolio grid ----- */
       .pf-intro { max-width: 760px; margin: 0 auto 36px; text-align: center; }
       .pf-grid {
