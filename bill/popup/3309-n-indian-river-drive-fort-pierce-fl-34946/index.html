@@ -70,19 +70,12 @@
         <nav class="nav__links" aria-label="Primary">
           <a href="/bill/" class="nav__main">For Realtors &amp; Brokerages</a>
           <a href="/bill/partners.html" class="nav__main">For Partners</a>
-          <div class="nav__item">
-            <button class="nav__main nav__dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">See It In Action</button>
-            <div class="nav__dropdown-menu">
-              <a href="/bill/popup/3309-n-indian-river-drive-fort-pierce-fl-34946/" aria-current="page">See the Popup Explorer In Action</a>
-              <a href="/bill/embed/3309-n-indian-river-drive-fort-pierce-fl-34946/">See the Embedded Explorer In Action</a>
-            </div>
-          </div>
+          <a href="/bill/popup/3309-n-indian-river-drive-fort-pierce-fl-34946/" class="nav__main" aria-current="page">See It In Action</a>
           <a href="/bill/portfolio.html" class="nav__main">Portfolio</a>
-          <a href="/" class="review-link">Switch to Main Site</a>
         </nav>
 
         <div class="nav__cta">
-          <a class="btn btn--ghost" href="https://realtor.dreamneighborhood.com/accounts/login/" target="_blank" rel="noopener">Log in</a>
+          <a class="btn btn--ghost" href="https://realtor.dreamneighborhood.com/accounts/login/" target="_blank" rel="noopener">Log in / Sign up</a>
           <a class="btn btn--primary" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
         </div>
       </div>
@@ -102,6 +95,10 @@
             listing and neighborhood page addresses and works on any website — <strong>no redesign
             required</strong>. Look for it in the bottom-right corner of this page.
           </p>
+          <div class="demo-toggle" role="tablist" aria-label="Explorer type">
+            <a class="demo-toggle__btn demo-toggle__btn--active" href="/bill/popup/3309-n-indian-river-drive-fort-pierce-fl-34946/" aria-current="page">Popup Explorer</a>
+            <a class="demo-toggle__btn" href="/bill/embed/3309-n-indian-river-drive-fort-pierce-fl-34946/">Embedded Explorer</a>
+          </div>
         </div>
 
         <article class="sia-listing">
@@ -163,8 +160,10 @@
         <div class="footer__cols">
           <div>
             <h4>Product</h4>
-            <a href="/bill/#lead-forms">Lead Forms</a>
+            <a href="/bill/#benefits">Benefits</a>
+            <a href="/bill/#how">How It Works</a>
             <a href="/bill/#pricing">Pricing</a>
+            <a href="/bill/faq.html">FAQ</a>
           </div>
           <div>
             <h4>Partners</h4>
@@ -188,6 +187,11 @@
         </div>
       </div>
     </footer>
+
+    <!-- Site switcher (review only) -->
+    <div class="site-switch">
+      <a href="/" class="review-link">Switch to Old Site</a>
+    </div>
 
     <!-- ===== Dream Neighborhood POPUP snippet (this page only, not a global install) ===== -->
     <script src="https://app.dreamneighborhood.com/explorer/sdk.js" async></script>

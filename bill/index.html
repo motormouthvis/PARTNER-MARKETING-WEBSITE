@@ -34,21 +34,14 @@
         </a>
 
         <nav class="nav__links" aria-label="Primary">
-          <a href="/bill/" class="nav__main">For Realtors &amp; Brokerages</a>
+          <a href="/bill/" class="nav__main" aria-current="page">For Realtors &amp; Brokerages</a>
           <a href="/bill/partners.html" class="nav__main">For Partners</a>
-          <div class="nav__item">
-            <button class="nav__main nav__dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">See It In Action</button>
-            <div class="nav__dropdown-menu">
-              <a href="/bill/popup/3309-n-indian-river-drive-fort-pierce-fl-34946/">See the Popup Explorer In Action</a>
-              <a href="/bill/embed/3309-n-indian-river-drive-fort-pierce-fl-34946/">See the Embedded Explorer In Action</a>
-            </div>
-          </div>
+          <a href="/bill/popup/3309-n-indian-river-drive-fort-pierce-fl-34946/" class="nav__main">See It In Action</a>
           <a href="/bill/portfolio.html" class="nav__main">Portfolio</a>
-          <a href="/" class="review-link">Switch to Main Site</a>
         </nav>
 
         <div class="nav__cta">
-          <a class="btn btn--ghost" href="https://realtor.dreamneighborhood.com/accounts/login/" target="_blank" rel="noopener">Log in</a>
+          <a class="btn btn--ghost" href="https://realtor.dreamneighborhood.com/accounts/login/" target="_blank" rel="noopener">Log in / Sign up</a>
           <a class="btn btn--primary" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
         </div>
       </div>
@@ -62,6 +55,12 @@
         alt=""
         aria-hidden="true"
       />
+
+      <div class="hero__badge" role="img" aria-label="Trusted on over 200 websites">
+        <span class="hero__badge-top">Trusted on over</span>
+        <span class="hero__badge-num">2000</span>
+        <span class="hero__badge-label">websites</span>
+      </div>
 
       <div class="container hero__grid">
         <div class="hero__copy">
@@ -157,65 +156,26 @@
       </div>
     </section>
 
-    <!-- ============== HOW IT WORKS (popup) ============== -->
-    <section id="how" class="section">
+    <!-- ============== BENEFITS ============== -->
+    <section id="benefits" class="section">
       <div class="container">
         <div class="section-head">
           <span class="pill pill--solid">
             <span class="pill__dot" aria-hidden="true"></span>
-            HOW IT WORKS
+            BENEFITS
           </span>
           <h2 class="section-title">
-            One Line Of Code.
-            <span class="accent">A Better Buyer Experience.</span>
+            Everything You Gain With
+            <span class="accent">Dream Neighborhood</span>
           </h2>
           <p class="section-lead">
-            The Dream Neighborhood popup installs in minutes and appears on every
-            listing automatically — no redesign, no developer headaches.
+            Add neighborhood data to your listings and turn more visitors into
+            engaged buyers — and more buyers into leads.
           </p>
         </div>
 
-        <div class="brokerage-steps">
-          <article class="brokerage-step">
-            <span class="brokerage-step__num">1</span>
-            <div>
-              <h3>Add one line of code</h3>
-              <p>
-                Paste a single script tag into your site once — about as simple
-                as adding a Meta Pixel. Works with WordPress, Squarespace, Wix,
-                IDX platforms, and custom-built sites.
-              </p>
-              <code style="display:block; background:#0f172a; color:#e2e8f0; padding:14px 16px; border-radius:10px; font-size:13px; line-height:1.5; margin-top:14px; overflow-x:auto;">&lt;script src="https://app.dreamneighborhood.com/explorer/sdk.js" async&gt;&lt;/script&gt;</code>
-            </div>
-          </article>
-
-          <article class="brokerage-step">
-            <span class="brokerage-step__num">2</span>
-            <div>
-              <h3>The popup appears on every listing</h3>
-              <p>
-                The explorer auto-detects the listing address and adds a
-                neighborhood popup in the corner of the page — across your whole
-                site, with nothing to maintain.
-              </p>
-            </div>
-          </article>
-
-          <article class="brokerage-step">
-            <span class="brokerage-step__num">3</span>
-            <div>
-              <h3>Buyers explore without leaving your site</h3>
-              <p>
-                Visitors dig into 38+ hyperlocal insights right where they
-                already are — so you keep the traffic, the engagement, and the
-                lead instead of handing it to Zillow.
-              </p>
-            </div>
-          </article>
-        </div>
-
         <!-- Popup benefits -->
-        <div class="insights" style="margin-top: 28px;">
+        <div class="insights">
           <article class="insight-card">
             <div class="insight-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -262,12 +222,84 @@
             <h3>More Leads</h3>
             <p>An optional built-in form turns engaged buyers into contacts that land straight in your inbox.</p>
           </article>
+
+          <article class="insight-card">
+            <div class="insight-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="17" rx="2" />
+                <line x1="3" y1="9" x2="21" y2="9" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <polyline points="9 14 11 16 15 12" />
+              </svg>
+            </div>
+            <h3>Fewer Showings per Closing</h3>
+            <p>Buyers vet the neighborhood before they tour, so you spend your time on serious, well-matched showings.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== HOW IT WORKS ============== -->
+    <section id="how" class="section section--alt">
+      <div class="container">
+        <div class="section-head">
+          <span class="pill pill--solid">
+            <span class="pill__dot" aria-hidden="true"></span>
+            HOW IT WORKS
+          </span>
+          <h2 class="section-title">
+            One Line Of Code.
+            <span class="accent">A Better Buyer Experience.</span>
+          </h2>
+          <p class="section-lead">
+            The Dream Neighborhood popup installs in minutes and appears on every
+            listing automatically — no redesign, no developer headaches.
+          </p>
+        </div>
+
+        <div class="brokerage-steps how-steps">
+          <article class="brokerage-step">
+            <span class="brokerage-step__num">1</span>
+            <div>
+              <h3>Add one line of code</h3>
+              <p>
+                We give you a single snippet to paste into your site once — or
+                we install it for you for free. Works with WordPress,
+                Squarespace, Wix, IDX platforms, and custom-built sites.
+              </p>
+            </div>
+          </article>
+
+          <article class="brokerage-step">
+            <span class="brokerage-step__num">2</span>
+            <div>
+              <h3>The popup appears on every listing</h3>
+              <p>
+                The explorer auto-detects the listing address and adds a
+                neighborhood popup in the corner of the page — across your whole
+                site, with nothing to maintain.
+              </p>
+            </div>
+          </article>
+
+          <article class="brokerage-step">
+            <span class="brokerage-step__num">3</span>
+            <div>
+              <h3>Buyers explore without leaving your site</h3>
+              <p>
+                Visitors dig into 38+ hyperlocal insights right where they
+                already are — so you keep the traffic, the engagement, and the
+                lead instead of handing it to Zillow.
+              </p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- ============== PRICING ============== -->
-    <section id="pricing" class="section section--alt">
+    <section id="pricing" class="section">
       <div class="container">
         <div class="section-head">
           <span class="pill pill--solid">
@@ -288,14 +320,13 @@
           <div class="plan">
             <div class="plan__name">Solo Agents</div>
             <div class="plan__price">
-              <strong>$39</strong><span>/ month</span>
+              <strong>$24.92</strong><span>/ mo</span>
             </div>
+            <p class="plan__annual">Billed annually · or $39/mo month-to-month</p>
             <p class="plan__sub">For individual agents who want to stand out.</p>
             <ul class="plan__features">
-              <li>Use the Explorer Pop Up on your website</li>
-              <li>Generate Neighborhood PDF Reports</li>
-              <li>Unlimited shareable widget links</li>
-              <li><strong>Up to 5,000 views per month</strong></li>
+              <li>Neighborhood popup on your website</li>
+              <li>Up to 5,000 views per month</li>
               <li>24/7 Support</li>
             </ul>
             <a class="btn btn--primary" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
@@ -304,16 +335,14 @@
           <div class="plan plan--featured">
             <div class="plan__name">Brokerages</div>
             <div class="plan__price">
-              <strong>$149</strong><span>/ month</span>
+              <strong>$99.92</strong><span>/ mo</span>
             </div>
+            <p class="plan__annual">Billed annually · or $149/mo month-to-month</p>
             <p class="plan__sub">For teams rolling out across all agents.</p>
             <ul class="plan__features">
-              <li>Use the Explorer Pop Up on your website</li>
-              <li>Generate Neighborhood PDF Reports</li>
-              <li>Invite all your Team Members</li>
-              <li>Brokerage-wide widgets &amp; templates</li>
-              <li>Lead &amp; usage analytics</li>
-              <li><strong>Up to 25,000 views per month</strong></li>
+              <li>Neighborhood popup on your website</li>
+              <li>Invite all your team members</li>
+              <li>Up to 25,000 views per month</li>
               <li>24/7 Support</li>
             </ul>
             <a class="btn btn--lime" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
@@ -324,15 +353,14 @@
             <div class="plan__price">
               <strong>Custom</strong>
             </div>
+            <p class="plan__annual">&nbsp;</p>
             <p class="plan__sub">
               For big brokerages, IDX providers, and B2B partners.
             </p>
             <ul class="plan__features">
               <li>Custom white-label model</li>
               <li>Revenue share opportunities</li>
-              <li>Enterprise deployments</li>
-              <li>Dedicated partner manager</li>
-              <li><strong>More than 25,000 views per month</strong></li>
+              <li>More than 25,000 views per month</li>
             </ul>
             <a class="btn btn--primary" href="/bill/partners.html">Learn More</a>
           </div>
@@ -341,7 +369,7 @@
     </section>
 
     <!-- ============== ADVANCED OPTIONS ============== -->
-    <section id="advanced" class="section">
+    <section id="advanced" class="section section--alt">
       <div class="container">
         <div class="section-head">
           <span class="pill pill--solid">
@@ -366,21 +394,25 @@
               your current design. The <strong>embedded explorer</strong> drops a
               full-width, interactive data panel directly into a page when you
               want neighborhood data front and center.
-              <br /><br />
-              See both live:
-              <a href="/bill/popup/3309-n-indian-river-drive-fort-pierce-fl-34946/">Popup demo</a>
-              ·
-              <a href="/bill/embed/3309-n-indian-river-drive-fort-pierce-fl-34946/">Embedded demo</a>.
+              <div class="faq__btns">
+                <a class="btn btn--primary" href="/bill/popup/3309-n-indian-river-drive-fort-pierce-fl-34946/">See the Popup Demo</a>
+                <a class="btn btn--ghost" href="/bill/embed/3309-n-indian-river-drive-fort-pierce-fl-34946/">See the Embedded Demo</a>
+              </div>
             </div>
           </details>
 
           <details class="faq__item">
-            <summary>Shareable widget links for text, email &amp; social</summary>
+            <summary>Shareable neighborhood explorer links for text, email &amp; social</summary>
             <div>
               Generate a private link to any neighborhood explorer and share it
               by text, email, or social post. Send it before a showing so buyers
               arrive informed, or follow up afterward so they can revisit the
               details with family — no install required on their end.
+              <br /><br />
+              You can also <strong>require a lead form</strong> on any shared
+              link. Post one about an open house on social media and turn a
+              single post into hundreds of captured leads — every person who
+              opens the neighborhood explorer becomes a contact in your inbox.
             </div>
           </details>
 
@@ -390,6 +422,9 @@
               Export a polished, branded PDF of the full neighborhood breakdown
               for any address — great for buyer packets, listing presentations,
               and follow-ups.
+              <div class="faq__btns">
+                <a class="btn btn--ghost" href="/bill/sample-neighborhood-report.pdf" target="_blank" rel="noopener">View a Sample PDF Report</a>
+              </div>
             </div>
           </details>
 
@@ -407,7 +442,7 @@
             <div>
               Roll Dream Neighborhood out across all your agents without per-seat
               licenses. Invite your whole team to a shared account, control who
-              can build their own widgets versus use brokerage-wide templates,
+              can build their own explorers versus use brokerage-wide templates,
               and see lead &amp; usage analytics by agent. Pricing scales on views
               and reports — not users.
             </div>
@@ -426,99 +461,6 @@
               <strong>At the property:</strong> pull the explorer up on your
               phone and walk buyers through schools, lifestyle spots, and commute
               times live.
-            </div>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============== FAQ ============== -->
-    <section id="faq" class="section section--alt">
-      <div class="container">
-        <div class="section-head">
-          <span class="pill pill--solid">
-            <span class="pill__dot" aria-hidden="true"></span>
-            FAQ
-          </span>
-          <h2 class="section-title">
-            Frequently Asked <span class="accent">Questions</span>
-          </h2>
-          <p class="section-lead">
-            We are here to help you. If you have any questions about Dream
-            Neighborhood please reach out to
-            <strong>support@dreamneighborhood.com</strong>.
-          </p>
-        </div>
-
-        <div class="faq">
-          <details class="faq__item">
-            <summary>What exactly is Dream Neighborhood?</summary>
-            <div>
-              Dream Neighborhood is a neighborhood data widget that embeds
-              directly on your real estate website. When a buyer views a
-              listing, they can instantly access local demographics, schools,
-              commute times, walkability scores, points of interest and more —
-              without ever leaving your site.
-            </div>
-          </details>
-
-          <details class="faq__item">
-            <summary>How difficult is it to install?</summary>
-            <div>
-              Not difficult at all. It’s one line of code that you or your web
-              developer paste into your website once. That’s it, as simple as a
-              Meta Pixel. We also provide
-              setup documentation and are happy to help if you get stuck.
-            </div>
-          </details>
-
-          <details class="faq__item">
-            <summary>Will it work with my current website?</summary>
-            <div>
-              Yes. The widget works with virtually any website platform
-              including WordPress, Squarespace, Wix, and custom built sites.
-              If you’re unsure, just ask us during a demo.
-            </div>
-          </details>
-
-          <details class="faq__item">
-            <summary>Where does the data come from?</summary>
-            <div>
-              We aggregate from best-in-class sources including the U.S.
-              Census Bureau for demographics, Redfin for housing market data,
-              Walk Score for mobility scores, NCES for school data, and Google
-              Maps for points of interest.
-            </div>
-          </details>
-
-          <details class="faq__item">
-            <summary>How is this different from Zillow or Redfin?</summary>
-            <div>
-              Zillow and Redfin have neighborhood data — but it lives on their
-              websites, alongside competing listings and other agents. Dream
-              Neighborhood puts that same context directly on your website,
-              keeping buyers engaged with you rather than sending them to your
-              competitors.
-            </div>
-          </details>
-
-          <details class="faq__item">
-            <summary>What does it cost?</summary>
-            <div>
-              We offer simple monthly plans starting at $39/month for solo
-              agents and $149/month for brokerages. No contracts, cancel
-              anytime.
-            </div>
-          </details>
-
-          <details class="faq__item">
-            <summary>
-              What if my website is managed by a developer or IDX provider?
-            </summary>
-            <div>
-              No problem. We provide one line of code your developer can
-              add in minutes. We’re also happy to jump on a quick call with
-              them directly to make installation as smooth as possible.
             </div>
           </details>
         </div>
@@ -563,8 +505,10 @@
         <div class="footer__cols">
           <div>
             <h4>Product</h4>
+            <a href="#benefits">Benefits</a>
             <a href="#how">How It Works</a>
             <a href="#pricing">Pricing</a>
+            <a href="/bill/faq.html">FAQ</a>
           </div>
           <div>
             <h4>Partners</h4>
@@ -590,6 +534,11 @@
         </div>
       </div>
     </footer>
+
+    <!-- Site switcher (review only) -->
+    <div class="site-switch">
+      <a href="/" class="review-link">Switch to Old Site</a>
+    </div>
 
     <!-- ============== VIDEO MODAL (button-triggered, no fixed preview) ============== -->
     <style>

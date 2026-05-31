@@ -22,6 +22,24 @@
   white-space: nowrap;
 }
 
+/* ---------- Active page highlight (no layout shift) ---------- */
+.nav__links a.nav__main {
+  position: relative;
+}
+.nav__links a.nav__main[aria-current="page"] {
+  color: #127d6b;
+}
+.nav__links a.nav__main[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  bottom: -7px;
+  height: 2px;
+  border-radius: 2px;
+  background: #127d6b;
+}
+
 /* ---------- "See It In Action" dropdown (desktop) ---------- */
 .nav__item {
   position: relative;

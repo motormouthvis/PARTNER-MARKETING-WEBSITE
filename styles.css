@@ -402,6 +402,104 @@ a {
   flex-wrap: wrap;
 }
 
+/* Hero "trusted on 200+ sites" seal badge (no icon) */
+.hero__badge {
+  position: absolute;
+  top: 22px;
+  right: 28px;
+  z-index: 4;
+  width: 134px;
+  height: 134px;
+  padding: 0 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 32%, var(--green-700), var(--green-900));
+  border: 3px solid var(--lime-500);
+  box-shadow: 0 16px 32px rgba(13, 90, 77, 0.32);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform: rotate(8deg);
+}
+
+.hero__badge-top {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.hero__badge-num {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1;
+  margin: 2px 0;
+  color: var(--lime-500);
+}
+
+.hero__badge-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+@media (max-width: 1100px) {
+  .hero__badge {
+    width: 116px;
+    height: 116px;
+    top: 16px;
+    right: 16px;
+  }
+  .hero__badge-num {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero__badge {
+    position: static;
+    margin: 0 auto 20px;
+    transform: none;
+  }
+}
+
+/* Demo page popup/embed toggle */
+.demo-toggle {
+  display: inline-flex;
+  gap: 4px;
+  margin: 18px auto 0;
+  padding: 5px;
+  background: var(--lime-100);
+  border-radius: var(--radius-pill);
+}
+
+.demo-toggle__btn {
+  padding: 9px 20px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green-700);
+  white-space: nowrap;
+}
+
+.demo-toggle__btn:hover {
+  color: var(--green-900);
+}
+
+.demo-toggle__btn--active {
+  background: var(--green-700);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.demo-toggle__btn--active:hover {
+  color: #ffffff;
+}
+
 /* Skyline */
 .hero__skyline {
   position: absolute;
@@ -2276,6 +2374,33 @@ a {
   line-height: 1.6;
 }
 
+/* ---------- HOW IT WORKS: unified, centered cards ---------- */
+.how-steps {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.how-steps .brokerage-step {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  text-align: center;
+  gap: 14px;
+}
+
+@media (max-width: 800px) {
+  .how-steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+#how .insight-card {
+  text-align: center;
+}
+
+#how .insight-card__icon {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* ---------- PRICING ---------- */
 .pricing {
   display: grid;
@@ -2365,6 +2490,17 @@ a {
 
 .plan--featured .plan__price span {
   color: rgba(255, 255, 255, 0.8);
+}
+
+.plan__annual {
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--green-700);
+}
+
+.plan--featured .plan__annual {
+  color: var(--lime-500);
 }
 
 .plan__sub {
@@ -2484,9 +2620,26 @@ a {
   line-height: 1.65;
 }
 
+.faq__btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.faq__btns .btn {
+  font-size: 14px;
+}
+
 /* =========================================================
    Review mode switcher (temporary for /bill/ review version)
    ========================================================= */
+.site-switch {
+  display: flex;
+  justify-content: center;
+  padding: 22px 16px 30px;
+}
+
 .review-link {
   font-size: 13px;
   font-weight: 600;
