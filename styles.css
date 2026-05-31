@@ -533,30 +533,35 @@ a {
 
 /* Better treatment specifically inside the Partners hero (two-column layout) */
 .hero .hero__skyline-illustration {
-  height: 340px;
-  bottom: -20px;
-  object-position: 50% 65%;
+  height: 220px;
+  bottom: 0;
+  object-position: 50% 70%;
 }
 
 /* On desktop, give the Partners hero more breathing room */
 @media (min-width: 900px) {
   .hero .hero__skyline-illustration {
-    height: 420px;
-    bottom: -60px;
-    object-position: 50% 75%;
+    height: 280px;
+    bottom: 0;
+    object-position: 50% 80%;
   }
 }
 
-/* Extra height for Bill's Partners hero so the rich skyline isn't squished */
+/* Extra bottom space so the partner card clears the skyline illustration */
 .hero--rich-skyline {
-  padding-bottom: 100px;
-  min-height: 620px;
+  padding-bottom: 200px;
+  min-height: 640px;
+}
+
+/* Top-align the two columns so the tall partner card doesn't dip into the skyline */
+.hero--rich-skyline .hero__grid {
+  align-items: start;
 }
 
 @media (min-width: 900px) {
   .hero--rich-skyline {
-    padding-bottom: 160px;
-    min-height: 720px;
+    padding-bottom: 300px;
+    min-height: 800px;
   }
 }
 
@@ -1511,6 +1516,23 @@ a {
   line-height: 1.55;
 }
 
+/* Four equal-width models on a single row (Ways to Partner) */
+.models--four {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1000px) {
+  .models--four {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .models--four {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ---------- REVENUE CARD ---------- */
 .revenue-card {
   background: #ffffff;
@@ -2112,6 +2134,23 @@ a {
 
 @media (max-width: 700px) {
   .insights {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Evenly spaced 3-up variant (Partners: For Your Clients) */
+.insights--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 900px) {
+  .insights--3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .insights--3 {
     grid-template-columns: 1fr;
   }
 }
@@ -3066,4 +3105,188 @@ a.review-link[href="/"]:hover {
 }
 .modal-actions .btn {
   flex: 1;
+}
+
+/* =========================================================
+   Partners page: density, case study, chips, contact form
+   ========================================================= */
+
+/* Chip row (search-term pills used in Why Buyers Leave / Why Now) */
+.chip-row {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  max-width: 720px;
+}
+.chip-row li {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  color: var(--ink-700);
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: var(--shadow-sm);
+}
+.section--alt .chip-row li {
+  background: #ffffff;
+}
+
+/* Featured partner / case study block */
+.case-study {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+  margin-top: 8px;
+}
+@media (max-width: 800px) {
+  .case-study {
+    grid-template-columns: 1fr;
+  }
+}
+.case-study__main {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+}
+.case-study__main h3 {
+  margin: 0 0 16px;
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--ink-900);
+}
+.case-study__main .benefit-list {
+  margin-top: 0;
+}
+.case-study__side {
+  background: linear-gradient(180deg, var(--green-900), var(--green-700));
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+.case-study__side-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lime-500);
+}
+.case-study__platforms {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 24px;
+  display: grid;
+  gap: 8px;
+}
+.case-study__platforms li {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+.case-study__side .btn {
+  width: 100%;
+}
+
+/* Partner contact form (Netlify Forms) */
+.partner-form {
+  max-width: 760px;
+  margin: 8px auto 0;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  backdrop-filter: blur(6px);
+}
+.partner-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+@media (max-width: 600px) {
+  .partner-form__row {
+    grid-template-columns: 1fr;
+  }
+}
+.partner-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.partner-form__field > span {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+}
+.partner-form__field input,
+.partner-form__field select {
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--ink-900);
+  background: #ffffff;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-pill);
+  padding: 13px 18px;
+  width: 100%;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.partner-form__field input::placeholder {
+  color: var(--ink-300);
+}
+.partner-form__field input:focus,
+.partner-form__field select:focus {
+  outline: none;
+  border-color: var(--lime-500);
+  box-shadow: 0 0 0 3px rgba(172, 239, 0, 0.25);
+}
+.partner-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+.partner-form__actions .btn {
+  border: none;
+}
+.partner-form__actions .btn--outline-lime {
+  border: 1.5px solid var(--lime-500);
+}
+.partner-form__success {
+  max-width: 620px;
+  margin: 16px auto 0;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(172, 239, 0, 0.4);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+}
+.partner-form__success h3 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+}
+.partner-form__success p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+}
+.partner-form__success a {
+  color: var(--lime-500);
+  font-weight: 600;
+  text-decoration: underline;
 }
