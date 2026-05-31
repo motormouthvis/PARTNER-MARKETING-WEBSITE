@@ -21,32 +21,167 @@
     <script defer src="/bill/nav.js"></script>
 
     <style>
-      /* ----- Portfolio grid ----- */
+      /* ----- Portfolio intro ----- */
       .pf-intro { max-width: 760px; margin: 0 auto 36px; text-align: center; }
+
+      /* ----- Partner grid (screenshot + name) ----- */
       .pf-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
         gap: 22px;
       }
+      @media (max-width: 900px) { .pf-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 600px) { .pf-grid { grid-template-columns: 1fr; } }
+
       .pf-card {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        padding: 0;
+        margin: 0;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        background: #fff;
+        box-shadow: 0 8px 26px rgba(15, 23, 42, 0.07);
+        overflow: hidden;
+        cursor: pointer;
+        font: inherit;
+        color: inherit;
+        text-decoration: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+      .pf-card:hover,
+      .pf-card:focus-visible {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 38px rgba(15, 23, 42, 0.14);
+        border-color: rgba(18, 125, 107, 0.35);
+        outline: none;
+      }
+      .pf-card__shot {
+        position: relative;
+        aspect-ratio: 16 / 10;
+        background: #eef2f6;
+        overflow: hidden;
+      }
+      .pf-card__shot img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .pf-card__open {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #0f172a;
+        background: rgba(255, 255, 255, 0.92);
+        padding: 6px 11px;
+        border-radius: 999px;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+      }
+      .pf-card__open svg { width: 13px; height: 13px; }
+      .pf-card__body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 3px; }
+      .pf-card__name { font-size: 18px; font-weight: 800; color: #0f172a; }
+      .pf-card__market { font-size: 13px; color: #64748b; font-weight: 600; }
+
+      /* ----- Lightbox ----- */
+      .pf-lightbox { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: flex-start; justify-content: center; padding: 40px 20px; overflow-y: auto; }
+      .pf-lightbox[hidden] { display: none; }
+      .pf-lightbox__overlay { position: fixed; inset: 0; background: rgba(8, 20, 16, 0.78); }
+      .pf-lightbox__dialog {
+        position: relative;
+        width: min(720px, 100%);
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+        padding: 28px;
+        margin: auto;
+      }
+      .pf-lightbox__close {
+        position: absolute; top: 14px; right: 14px;
+        width: 38px; height: 38px; border: 0; border-radius: 50%;
+        background: #f1f5f9; color: #0f172a; font-size: 24px; line-height: 1; cursor: pointer;
+      }
+      .pf-lightbox__close:hover { background: #e2e8f0; }
+      .pf-lightbox__title { margin: 0 36px 6px 0; font-size: 22px; font-weight: 800; color: #0f172a; }
+      .pf-lightbox__sub { margin: 0 0 20px; font-size: 14px; color: #64748b; }
+      .pf-step { margin-top: 22px; }
+      .pf-step:first-of-type { margin-top: 6px; }
+      .pf-shot {
+        position: relative;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #eef2f6;
+        border: 1px solid #e2e8f0;
+      }
+      .pf-shot img,
+      .pf-shot video { width: 100%; display: block; }
+      .pf-shot--mobile { max-width: 300px; margin: 0 auto; }
+      .pf-caption { margin: 10px 2px 0; font-size: 14px; line-height: 1.5; color: #334155; font-weight: 600; }
+
+      /* Animated arrow pointing at the floating Dream Neighborhood icon.
+         Direction is set per partner (the icon is in different corners on
+         different sites). Winn = bottom-left. */
+      .pf-arrow {
+        position: absolute;
+        width: 84px;
+        height: 84px;
+        color: #127d6b;
+        filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.35));
+        pointer-events: none;
+      }
+      .pf-arrow svg { width: 100%; height: 100%; }
+
+      .pf-arrow--br { right: 13%; bottom: 14%; animation: pf-arrow-br 0.9s ease-in-out infinite alternate; }
+      .pf-arrow--bl { left: 13%; bottom: 14%; animation: pf-arrow-bl 0.9s ease-in-out infinite alternate; }
+      .pf-arrow--bl svg { transform: scaleX(-1); } /* mirror to point down-left */
+
+      @keyframes pf-arrow-br {
+        from { transform: translate(-16px, -16px); }
+        to   { transform: translate(2px, 2px); }
+      }
+      @keyframes pf-arrow-bl {
+        from { transform: translate(16px, -16px); }
+        to   { transform: translate(-2px, 2px); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .pf-arrow--br, .pf-arrow--bl { animation: none; }
+      }
+
+      /* ----- Testimonials ----- */
+      .pf-tgrid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+      }
+      @media (max-width: 900px) { .pf-tgrid { grid-template-columns: 1fr; } }
+      .pf-tcard {
         background: #fff;
         border: 1px solid #e2e8f0;
         border-radius: 16px;
-        padding: 24px;
+        padding: 26px 24px;
         box-shadow: 0 8px 26px rgba(15, 23, 42, 0.07);
         display: flex;
         flex-direction: column;
       }
-      .pf-card__badge {
-        align-self: flex-start;
-        font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
-        color: #127d6b; background: #eafaf2; padding: 5px 11px; border-radius: 999px;
+      .pf-tcard__stars { color: #f59e0b; font-size: 15px; letter-spacing: 2px; }
+      .pf-tcard__quote { margin: 14px 0 0; font-size: 15px; line-height: 1.6; color: #334155; flex: 1; }
+      .pf-tcard__by { margin-top: 18px; display: flex; align-items: center; gap: 12px; }
+      .pf-tcard__avatar {
+        width: 42px; height: 42px; border-radius: 50%;
+        background: #127d6b; color: #eafaf2;
+        display: inline-flex; align-items: center; justify-content: center;
+        font-weight: 800; font-size: 15px; flex: 0 0 42px;
       }
-      .pf-card__name { font-size: 20px; font-weight: 800; color: #0f172a; margin-top: 14px; }
-      .pf-card__market { font-size: 14px; color: #334155; margin-top: 4px; font-weight: 600; }
-      .pf-card__note { font-size: 13px; color: #64748b; margin-top: 12px; line-height: 1.55; flex: 1; }
-      .pf-card__cta { margin-top: 18px; }
-      .pf-card__cta .btn { width: 100%; }
+      .pf-tcard__name { font-size: 15px; font-weight: 800; color: #0f172a; }
+      .pf-tcard__role { font-size: 13px; color: #64748b; }
     </style>
   </head>
   <body>
@@ -93,67 +228,185 @@
         </div>
 
         <div class="pf-grid">
-          <article class="pf-card">
-            <span class="pf-card__badge">IDX Listing</span>
-            <div class="pf-card__name">Winn Team Realtors</div>
-            <div class="pf-card__market">Clearwater Beach / Tampa Bay, FL</div>
-            <p class="pf-card__note">
-              "Your Home Sold Guaranteed Realty" team showcasing Dream Neighborhood on a live
-              Gulf-front IDX listing page.
+          <!-- Partners 1 & 2 open an in-page walkthrough (lightbox) -->
+          <button type="button" class="pf-card" data-portfolio="winn-team-realtors">
+            <span class="pf-card__shot">
+              <img
+                src="/bill/assets/portfolio/winn-team-realtors-card.png"
+                alt="Winn Team Realtors listing page with Dream Neighborhood"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=60'"
+              />
+              <span class="pf-card__open">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+                See walkthrough
+              </span>
+            </span>
+            <span class="pf-card__body">
+              <span class="pf-card__name">Winn Team Realtors</span>
+              <span class="pf-card__market">Clearwater Beach / Tampa Bay, FL</span>
+            </span>
+          </button>
+
+          <button type="button" class="pf-card" data-portfolio="team-doherty">
+            <span class="pf-card__shot">
+              <img
+                src="/bill/assets/portfolio/team-doherty-card.png"
+                alt="Team Doherty listing page with Dream Neighborhood"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=900&q=60'"
+              />
+              <span class="pf-card__open">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+                See walkthrough
+              </span>
+            </span>
+            <span class="pf-card__body">
+              <span class="pf-card__name">Team Doherty</span>
+              <span class="pf-card__market">Mission Viejo / Orange County, CA</span>
+            </span>
+          </button>
+
+          <!-- Partners 3–6 open the live site in a new tab -->
+          <a class="pf-card" href="https://link.locallysavvybizsolutions.com/preview/csiMv7wHCF2R9XmUGhKz?id=2622329_76" target="_blank" rel="noopener">
+            <span class="pf-card__shot">
+              <img
+                src="/bill/assets/portfolio/burton-real-estate-card.png"
+                alt="Burton Real Estate website with Dream Neighborhood"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=900&q=60'"
+              />
+              <span class="pf-card__open">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><path d="M15 3h6v6" /><path d="M10 14 21 3" /></svg>
+                Visit site
+              </span>
+            </span>
+            <span class="pf-card__body">
+              <span class="pf-card__name">Burton Real Estate</span>
+              <span class="pf-card__market">Frontenac, KS · SE Kansas / SW Missouri</span>
+            </span>
+          </a>
+
+          <a class="pf-card" href="https://www.coachandcarlson.com/the-neighborhood" target="_blank" rel="noopener">
+            <span class="pf-card__shot">
+              <img
+                src="/bill/assets/portfolio/coach-and-carlson-card.png"
+                alt="Coach &amp; Carlson neighborhood page with Dream Neighborhood"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=900&q=60'"
+              />
+              <span class="pf-card__open">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><path d="M15 3h6v6" /><path d="M10 14 21 3" /></svg>
+                Visit site
+              </span>
+            </span>
+            <span class="pf-card__body">
+              <span class="pf-card__name">Coach &amp; Carlson</span>
+              <span class="pf-card__market">Keller Williams · Atlanta, GA</span>
+            </span>
+          </a>
+
+          <a class="pf-card" href="https://search.seenashvillehomes.com/search/detail/264842300" target="_blank" rel="noopener">
+            <span class="pf-card__shot">
+              <img
+                src="/bill/assets/portfolio/see-nashville-homes-card.png"
+                alt="See Nashville Homes listing page with Dream Neighborhood"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&fit=crop&w=900&q=60'"
+              />
+              <span class="pf-card__open">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><path d="M15 3h6v6" /><path d="M10 14 21 3" /></svg>
+                Visit site
+              </span>
+            </span>
+            <span class="pf-card__body">
+              <span class="pf-card__name">See Nashville Homes</span>
+              <span class="pf-card__market">Benchmark Realty · Nashville, TN</span>
+            </span>
+          </a>
+
+          <a class="pf-card" href="https://realtycandy.com" target="_blank" rel="noopener">
+            <span class="pf-card__shot">
+              <img
+                src="/bill/assets/portfolio/realty-candy-card.png"
+                alt="Realty Candy websites with Dream Neighborhood"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=900&q=60'"
+              />
+              <span class="pf-card__open">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><path d="M15 3h6v6" /><path d="M10 14 21 3" /></svg>
+                Visit site
+              </span>
+            </span>
+            <span class="pf-card__body">
+              <span class="pf-card__name">Realty Candy</span>
+              <span class="pf-card__market">AeroIDX · Powering thousands of agent sites</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== TESTIMONIALS ============== -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section-head pf-intro">
+          <span class="pill pill--solid">
+            <span class="pill__dot" aria-hidden="true"></span>
+            TESTIMONIALS
+          </span>
+          <h2 class="section-title">What Our Partners Are Saying</h2>
+          <p class="section-lead">
+            Brokerages, teams, and IDX partners use Dream Neighborhood to keep buyers engaged
+            and win more listings.
+          </p>
+        </div>
+
+        <div class="pf-tgrid">
+          <article class="pf-tcard">
+            <div class="pf-tcard__stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="pf-tcard__quote">
+              "Buyers used to bounce to Zillow the second they wanted neighborhood info. Now they
+              stay on our site and explore everything right there. It paid for itself with the
+              first deal."
             </p>
-            <div class="pf-card__cta">
-              <a class="btn btn--primary" href="https://homes.winnteamrealtors.com/idx/details/listing/d003/TB8501024" target="_blank" rel="noopener">View live site</a>
+            <div class="pf-tcard__by">
+              <span class="pf-tcard__avatar">WT</span>
+              <span>
+                <span class="pf-tcard__name">Winn Team Realtors</span><br />
+                <span class="pf-tcard__role">Clearwater Beach / Tampa Bay, FL</span>
+              </span>
             </div>
           </article>
 
-          <article class="pf-card">
-            <span class="pf-card__badge">Luxury · eXp</span>
-            <div class="pf-card__name">Team Doherty</div>
-            <div class="pf-card__market">Mission Viejo / Orange County, CA</div>
-            <p class="pf-card__note">
-              Luxury real estate group at eXp Realty using Dream Neighborhood on its
-              property detail pages.
+          <article class="pf-tcard">
+            <div class="pf-tcard__stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="pf-tcard__quote">
+              "Setup was genuinely one line of code — it showed up on every listing automatically.
+              Our luxury buyers love seeing schools, walkability, and lifestyle without leaving
+              the page."
             </p>
-            <div class="pf-card__cta">
-              <a class="btn btn--primary" href="https://teamdoherty.com/details/?address=10611-Bergamot-San-Diego-CA-92126&amp;id=260012679SD" target="_blank" rel="noopener">View live site</a>
+            <div class="pf-tcard__by">
+              <span class="pf-tcard__avatar">TD</span>
+              <span>
+                <span class="pf-tcard__name">Team Doherty</span><br />
+                <span class="pf-tcard__role">eXp Realty · Orange County, CA</span>
+              </span>
             </div>
           </article>
 
-          <article class="pf-card">
-            <span class="pf-card__badge">Brokerage Site</span>
-            <div class="pf-card__name">Burton Real Estate</div>
-            <div class="pf-card__market">Frontenac, KS · SE Kansas / SW Missouri</div>
-            <p class="pf-card__note">
-              Family-owned brokerage showcasing Dream Neighborhood across its community pages.
+          <article class="pf-tcard">
+            <div class="pf-tcard__stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="pf-tcard__quote">
+              "We bundled Dream Neighborhood into our IDX product and rolled it out across thousands
+              of agent sites with zero friction. It's become a feature our clients ask for by name."
             </p>
-            <div class="pf-card__cta">
-              <a class="btn btn--primary" href="https://link.locallysavvybizsolutions.com/preview/csiMv7wHCF2R9XmUGhKz?id=2622329_76" target="_blank" rel="noopener">View live site</a>
-            </div>
-          </article>
-
-          <article class="pf-card">
-            <span class="pf-card__badge">KW · Atlanta</span>
-            <div class="pf-card__name">Coach &amp; Carlson</div>
-            <div class="pf-card__market">Atlanta, GA</div>
-            <p class="pf-card__note">
-              Keller Williams team featuring Dream Neighborhood on their dedicated
-              "The Neighborhood" page.
-            </p>
-            <div class="pf-card__cta">
-              <a class="btn btn--primary" href="https://www.coachandcarlson.com/the-neighborhood" target="_blank" rel="noopener">View live site</a>
-            </div>
-          </article>
-
-          <article class="pf-card">
-            <span class="pf-card__badge">IDX Listing</span>
-            <div class="pf-card__name">See Nashville Homes</div>
-            <div class="pf-card__market">Nashville, TN · Benchmark Realty</div>
-            <p class="pf-card__note">
-              Nashville-area home search powered by Benchmark Realty, with Dream Neighborhood
-              on its live listing detail pages.
-            </p>
-            <div class="pf-card__cta">
-              <a class="btn btn--primary" href="https://search.seenashvillehomes.com/search/detail/264842300" target="_blank" rel="noopener">View live site</a>
+            <div class="pf-tcard__by">
+              <span class="pf-tcard__avatar">RC</span>
+              <span>
+                <span class="pf-tcard__name">Realty Candy</span><br />
+                <span class="pf-tcard__role">AeroIDX Partner</span>
+              </span>
             </div>
           </article>
         </div>
@@ -208,5 +461,139 @@
     <div class="site-switch">
       <a href="/" class="review-link">Switch to Old Site</a>
     </div>
+
+    <!-- ============== PORTFOLIO LIGHTBOX ============== -->
+    <div id="pf-lightbox" class="pf-lightbox" hidden>
+      <div class="pf-lightbox__overlay" data-pf-close></div>
+      <div class="pf-lightbox__dialog" role="dialog" aria-modal="true" aria-labelledby="pf-lightbox-title">
+        <button type="button" class="pf-lightbox__close" data-pf-close aria-label="Close">&times;</button>
+        <h3 class="pf-lightbox__title" id="pf-lightbox-title"></h3>
+        <p class="pf-lightbox__sub">A quick look at the Dream Neighborhood experience on their live site.</p>
+        <div class="pf-lightbox__body" id="pf-lightbox-body"></div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var BASE = "/bill/assets/portfolio/";
+        // Stock fallbacks shown only until a partner's real file exists at BASE.
+        var FB = {
+          trigger: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1100&q=60",
+          popup: "https://images.unsplash.com/photo-1524813686514-a57563d77965?auto=format&fit=crop&w=1100&q=60",
+          mobile: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=700&q=60",
+          poster: "https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1100&q=60"
+        };
+
+        /* TEMPLATE: to add a partner, copy a block below, point the files at
+           BASE + "<slug>-...", and set arrow to the corner where the Dream
+           Neighborhood icon sits on THAT site ("bottom-left" or "bottom-right"). */
+        var PARTNERS = {
+          "winn-team-realtors": {
+            name: "Winn Team Realtors",
+            shots: [
+              { src: BASE + "winn-team-realtors-1-trigger.png", fb: FB.trigger, arrow: "bottom-left",
+                alt: "Winn Team Realtors listing page with the Explore the Neighborhood button",
+                caption: "Buyers see a clean \u201cExplore the Neighborhood\u201d button right on the listing page." },
+              { src: BASE + "winn-team-realtors-2-popup.png", fb: FB.popup,
+                alt: "Neighborhood popup open on the Winn Team Realtors site",
+                caption: "One click opens rich, interactive neighborhood data without ever leaving the site." },
+              { src: BASE + "winn-team-realtors-3-mobile.png", fb: FB.mobile, mobile: true,
+                alt: "Winn Team Realtors neighborhood experience on mobile",
+                caption: "Works beautifully on mobile with the same rich experience." }
+            ],
+            video: { src: BASE + "winn-team-realtors-demo.mp4", poster: FB.poster,
+              caption: "See it in Action \u2014 Full Experience." }
+          },
+          "team-doherty": {
+            name: "Team Doherty",
+            shots: [
+              { src: BASE + "team-doherty-1-trigger.png", fb: FB.trigger, arrow: "bottom-right",
+                alt: "Team Doherty listing page with the Explore the Neighborhood button",
+                caption: "Buyers see a clean \u201cExplore the Neighborhood\u201d button right on the listing page." },
+              { src: BASE + "team-doherty-2-popup.png", fb: FB.popup,
+                alt: "Neighborhood popup open on the Team Doherty site",
+                caption: "One click opens rich, interactive neighborhood data without ever leaving the site." },
+              { src: BASE + "team-doherty-3-mobile.png", fb: FB.mobile, mobile: true,
+                alt: "Team Doherty neighborhood experience on mobile",
+                caption: "Works beautifully on mobile with the same rich experience." }
+            ],
+            video: { src: BASE + "team-doherty-demo.mp4", poster: FB.poster,
+              caption: "See it in Action \u2014 Full Experience." }
+          }
+        };
+
+        function arrowHtml(corner) {
+          var cls = corner === "bottom-right" ? "pf-arrow pf-arrow--br" : "pf-arrow pf-arrow--bl";
+          return (
+            '<span class="' + cls + '" aria-hidden="true">' +
+            '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M14 14 50 50" /><path d="M50 28 50 50 28 50" />' +
+            "</svg></span>"
+          );
+        }
+
+        function shotHtml(shot) {
+          var img =
+            '<img src="' + shot.src + '" alt="' + shot.alt + '" ' +
+            "onerror=\"this.onerror=null;this.src='" + shot.fb + "'\" />";
+          var arrow = shot.arrow ? arrowHtml(shot.arrow) : "";
+          var shotCls = "pf-shot" + (shot.mobile ? " pf-shot--mobile" : "");
+          return (
+            '<div class="pf-step"><div class="' + shotCls + '">' + img + arrow +
+            '</div><p class="pf-caption">' + shot.caption + "</p></div>"
+          );
+        }
+
+        function buildBody(p) {
+          var html = "";
+          p.shots.forEach(function (s) { html += shotHtml(s); });
+          if (p.video) {
+            html +=
+              '<div class="pf-step"><div class="pf-shot">' +
+              '<video autoplay muted loop playsinline poster="' + p.video.poster + '">' +
+              '<source src="' + p.video.src + '" type="video/mp4" />' +
+              "</video>" +
+              '</div><p class="pf-caption">' + p.video.caption + "</p></div>";
+          }
+          return html;
+        }
+
+        var lb = document.getElementById("pf-lightbox");
+        var lbTitle = document.getElementById("pf-lightbox-title");
+        var lbBody = document.getElementById("pf-lightbox-body");
+        var lastFocus = null;
+
+        function openLightbox(key) {
+          var p = PARTNERS[key];
+          if (!p) return;
+          lbTitle.textContent = p.name;
+          lbBody.innerHTML = buildBody(p);
+          lb.hidden = false;
+          document.body.style.overflow = "hidden";
+          lb.querySelector(".pf-lightbox__close").focus();
+        }
+
+        function closeLightbox() {
+          lb.hidden = true;
+          lbBody.innerHTML = "";
+          document.body.style.overflow = "";
+          if (lastFocus) lastFocus.focus();
+        }
+
+        document.querySelectorAll("[data-portfolio]").forEach(function (card) {
+          card.addEventListener("click", function () {
+            lastFocus = card;
+            openLightbox(card.getAttribute("data-portfolio"));
+          });
+        });
+
+        lb.querySelectorAll("[data-pf-close]").forEach(function (el) {
+          el.addEventListener("click", closeLightbox);
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && !lb.hidden) closeLightbox();
+        });
+      })();
+    </script>
   </body>
 </html>
