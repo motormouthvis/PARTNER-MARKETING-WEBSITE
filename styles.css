@@ -900,6 +900,57 @@ a {
   line-height: 1.4;
 }
 
+/* ---------- FEATURE BOX (full-width highlight) ---------- */
+.feature-box {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: linear-gradient(135deg, var(--green-900), var(--green-700));
+  color: #fff;
+  padding: 28px 32px;
+  border-radius: var(--radius-lg);
+  margin: 0 0 32px;
+  box-shadow: 0 18px 40px rgba(13, 90, 77, 0.25);
+}
+
+.feature-box__icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--lime-500);
+  color: var(--green-900);
+}
+
+.feature-box__title {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.feature-box__text {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.feature-box__text strong {
+  color: var(--lime-400);
+}
+
+@media (max-width: 640px) {
+  .feature-box {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding: 24px;
+  }
+}
+
 /* ---------- MOCK STACK (illustration) ---------- */
 .two-col__visual {
   position: relative;
@@ -2668,6 +2719,40 @@ a {
 
 .faq__btns .btn {
   font-size: 14px;
+}
+
+/* Grouped FAQ categories (comprehensive FAQ pages) */
+.faq-group {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.faq-group + .faq-group {
+  margin-top: 44px;
+}
+
+.faq-group__head {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green-700);
+  margin: 0 0 16px;
+  padding-left: 4px;
+}
+
+/* FAQ audience switch (Realtors vs Partners) */
+.faq-switch {
+  text-align: center;
+  margin-bottom: 44px;
+}
+
+.faq-switch .demo-toggle {
+  margin-top: 0;
+}
+
+.faq-switch .demo-toggle__btn {
+  cursor: pointer;
 }
 
 /* =========================================================
