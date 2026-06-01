@@ -1,5 +1,5 @@
 # Compress portfolio walkthrough videos (and optionally PNGs) for web delivery.
-# Requires: ffmpeg on PATH — install once: winget install Gyan.FFmpeg
+# Requires: ffmpeg on PATH - install once: winget install Gyan.FFmpeg
 #
 # Usage (from repo root):
 #   .\scripts\compress-portfolio-media.ps1
@@ -18,10 +18,18 @@ param(
 
 $ErrorActionPreference = "Stop"
 $PortfolioDir = Join-Path $PSScriptRoot "..\bill\assets\portfolio" | Resolve-Path
+$BytesPerMb = 1048576
 
 function Get-Ffmpeg {
   $cmd = Get-Command ffmpeg -ErrorAction SilentlyContinue
   if ($cmd) { return $cmd.Source }
+  $wingetRoot = Join-Path $env:LOCALAPPDATA "Microsoft\WinGet\Packages"
+  if (Test-Path $wingetRoot) {
+    $found = Get-ChildItem $wingetRoot -Recurse -Filter "ffmpeg.exe" -ErrorAction SilentlyContinue |
+      Where-Object { $_.DirectoryName -match "\\bin$" } |
+      Select-Object -First 1 -ExpandProperty FullName
+    if ($found) { return $found }
+  }
   return $null
 }
 
@@ -56,13 +64,13 @@ function Compress-Video([string]$InputPath, [string]$Ffmpeg) {
   $after = (Get-Item $tmp).Length
   Copy-Item $InputPath $bak -Force
   Move-Item $tmp $InputPath -Force
-  Write-Host ("  {0:N1} MB -> {1:N1} MB (backup: {2})" -f ($before/1MB), ($after/1MB), (Split-Path $bak -Leaf))
+  Write-Host ('  {0:N1} MB -> {1:N1} MB (backup: {2})' -f ($before / $BytesPerMb), ($after / $BytesPerMb), (Split-Path $bak -Leaf))
 }
 
 function Compress-Png([string]$InputPath) {
   $magick = Get-Command magick -ErrorAction SilentlyContinue
   if (-not $magick) {
-    Write-Warning "ImageMagick (magick) not found — skipping PNG: $(Split-Path $InputPath -Leaf)"
+    Write-Warning "ImageMagick (magick) not found - skipping PNG: $(Split-Path $InputPath -Leaf)"
     return
   }
 
@@ -81,12 +89,12 @@ function Compress-Png([string]$InputPath) {
   $after = (Get-Item $tmp).Length
   if ($after -ge $before) {
     Remove-Item $tmp -Force
-    Write-Host "  already optimal ($([math]::Round($before/1MB,2)) MB)"
+    Write-Host ('  already optimal ({0:N2} MB)' -f ($before / $BytesPerMb))
     return
   }
   Copy-Item $InputPath $bak -Force
   Move-Item $tmp $InputPath -Force
-  Write-Host ("  {0:N1} MB -> {1:N1} MB" -f ($before/1MB), ($after/1MB))
+  Write-Host ('  {0:N1} MB -> {1:N1} MB' -f ($before / $BytesPerMb), ($after / $BytesPerMb))
 }
 
 $ffmpeg = Get-Ffmpeg
@@ -139,5 +147,5 @@ if (-not $VideosOnly) {
 }
 
 Write-Host ""
-Write-Host "Done. Review visuals, then: git add bill/assets/portfolio && git commit"
+Write-Host "Done. Review visuals, then: git add bill/assets/portfolio; git commit"
 Write-Host "Delete *.bak when satisfied."

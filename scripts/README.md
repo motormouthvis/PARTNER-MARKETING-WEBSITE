@@ -14,7 +14,14 @@ Optional (PNG optimization — ImageMagick):
 winget install ImageMagick.ImageMagick
 ```
 
-Close and reopen the terminal so `ffmpeg` is on PATH.
+Close and reopen the terminal so `ffmpeg` is on PATH. If you still get “not recognized,” refresh PATH in the current window:
+
+```powershell
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+ffmpeg -version
+```
+
+The compress script also finds WinGet’s `ffmpeg.exe` even when PATH was not refreshed yet.
 
 ## Compress manually
 

@@ -1,3 +1,8 @@
+# Local compression backups and temp artifacts — keep on disk, not in repo.
+*.bak
+*._compressed.png
+*._compressed.mp4
+
 # Source exports with spaces — canonical copies (kebab-case) are what the site uses.
 Burton Real Estate Hero.png
 Coach & Carlson Reaal Estate - Hero.png
