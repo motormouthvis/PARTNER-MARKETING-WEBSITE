@@ -64,6 +64,14 @@
         right: 58px;
         bottom: 58px;
         transform: translate(50%, 50%);
+        transition: opacity 0.25s ease, visibility 0.25s ease;
+      }
+      .sia-marker--paused {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .sia-marker--paused .sia-marker__path {
+        animation: none;
       }
       .sia-marker svg { width: 100%; height: 100%; overflow: visible; }
       .sia-marker__path {
@@ -239,12 +247,42 @@
     <script src="https://app.dreamneighborhood.com/explorer/sdk.js" async></script>
     <script>
       (function () {
+        var marker = document.querySelector(".sia-marker");
         var path = document.querySelector(".sia-marker__path");
-        if (!path) return;
-        try {
-          var len = path.getTotalLength();
-          if (len) path.style.setProperty("--len", len);
-        } catch (e) {}
+        if (path) {
+          try {
+            var len = path.getTotalLength();
+            if (len) path.style.setProperty("--len", len);
+          } catch (e) {}
+        }
+        if (!marker) return;
+
+        function setExplorerOpen(isOpen) {
+          marker.classList.toggle("sia-marker--paused", isOpen);
+        }
+
+        function watchExplorer() {
+          var root = document.getElementById("dn-explorer-root");
+          if (!root) return false;
+          var backdrop = root.querySelector(".dn-exp-backdrop");
+          if (!backdrop) return false;
+
+          function sync() {
+            setExplorerOpen(backdrop.classList.contains("dn-exp-open"));
+          }
+
+          sync();
+          new MutationObserver(sync).observe(backdrop, {
+            attributes: true,
+            attributeFilter: ["class"]
+          });
+          return true;
+        }
+
+        var tries = 0;
+        var timer = setInterval(function () {
+          if (watchExplorer() || ++tries > 120) clearInterval(timer);
+        }, 250);
       })();
     </script>
   </body>
