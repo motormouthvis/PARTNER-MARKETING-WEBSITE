@@ -39,16 +39,15 @@ short loop).
 - `see-nashville-homes-card.png`
 - `realty-candy-card.png`
 
-## Arrow direction (per site)
+## Red marker circle (per site)
 
-The animated arrow on the first screenshot points at the floating Dream
-Neighborhood icon. Its corner is set per partner in the `PARTNERS` config inside
-`portfolio.html` via `arrow: "bottom-left"` or `arrow: "bottom-right"`.
+The hand-drawn circle on the first screenshot is tuned per partner in
+`portfolio.html` via `marker: "winn"`, `marker: "doherty"`, etc. (CSS classes
+`pf-marker--winn`, `pf-marker--doherty`). Both Winn and Team Doherty use the
+**lower-left** DN icon; help/chat widgets sit on the right.
 
-- **Winn Team Realtors → bottom-left** (their site has a help bubble in the
-  bottom-right, so the DN icon sits lower-left).
-- Set each new partner's corner to wherever the DN icon actually appears on
-  that site.
+- **Winn Team Realtors → `marker: "winn"`**
+- **Team Doherty → `marker: "doherty"`**
 
 ## Notes
 - Filenames are case-sensitive on the live (Netlify) server — keep them lowercase exactly as above.

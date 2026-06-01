@@ -132,8 +132,7 @@
 
       /* Hand-drawn "magic marker" circle that loops around the floating
          Dream Neighborhood icon, then clears and redraws over and over.
-         Direction is set per partner (the icon is in different corners on
-         different sites). Winn = bottom-left. */
+         Position is tuned per partner (icon + tooltip sit in different spots). */
       .pf-marker {
         position: absolute;
         width: 104px;
@@ -142,6 +141,9 @@
         pointer-events: none;
       }
       .pf-marker svg { width: 100%; height: 100%; overflow: visible; }
+      /* Nudge the drawn oval so it wraps the icon, not empty space in the viewBox. */
+      .pf-marker--winn svg { transform: translate(0, 4%); }
+      .pf-marker--doherty svg { transform: translate(-3%, 6%); }
       .pf-marker__path {
         fill: none;
         stroke: currentColor;
@@ -154,6 +156,33 @@
         animation: pf-marker-draw 2.8s ease-in-out infinite;
       }
 
+      /* Per-site tuning: left/top = icon center; translate(-50%,-50%) centers the oval on it. */
+      .pf-marker--winn {
+        /* Bottom-left: blue DN icon + white “explore neighborhood” tooltip */
+        left: calc(3.2% + 1px);
+        top: calc(94.5% - 8px);
+        bottom: auto;
+        width: 13%;
+        height: 13%;
+        min-width: 68px;
+        min-height: 68px;
+        max-width: 88px;
+        max-height: 88px;
+        transform: translate(-50%, -50%);
+      }
+      .pf-marker--doherty {
+        /* Lower-left: black DN icon + tooltip (not the BR purple chat widget) */
+        left: calc(10.5% - 40px);
+        top: calc(88.5% + 16px);
+        bottom: auto;
+        width: 11%;
+        height: 11%;
+        min-width: 58px;
+        min-height: 58px;
+        max-width: 72px;
+        max-height: 72px;
+        transform: translate(-50%, -50%);
+      }
       .pf-marker--br { right: 1%; bottom: 1%; }
       .pf-marker--bl { left: 1%; bottom: 1%; }
 
@@ -499,14 +528,14 @@
         };
 
         /* TEMPLATE: to add a partner, copy a block below, point the files at
-           BASE + "<slug>-...", and set arrow to the corner where the Dream
-           Neighborhood icon sits on THAT site ("bottom-left" or "bottom-right"). */
+           BASE + "<slug>-...", and set marker to "winn" / "doherty" or tune a new
+           .pf-marker--<slug> class for where the DN icon sits in the trigger shot. */
         var PARTNERS = {
           "winn-team-realtors": {
             name: "Winn Team Realtors",
             live: "https://homes.winnteamrealtors.com/idx/details/listing/d003/U8197013/691-S-Gulfview-Boulevard-1011-Clearwater-Beach",
             shots: [
-              { src: BASE + "winn-team-realtors-1-trigger.png", fb: FB.trigger, arrow: "bottom-left",
+              { src: BASE + "winn-team-realtors-1-trigger.png", fb: FB.trigger, marker: "winn",
                 alt: "Winn Team Realtors listing page with the Explore the Neighborhood button",
                 caption: "Buyers see a clean \u201cExplore the Neighborhood\u201d button right on the listing page." },
               { src: BASE + "winn-team-realtors-2-popup.png", fb: FB.popup,
@@ -523,7 +552,7 @@
             name: "Team Doherty",
             live: "https://teamdoherty.com/details/?address=10611-Bergamot-San-Diego-CA-92126&id=260012679SD",
             shots: [
-              { src: BASE + "team-doherty-1-trigger.png", fb: FB.trigger, arrow: "bottom-right",
+              { src: BASE + "team-doherty-1-trigger.png", fb: FB.trigger, marker: "doherty",
                 alt: "Team Doherty listing page with the Explore the Neighborhood button",
                 caption: "Buyers see a clean \u201cExplore the Neighborhood\u201d button right on the listing page." },
               { src: BASE + "team-doherty-2-popup.png", fb: FB.popup,
@@ -538,8 +567,12 @@
           }
         };
 
-        function arrowHtml(corner) {
-          var cls = corner === "bottom-right" ? "pf-marker pf-marker--br" : "pf-marker pf-marker--bl";
+        function markerHtml(marker) {
+          var cls = "pf-marker";
+          if (marker === "winn") cls += " pf-marker--winn";
+          else if (marker === "doherty") cls += " pf-marker--doherty";
+          else if (marker === "bottom-right") cls += " pf-marker--br";
+          else cls += " pf-marker--bl";
           return (
             '<span class="' + cls + '" aria-hidden="true">' +
             '<svg viewBox="0 0 100 100" fill="none">' +
@@ -552,7 +585,7 @@
           var img =
             '<img src="' + shot.src + '" alt="' + shot.alt + '" ' +
             "onerror=\"this.onerror=null;this.src='" + shot.fb + "'\" />";
-          var arrow = shot.arrow ? arrowHtml(shot.arrow) : "";
+          var arrow = shot.marker ? markerHtml(shot.marker) : "";
           var shotCls = "pf-shot" + (shot.mobile ? " pf-shot--mobile" : "");
           return (
             '<div class="pf-step"><div class="' + shotCls + '">' + img + arrow +
