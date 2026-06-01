@@ -124,17 +124,21 @@
       .pf-shot img,
       .pf-shot video { width: 100%; display: block; }
       .pf-shot--mobile { max-width: 300px; margin: 0 auto; }
-      .pf-caption { margin: 10px 2px 0; font-size: 14px; line-height: 1.5; color: #334155; font-weight: 600; }
+      .pf-caption { margin: 12px 2px 0; font-size: 18px; line-height: 1.4; color: #0f172a; font-weight: 800; }
+
+      /* "See it live" link inside the lightbox */
+      .pf-livebtn { margin-top: 26px; }
+      .pf-livebtn .btn { width: 100%; }
 
       /* Animated arrow pointing at the floating Dream Neighborhood icon.
          Direction is set per partner (the icon is in different corners on
          different sites). Winn = bottom-left. */
       .pf-arrow {
         position: absolute;
-        width: 84px;
-        height: 84px;
+        width: 54px;
+        height: 54px;
         color: #127d6b;
-        filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.35));
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         pointer-events: none;
       }
       .pf-arrow svg { width: 100%; height: 100%; }
@@ -232,7 +236,7 @@
           <button type="button" class="pf-card" data-portfolio="winn-team-realtors">
             <span class="pf-card__shot">
               <img
-                src="/bill/assets/portfolio/winn-team-realtors-card.png"
+                src="/bill/assets/portfolio/winn-team-realtors-hero.png"
                 alt="Winn Team Realtors listing page with Dream Neighborhood"
                 loading="lazy"
                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=60'"
@@ -490,6 +494,7 @@
         var PARTNERS = {
           "winn-team-realtors": {
             name: "Winn Team Realtors",
+            live: "https://homes.winnteamrealtors.com/idx/details/listing/d003/U8197013/691-S-Gulfview-Boulevard-1011-Clearwater-Beach",
             shots: [
               { src: BASE + "winn-team-realtors-1-trigger.png", fb: FB.trigger, arrow: "bottom-left",
                 alt: "Winn Team Realtors listing page with the Explore the Neighborhood button",
@@ -506,6 +511,7 @@
           },
           "team-doherty": {
             name: "Team Doherty",
+            live: "https://teamdoherty.com/details/?address=10611-Bergamot-San-Diego-CA-92126&id=260012679SD",
             shots: [
               { src: BASE + "team-doherty-1-trigger.png", fb: FB.trigger, arrow: "bottom-right",
                 alt: "Team Doherty listing page with the Explore the Neighborhood button",
@@ -526,7 +532,7 @@
           var cls = corner === "bottom-right" ? "pf-arrow pf-arrow--br" : "pf-arrow pf-arrow--bl";
           return (
             '<span class="' + cls + '" aria-hidden="true">' +
-            '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">' +
+            '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">' +
             '<path d="M14 14 50 50" /><path d="M50 28 50 50 28 50" />' +
             "</svg></span>"
           );
@@ -554,6 +560,11 @@
               '<source src="' + p.video.src + '" type="video/mp4" />' +
               "</video>" +
               '</div><p class="pf-caption">' + p.video.caption + "</p></div>";
+          }
+          if (p.live) {
+            html +=
+              '<div class="pf-livebtn"><a class="btn btn--primary" href="' + p.live +
+              '" target="_blank" rel="noopener">See it live on ' + p.name + " \u2197</a></div>";
           }
           return html;
         }
