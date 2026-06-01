@@ -55,7 +55,7 @@ Delivery assets no longer use Git LFS. The root `.gitattributes` no longer route
 files ship through regular git, and the large PNG masters stay local (gitignored
 via `bill/assets/portfolio/.gitignore`).
 
-> **One-time cleanup (optional, by the repo owner):** PNG masters and the two
-> demo `.mp4`s were committed via LFS before this change. They remain tracked
-> until removed non-destructively with `git rm --cached bill/assets/portfolio/*.png`
-> (then re-add the small `.mp4`s as regular git blobs). History is not rewritten.
+Portfolio PNG paths were removed from git tracking (they were LFS pointers); only
+`.webp` / `.jpg` / `.mp4` delivery files live in the repo now. Older commits still
+contain LFS metadata for those PNG paths if you check them out — history was not
+rewritten.

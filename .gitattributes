@@ -5,7 +5,6 @@
 # bill/assets/portfolio/.gitignore). The generated .webp/.jpg/.mp4 files are the
 # only media the site actually serves.
 #
-# NOTE: PNG masters and the two demo .mp4s were previously committed via LFS.
-# Removing these rules does not retroactively un-LFS those existing blobs; the
-# user can do that later with a non-destructive `git rm --cached` + re-add if
-# desired. New commits of these file types use regular git.
+# PNG masters were removed from git tracking (they stay local; see
+# bill/assets/portfolio/.gitignore). History still contains older LFS blobs for
+# those paths until a history rewrite, which we intentionally avoid.
