@@ -3,6 +3,12 @@
 *._compressed.png
 *._compressed.mp4
 
+# Large PNG masters — the site now serves the generated .webp/.jpg instead, so
+# the masters stay local and out of git. Re-run scripts/compress-portfolio-media.ps1
+# after replacing one. (Masters committed before this change remain tracked until
+# removed with: git rm --cached bill/assets/portfolio/*.png)
+*.png
+
 # Source exports with spaces — canonical copies (kebab-case) are what the site uses.
 Burton Real Estate Hero.png
 Coach & Carlson Reaal Estate - Hero.png

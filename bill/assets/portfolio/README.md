@@ -1,17 +1,28 @@
 # Portfolio media
 
-Drop real screenshots / videos here using the **exact filenames below**. Until a
+Drop real screenshots / videos here using the **exact filenames below**, then run
+`scripts/compress-portfolio-media.ps1` to generate the web-delivery files. Until a
 file exists, the Portfolio page automatically shows a stock photo fallback, so
-nothing looks broken in the meantime. Just add the file with the matching name
-and push — no HTML edits needed.
+nothing looks broken in the meantime.
 
-Recommended sizes: card images ~900×560 (16:10), walkthrough screenshots
-~1100px wide, mobile screenshot ~700px wide (tall/portrait), video MP4 (muted,
-short loop).
+## Masters vs. delivery files
+
+- **PNG masters** (the filenames below): the high-res source screenshots. These
+  stay **local only** — they are gitignored and **not** committed.
+- **Delivery files**: the script produces a `.webp` + `.jpg` for every PNG (the
+  page uses `<picture>` with a WebP source and JPEG fallback) and a compressed
+  `.mp4` for each demo video. **These small files are what gets committed** (via
+  regular git — no LFS).
+
+So after adding/replacing a PNG: run the script, then commit only the resulting
+`.webp` / `.jpg` / `.mp4` files. No HTML edits needed.
+
+Recommended source sizes: card images ~900×560 (16:10), walkthrough screenshots
+~1100px+ wide, mobile screenshot tall/portrait, video MP4 (muted, short loop).
 
 ## Grid card thumbnails (all 6 partners)
 
-- `winn-team-realtors-card.png`
+- `winn-team-realtors-hero.png`  _(the Winn grid card uses the hero file)_
 - `team-doherty-card.png`
 - `burton-real-estate-card.png`
 - `coach-and-carlson-card.png`

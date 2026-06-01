@@ -1,19 +1,28 @@
-# Compress portfolio walkthrough videos (and optionally PNGs) for web delivery.
-# Requires: ffmpeg on PATH - install once: winget install Gyan.FFmpeg
+# Generate web-optimized portfolio assets from local PNG/MP4 masters.
+# Requires: ffmpeg (winget install Gyan.FFmpeg)
 #
 # Usage (from repo root):
 #   .\scripts\compress-portfolio-media.ps1
 #   .\scripts\compress-portfolio-media.ps1 -VideosOnly
 #   .\scripts\compress-portfolio-media.ps1 -WhatIf
 #
-# Writes *.bak backups next to originals, then replaces in place.
-# Re-run git add after compressing; LFS will track the smaller files.
+# Outputs (committed to git):
+#   Grid cards     -> {name}.webp + {name}.jpg  at 800px max width
+#   Lightbox shots -> {name}.webp + {name}.jpg  at 1200px max width
+#   Videos         -> compressed {name}.mp4
+#
+# Source PNG masters stay local (gitignored). Re-run after replacing a screenshot.
 
 param(
   [switch]$VideosOnly,
+  [switch]$ImagesOnly,
   [switch]$WhatIf,
+  [int]$CardWidth = 800,
+  [int]$LightboxWidth = 1200,
   [int]$MaxVideoWidth = 1280,
-  [int]$Crf = 26
+  [int]$Crf = 26,
+  [int]$WebpQuality = 82,
+  [int]$JpegQuality = 85
 )
 
 $ErrorActionPreference = "Stop"
@@ -33,13 +42,17 @@ function Get-Ffmpeg {
   return $null
 }
 
+function Format-Mb([long]$Bytes) {
+  return "{0:N2} MB" -f ($Bytes / $BytesPerMb)
+}
+
 function Compress-Video([string]$InputPath, [string]$Ffmpeg) {
   $dir = Split-Path $InputPath -Parent
   $base = [System.IO.Path]::GetFileNameWithoutExtension($InputPath)
   $tmp = Join-Path $dir ($base + "._compressed.mp4")
-  $bak = $InputPath + ".bak"
 
   $args = @(
+    "-hide_banner", "-loglevel", "error",
     "-y", "-i", $InputPath,
     "-an",
     "-c:v", "libx264",
@@ -57,44 +70,44 @@ function Compress-Video([string]$InputPath, [string]$Ffmpeg) {
     return
   }
 
-  & $Ffmpeg @args
+  # ffmpeg logs to stderr; redirect so $ErrorActionPreference='Stop' doesn't
+  # treat the banner as a terminating error. Rely on $LASTEXITCODE instead.
+  & $Ffmpeg @args 2>&1 | Out-Null
   if ($LASTEXITCODE -ne 0) { throw "ffmpeg failed for $InputPath" }
 
   $before = (Get-Item $InputPath).Length
   $after = (Get-Item $tmp).Length
-  Copy-Item $InputPath $bak -Force
   Move-Item $tmp $InputPath -Force
-  Write-Host ('  {0:N1} MB -> {1:N1} MB (backup: {2})' -f ($before / $BytesPerMb), ($after / $BytesPerMb), (Split-Path $bak -Leaf))
+  Write-Host ("  {0} -> {1}" -f (Format-Mb $before), (Format-Mb $after))
 }
 
-function Compress-Png([string]$InputPath) {
-  $magick = Get-Command magick -ErrorAction SilentlyContinue
-  if (-not $magick) {
-    Write-Warning "ImageMagick (magick) not found - skipping PNG: $(Split-Path $InputPath -Leaf)"
-    return
-  }
+function Export-Image([string]$InputPath, [string]$Ffmpeg, [int]$MaxWidth) {
+  $dir = Split-Path $InputPath -Parent
+  $base = [System.IO.Path]::GetFileNameWithoutExtension($InputPath)
+  $webp = Join-Path $dir ($base + ".webp")
+  $jpg = Join-Path $dir ($base + ".jpg")
+  $scale = "scale='min($MaxWidth,iw)':-2:flags=lanczos"
 
-  $bak = $InputPath + ".bak"
-  $tmp = $InputPath + "._compressed.png"
-  Write-Host "PNG: $([System.IO.Path]::GetFileName($InputPath))"
+  Write-Host "Image ($MaxWidth px): $([System.IO.Path]::GetFileName($InputPath))"
 
   if ($WhatIf) {
-    Write-Host "  would run: magick convert -strip (optimize) $InputPath"
+    Write-Host "  would write: $base.webp, $base.jpg"
     return
   }
 
   $before = (Get-Item $InputPath).Length
-  & $magick.Source $InputPath -strip -define png:compression-level=9 -define png:compression-filter=5 $tmp
-  if ($LASTEXITCODE -ne 0) { throw "magick failed for $InputPath" }
-  $after = (Get-Item $tmp).Length
-  if ($after -ge $before) {
-    Remove-Item $tmp -Force
-    Write-Host ('  already optimal ({0:N2} MB)' -f ($before / $BytesPerMb))
-    return
-  }
-  Copy-Item $InputPath $bak -Force
-  Move-Item $tmp $InputPath -Force
-  Write-Host ('  {0:N1} MB -> {1:N1} MB' -f ($before / $BytesPerMb), ($after / $BytesPerMb))
+
+  # ffmpeg logs to stderr; redirect so $ErrorActionPreference='Stop' doesn't
+  # treat the banner as a terminating error. Rely on $LASTEXITCODE instead.
+  & $Ffmpeg -hide_banner -loglevel error -y -i $InputPath -vf $scale -c:v libwebp -quality $WebpQuality $webp 2>&1 | Out-Null
+  if ($LASTEXITCODE -ne 0) { throw "ffmpeg webp failed for $InputPath" }
+
+  & $Ffmpeg -hide_banner -loglevel error -y -i $InputPath -vf $scale -q:v $JpegQuality $jpg 2>&1 | Out-Null
+  if ($LASTEXITCODE -ne 0) { throw "ffmpeg jpeg failed for $InputPath" }
+
+  $webpSize = (Get-Item $webp).Length
+  $jpgSize = (Get-Item $jpg).Length
+  Write-Host ("  source {0} -> webp {1}, jpg {2}" -f (Format-Mb $before), (Format-Mb $webpSize), (Format-Mb $jpgSize))
 }
 
 $ffmpeg = Get-Ffmpeg
@@ -109,43 +122,58 @@ Then open a new terminal and re-run this script.
 "@
 }
 
+# Card images: 800px wide (grid thumbnails)
+$cardSources = @(
+  @{ png = "winn-team-realtors-hero.png"; width = $CardWidth },
+  @{ png = "team-doherty-card.png"; width = $CardWidth },
+  @{ png = "burton-real-estate-card.png"; width = $CardWidth },
+  @{ png = "coach-and-carlson-card.png"; width = $CardWidth },
+  @{ png = "see-nashville-homes-card.png"; width = $CardWidth },
+  @{ png = "realty-candy-card.png"; width = $CardWidth }
+)
+
+# Lightbox screenshots: 1200px wide
+$lightboxSources = @(
+  "winn-team-realtors-1-trigger.png",
+  "winn-team-realtors-2-popup.png",
+  "winn-team-realtors-3-mobile.png",
+  "team-doherty-1-trigger.png",
+  "team-doherty-2-popup.png",
+  "team-doherty-3-mobile.png"
+)
+
 $videoNames = @(
   "winn-team-realtors-demo.mp4",
   "team-doherty-demo.mp4"
 )
 
-$pngNames = @(
-  "winn-team-realtors-hero.png",
-  "winn-team-realtors-1-trigger.png",
-  "winn-team-realtors-2-popup.png",
-  "winn-team-realtors-3-mobile.png",
-  "team-doherty-card.png",
-  "team-doherty-1-trigger.png",
-  "team-doherty-2-popup.png",
-  "team-doherty-3-mobile.png",
-  "burton-real-estate-card.png",
-  "coach-and-carlson-card.png",
-  "see-nashville-homes-card.png",
-  "realty-candy-card.png"
-)
-
 Write-Host "Portfolio dir: $PortfolioDir"
+Write-Host "Card width: $CardWidth px | Lightbox width: $LightboxWidth px"
 Write-Host ""
 
-foreach ($name in $videoNames) {
-  $path = Join-Path $PortfolioDir $name
-  if (Test-Path $path) { Compress-Video $path $ffmpeg }
-  else { Write-Warning "Missing: $name" }
+if (-not $VideosOnly) {
+  foreach ($item in $cardSources) {
+    $path = Join-Path $PortfolioDir $item.png
+    if (Test-Path $path) { Export-Image $path $ffmpeg $item.width }
+    else { Write-Warning "Missing card source: $($item.png)" }
+  }
+
+  foreach ($name in $lightboxSources) {
+    $path = Join-Path $PortfolioDir $name
+    if (Test-Path $path) { Export-Image $path $ffmpeg $LightboxWidth }
+    else { Write-Warning "Missing lightbox source: $name" }
+  }
 }
 
-if (-not $VideosOnly) {
-  foreach ($name in $pngNames) {
+if (-not $ImagesOnly) {
+  foreach ($name in $videoNames) {
     $path = Join-Path $PortfolioDir $name
-    if (Test-Path $path) { Compress-Png $path }
+    if (Test-Path $path) { Compress-Video $path $ffmpeg }
     else { Write-Warning "Missing: $name" }
   }
 }
 
 Write-Host ""
-Write-Host "Done. Review visuals, then: git add bill/assets/portfolio; git commit"
-Write-Host "Delete *.bak when satisfied."
+Write-Host "Done. Review in browser, then:"
+Write-Host "  git add bill/assets/portfolio/*.webp bill/assets/portfolio/*.jpg bill/assets/portfolio/*.mp4"
+Write-Host "  git commit -m 'Optimize portfolio media for web delivery.'"

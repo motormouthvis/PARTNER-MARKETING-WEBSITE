@@ -1,2 +1,11 @@
-*.mp4 filter=lfs diff=lfs merge=lfs -text
-bill/assets/portfolio/*.png filter=lfs diff=lfs merge=lfs -text
+# Portfolio delivery assets (WebP / JPEG / compressed MP4) are small enough to
+# ship through regular git — Git LFS is no longer used for them.
+#
+# Large PNG masters stay local and out of git (see
+# bill/assets/portfolio/.gitignore). The generated .webp/.jpg/.mp4 files are the
+# only media the site actually serves.
+#
+# NOTE: PNG masters and the two demo .mp4s were previously committed via LFS.
+# Removing these rules does not retroactively un-LFS those existing blobs; the
+# user can do that later with a non-destructive `git rm --cached` + re-add if
+# desired. New commits of these file types use regular git.
