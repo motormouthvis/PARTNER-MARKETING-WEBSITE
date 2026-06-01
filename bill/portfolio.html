@@ -111,20 +111,65 @@
       }
       .pf-lightbox__close:hover { background: #e2e8f0; }
       .pf-lightbox__title { margin: 0 36px 6px 0; font-size: 22px; font-weight: 800; color: #0f172a; }
-      .pf-lightbox__sub { margin: 0 0 20px; font-size: 14px; color: #64748b; }
-      .pf-step { margin-top: 22px; }
-      .pf-step:first-of-type { margin-top: 6px; }
+      .pf-lightbox__sub {
+        margin: 0 0 26px;
+        font-size: 16px;
+        line-height: 1.55;
+        font-weight: 600;
+        color: #334155;
+      }
+      .pf-step { margin-top: 38px; }
+      .pf-step:first-of-type { margin-top: 8px; }
       .pf-shot {
         position: relative;
         border-radius: 14px;
         overflow: hidden;
         background: #eef2f6;
         border: 1px solid #e2e8f0;
+        min-height: 220px;
       }
       .pf-shot img,
       .pf-shot video { width: 100%; display: block; }
+      .pf-shot img {
+        opacity: 0;
+        transition: opacity 0.35s ease;
+      }
+      .pf-shot--ready img { opacity: 1; }
+      .pf-shot--video .pf-shot__loader { background: rgba(238, 242, 246, 0.72); }
       .pf-shot--mobile { max-width: 300px; margin: 0 auto; }
-      .pf-caption { margin: 12px 2px 0; font-size: 18px; line-height: 1.4; color: #0f172a; font-weight: 800; }
+      .pf-shot__loader {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        color: #127d6b;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        pointer-events: none;
+      }
+      .pf-shot__loader::before {
+        content: "";
+        width: 36px;
+        height: 36px;
+        border: 3px solid rgba(18, 125, 107, 0.2);
+        border-top-color: #127d6b;
+        border-radius: 50%;
+        animation: pf-shot-spin 0.85s linear infinite;
+      }
+      .pf-shot--ready .pf-shot__loader { display: none; }
+      @keyframes pf-shot-spin { to { transform: rotate(360deg); } }
+      .pf-caption {
+        margin: 16px 0 0;
+        font-size: 17px;
+        line-height: 1.5;
+        color: #0d5a4d;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
 
       /* "See it live" link inside the lightbox */
       .pf-livebtn { margin-top: 26px; }
@@ -581,10 +626,13 @@
           );
         }
 
-        function shotHtml(shot) {
+        function shotHtml(shot, index) {
+          var loadAttr =
+            index === 0 ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"';
           var img =
-            '<img src="' + shot.src + '" alt="' + shot.alt + '" ' +
-            "onerror=\"this.onerror=null;this.src='" + shot.fb + "'\" />";
+            '<span class="pf-shot__loader">Loading image…</span>' +
+            '<img src="' + shot.src + '" alt="' + shot.alt + '" decoding="async"' + loadAttr +
+            " onerror=\"this.onerror=null;this.src='" + shot.fb + "'\" />";
           var arrow = shot.marker ? markerHtml(shot.marker) : "";
           var shotCls = "pf-shot" + (shot.mobile ? " pf-shot--mobile" : "");
           return (
@@ -595,11 +643,13 @@
 
         function buildBody(p) {
           var html = "";
-          p.shots.forEach(function (s) { html += shotHtml(s); });
+          p.shots.forEach(function (s, i) { html += shotHtml(s, i); });
           if (p.video) {
             html +=
-              '<div class="pf-step"><div class="pf-shot">' +
-              '<video autoplay muted loop playsinline poster="' + p.video.poster + '">' +
+              '<div class="pf-step"><div class="pf-shot pf-shot--video">' +
+              '<span class="pf-shot__loader">Loading video…</span>' +
+              '<video class="pf-shot__video" muted loop playsinline preload="none" poster="' +
+              p.video.poster + '">' +
               '<source src="' + p.video.src + '" type="video/mp4" />' +
               "</video>" +
               '</div><p class="pf-caption">' + p.video.caption + "</p></div>";
@@ -617,6 +667,61 @@
         var lbBody = document.getElementById("pf-lightbox-body");
         var lastFocus = null;
 
+        function markShotReady(shot) {
+          shot.classList.add("pf-shot--ready");
+        }
+
+        function bindShotMedia(shot) {
+          var img = shot.querySelector("img");
+          if (img) {
+            if (img.complete && img.naturalWidth) markShotReady(shot);
+            else {
+              img.addEventListener("load", function () { markShotReady(shot); });
+              img.addEventListener("error", function () { markShotReady(shot); });
+            }
+            return;
+          }
+          var video = shot.querySelector("video.pf-shot__video");
+          if (!video) {
+            markShotReady(shot);
+            return;
+          }
+          var started = false;
+          function startVideo() {
+            if (started) return;
+            started = true;
+            video.preload = "auto";
+            video.load();
+            video.play().catch(function () {});
+          }
+          function onVideoReady() {
+            markShotReady(shot);
+          }
+          if ("IntersectionObserver" in window) {
+            var io = new IntersectionObserver(
+              function (entries) {
+                entries.forEach(function (entry) {
+                  if (entry.isIntersecting) {
+                    startVideo();
+                    io.disconnect();
+                  }
+                });
+              },
+              { root: lb, rootMargin: "120px 0px", threshold: 0.01 }
+            );
+            io.observe(video);
+          } else {
+            startVideo();
+          }
+          video.addEventListener("loadeddata", onVideoReady);
+          video.addEventListener("error", onVideoReady);
+          if (video.readyState >= 2) onVideoReady();
+        }
+
+        function initLightboxMedia() {
+          lbBody.querySelectorAll(".pf-shot").forEach(bindShotMedia);
+        }
+
         function openLightbox(key) {
           var p = PARTNERS[key];
           if (!p) return;
@@ -624,6 +729,7 @@
           lbBody.innerHTML = buildBody(p);
           lb.hidden = false;
           document.body.style.overflow = "hidden";
+          initLightboxMedia();
           // Use the real path length so the marker draws cleanly start-to-finish.
           lbBody.querySelectorAll(".pf-marker__path").forEach(function (path) {
             try {
