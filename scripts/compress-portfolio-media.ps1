@@ -132,13 +132,11 @@ $cardSources = @(
   @{ png = "realty-candy-card.png"; width = $CardWidth }
 )
 
-# Lightbox screenshots: 1200px wide
+# Lightbox screenshots: 1200px wide (trigger + mobile only; popup is covered by video)
 $lightboxSources = @(
   "winn-team-realtors-1-trigger.png",
-  "winn-team-realtors-2-popup.png",
   "winn-team-realtors-3-mobile.png",
   "team-doherty-1-trigger.png",
-  "team-doherty-2-popup.png",
   "team-doherty-3-mobile.png"
 )
 

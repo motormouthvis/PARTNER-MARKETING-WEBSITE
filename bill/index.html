@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/styles.css" />
     <link rel="stylesheet" href="/bill/nav.css" />
     <script defer src="/bill/nav.js"></script>
+    <script defer src="/bill/calendly-gate.js"></script>
   </head>
   <body>
     <!-- ============== NAVIGATION ============== -->
@@ -42,7 +43,13 @@
 
         <div class="nav__cta">
           <a class="btn btn--ghost" href="https://realtor.dreamneighborhood.com/accounts/login/" target="_blank" rel="noopener">Log in / Sign up</a>
-          <a class="btn btn--primary" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
+          <a
+            class="btn btn--primary calendly-gate calendly-gate--locked"
+            href="#"
+            data-calendly-gate
+            data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+            >Book a Demo</a
+          >
         </div>
       </div>
     </header>
@@ -85,8 +92,17 @@
 
           <div class="hero__ctas">
             <a class="btn btn--primary btn--lg" href="#" data-video-open>Watch Video</a>
-            <a class="btn btn--lime btn--lg" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
+            <a
+              class="btn btn--lime btn--lg calendly-gate calendly-gate--locked"
+              href="#"
+              data-calendly-gate
+              data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+              >Book a Demo</a
+            >
           </div>
+          <p class="form-unlock-hint" style="margin-top: 14px">
+            Submit the <a href="#contact">short form below</a> first — then Calendly scheduling unlocks.
+          </p>
         </div>
       </div>
     </section>
@@ -334,7 +350,13 @@
               <li>Up to 5,000 views per month</li>
               <li>24/7 Support</li>
             </ul>
-            <a class="btn btn--primary" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
+            <a
+              class="btn btn--primary calendly-gate calendly-gate--locked"
+              href="#"
+              data-calendly-gate
+              data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+              >Book a Demo</a
+            >
           </div>
 
           <div class="plan plan--featured">
@@ -350,7 +372,13 @@
               <li>Up to 25,000 views per month</li>
               <li>24/7 Support</li>
             </ul>
-            <a class="btn btn--lime" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
+            <a
+              class="btn btn--lime calendly-gate calendly-gate--locked"
+              href="#"
+              data-calendly-gate
+              data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+              >Book a Demo</a
+            >
           </div>
 
           <div class="plan">
@@ -472,7 +500,7 @@
       </div>
     </section>
 
-    <!-- ============== CTA BANNER ============== -->
+    <!-- ============== CTA BANNER + REALTOR FORM (unlocks Calendly) ============== -->
     <section id="contact" class="cta">
       <div class="container cta__inner">
         <span class="pill pill--solid pill--on-dark">
@@ -484,12 +512,84 @@
           <span class="accent-lime">standing out from the crowd.</span>
         </h2>
         <p class="cta__lead">
-          We will install the Dream Neighborhood Widget on your website for
-          free. Schedule a free call and we’ll walk you through it.
+          We will install the Dream Neighborhood widget on your website for free. Tell us a bit about your site,
+          then pick a time with our team and CTO on Calendly.
+        </p>
+        <p class="cta__form-intro">
+          Submit this short form once — then <strong>Schedule a Free Call</strong>, <strong>Book a Demo</strong>, and the header button unlock Calendly site-wide on this preview.
         </p>
         <div class="cta__btns">
-          <a class="btn btn--lime btn--lg" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Schedule a Free Call</a>
-          <a class="btn btn--outline-lime btn--lg" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
+          <a
+            class="btn btn--lime btn--lg calendly-gate calendly-gate--locked"
+            href="#"
+            data-calendly-gate
+            data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+            >Schedule a Free Call</a
+          >
+          <a
+            class="btn btn--outline-lime btn--lg calendly-gate calendly-gate--locked"
+            href="#"
+            data-calendly-gate
+            data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+            >Book a Demo</a
+          >
+        </div>
+
+        <form
+          name="realtor-calendly-gate"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          class="partner-form"
+          id="realtor-calendly-form"
+          style="margin-top: 28px"
+        >
+          <input type="hidden" name="form-name" value="realtor-calendly-gate" />
+          <p class="partner-form__hp" hidden>
+            <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+          </p>
+
+          <div class="partner-form__row">
+            <label class="partner-form__field">
+              <span>Name</span>
+              <input type="text" name="name" autocomplete="name" required />
+            </label>
+            <label class="partner-form__field">
+              <span>Work email</span>
+              <input type="email" name="email" autocomplete="email" required />
+            </label>
+          </div>
+
+          <div class="partner-form__row">
+            <label class="partner-form__field">
+              <span>Brokerage or team</span>
+              <input type="text" name="brokerage" autocomplete="organization" placeholder="Optional" />
+            </label>
+            <label class="partner-form__field">
+              <span>Phone</span>
+              <input type="tel" name="phone" autocomplete="tel" placeholder="Optional" />
+            </label>
+          </div>
+
+          <div class="partner-form__row">
+            <label class="partner-form__field partner-form__field--grow">
+              <span>Anything we should know before the call?</span>
+              <input type="text" name="message" placeholder="Optional — your site URL, IDX, goals…" />
+            </label>
+          </div>
+
+          <div class="partner-form__actions">
+            <button type="submit" class="btn btn--lime btn--lg">Submit &amp; unlock scheduling</button>
+          </div>
+        </form>
+
+        <div class="partner-form__success" id="realtor-form-success" hidden style="margin-top: 24px">
+          <h3>Thanks — you’re all set.</h3>
+          <p>
+            Scheduling is unlocked.
+            <a id="realtor-calendly-open" href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call" target="_blank" rel="noopener">Open Calendly</a>
+            to pick a time, or use the buttons above.
+          </p>
         </div>
       </div>
     </section>
@@ -518,7 +618,13 @@
           <div>
             <h4>Partners</h4>
             <a href="/bill/partners.html">Become a Partner</a>
-            <a href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
+            <a
+              class="calendly-gate calendly-gate--locked"
+              href="#"
+              data-calendly-gate
+              data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+              >Book a Demo</a
+            >
           </div>
           <div>
             <h4>Company</h4>
@@ -544,6 +650,47 @@
     <div class="site-switch">
       <a href="/" class="review-link">Switch to Old Site</a>
     </div>
+
+    <script>
+      (function () {
+        var form = document.getElementById("realtor-calendly-form");
+        var success = document.getElementById("realtor-form-success");
+        if (!form || !success) return;
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var data = new FormData(form);
+          var body = new URLSearchParams(data).toString();
+          var calBase = "https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call";
+          var prefill = {
+            name: (data.get("name") || "").toString().trim(),
+            email: (data.get("email") || "").toString().trim(),
+            brokerage: (data.get("brokerage") || "").toString(),
+            phone: (data.get("phone") || "").toString(),
+            message: (data.get("message") || "").toString(),
+          };
+          fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: body,
+          })
+            .then(function () {
+              if (window.DNCalendlyGate && typeof window.DNCalendlyGate.unlock === "function") {
+                window.DNCalendlyGate.unlock(prefill);
+              }
+              var openLink = document.getElementById("realtor-calendly-open");
+              if (openLink && window.DNCalendlyGate && typeof window.DNCalendlyGate.buildCalendlyUrl === "function") {
+                openLink.href = window.DNCalendlyGate.buildCalendlyUrl(calBase);
+              }
+              form.hidden = true;
+              success.hidden = false;
+              success.scrollIntoView({ behavior: "smooth", block: "center" });
+            })
+            .catch(function () {
+              form.submit();
+            });
+        });
+      })();
+    </script>
 
     <!-- ============== VIDEO MODAL (button-triggered, no fixed preview) ============== -->
     <style>

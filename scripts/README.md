@@ -35,8 +35,7 @@ From the repo root:
 |---|---|---|
 | `winn-team-realtors-hero.png` | `.webp` + `.jpg` | 800px (grid card) |
 | `*-card.png` | `.webp` + `.jpg` | 800px |
-| `*-1-trigger.png`, `*-2-popup.png` | `.webp` + `.jpg` | 1200px (lightbox) |
-| `*-3-mobile.png` | `.webp` + `.jpg` | 1200px |
+| `*-1-trigger.png`, `*-3-mobile.png` | `.webp` + `.jpg` | 1200px (lightbox) |
 | `*-demo.mp4` | compressed `.mp4` | 1280px wide, no audio |
 
 **Typical results:** grid total ~500 KB (was ~34 MB), walkthrough ~1 MB (was ~6 MB).

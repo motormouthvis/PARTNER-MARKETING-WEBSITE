@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/styles.css" />
     <link rel="stylesheet" href="/bill/nav.css" />
     <script defer src="/bill/nav.js"></script>
+    <script defer src="/bill/calendly-gate.js"></script>
   </head>
   <body>
     <!-- ============== NAVIGATION ============== -->
@@ -42,7 +43,13 @@
 
         <div class="nav__cta">
           <a class="btn btn--ghost" href="https://realtor.dreamneighborhood.com/accounts/login/" target="_blank" rel="noopener">Log in / Sign up</a>
-          <a class="btn btn--primary" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
+          <a
+            class="btn btn--primary calendly-gate calendly-gate--locked"
+            href="#"
+            data-calendly-gate
+            data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+            >Book a Demo</a
+          >
         </div>
       </div>
     </header>
@@ -77,8 +84,17 @@
           </ul>
 
           <div class="hero__ctas">
-            <a class="btn btn--primary btn--lg" href="#contact">Become a Partner</a>
+            <a
+              class="btn btn--primary btn--lg calendly-gate calendly-gate--locked"
+              href="#"
+              data-calendly-gate
+              data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+              >Become a Partner</a
+            >
           </div>
+          <p class="form-unlock-hint">
+            Submit the <a href="#contact">partnership inquiry form</a> below first — then Calendly scheduling with our team unlocks.
+          </p>
         </div>
 
         <!-- Right side: Realty Candy partner showcase card -->
@@ -381,8 +397,20 @@
       </div>
 
       <div class="section-cta">
-        <a class="btn btn--primary" href="#contact">Become a Partner</a>
-        <a class="btn btn--ghost" href="#contact">Schedule an Integration Call</a>
+        <a
+          class="btn btn--primary calendly-gate calendly-gate--locked"
+          href="#"
+          data-calendly-gate
+          data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+          >Become a Partner</a
+        >
+        <a
+          class="btn btn--ghost calendly-gate calendly-gate--locked"
+          href="#"
+          data-calendly-gate
+          data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+          >Schedule an Integration Call</a
+        >
       </div>
     </section>
 
@@ -431,8 +459,20 @@
       </div>
 
       <div class="section-cta">
-        <a class="btn btn--primary" href="#contact">Become a Partner</a>
-        <a class="btn btn--lime" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
+        <a
+          class="btn btn--primary calendly-gate calendly-gate--locked"
+          href="#"
+          data-calendly-gate
+          data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+          >Become a Partner</a
+        >
+        <a
+          class="btn btn--lime calendly-gate calendly-gate--locked"
+          href="#"
+          data-calendly-gate
+          data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+          >Book a Demo</a
+        >
       </div>
     </section>
 
@@ -498,8 +538,21 @@
       </div>
 
       <div class="section-cta">
-        <a class="btn btn--primary" href="#contact">Become a Partner</a>
-        <a class="btn btn--ghost" href="#contact">Schedule an Integration Call</a>
+        <a
+          class="btn btn--primary calendly-gate calendly-gate--locked"
+          href="#"
+          data-calendly-gate
+          data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+          >Become a Partner</a
+        >
+        <a class="btn btn--primary" href="#" data-video-open>Watch 55 second Partnership Video</a>
+        <a
+          class="btn btn--ghost calendly-gate calendly-gate--locked"
+          href="#"
+          data-calendly-gate
+          data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+          >Schedule an Integration Call</a
+        >
       </div>
     </section>
 
@@ -609,6 +662,9 @@
         <p class="cta__lead">
           Create new recurring revenue streams while enhancing your clients’ websites. Tell us about your platform and we’ll be in touch.
         </p>
+        <p class="cta__form-intro">
+          After you submit this form, scheduling with our team and CTO on Calendly unlocks site-wide (including the Book a Demo buttons in the header).
+        </p>
 
         <form
           name="partner-inquiry"
@@ -663,13 +719,19 @@
 
           <div class="partner-form__actions">
             <button type="submit" class="btn btn--lime btn--lg">Become a Partner</button>
-            <a class="btn btn--outline-lime btn--lg" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
+            <a
+              class="btn btn--outline-lime btn--lg calendly-gate calendly-gate--locked"
+              href="#"
+              data-calendly-gate
+              data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+              >Book a Demo</a
+            >
           </div>
         </form>
 
         <div class="partner-form__success" id="partner-form-success" hidden>
           <h3>Thanks — we’ve got it.</h3>
-          <p>Our partnerships team will reach out shortly. Prefer to talk now? <a href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a demo</a>.</p>
+          <p>Our partnerships team will reach out shortly. Prefer to talk now? <a id="partner-calendly-open" href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call" target="_blank" rel="noopener">Book a demo on Calendly</a>.</p>
         </div>
       </div>
     </section>
@@ -699,7 +761,13 @@
             <h4>Partners</h4>
             <a href="#contact">Become a Partner</a>
             <a href="#revenue">Revenue Opportunities</a>
-            <a href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
+            <a
+              class="calendly-gate calendly-gate--locked"
+              href="#"
+              data-calendly-gate
+              data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+              >Book a Demo</a
+            >
           </div>
           <div>
             <h4>Company</h4>
@@ -724,6 +792,57 @@
       <a href="/" class="review-link">Switch to Old Site</a>
     </div>
 
+    <!-- ============== VIDEO MODAL (same pattern as /bill/index.html) ============== -->
+    <style>
+      .dnv-modal{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;padding:24px}
+      .dnv-modal[hidden]{display:none}
+      .dnv-modal__overlay{position:absolute;inset:0;background:rgba(8,20,16,.78)}
+      .dnv-modal__dialog{position:relative;width:min(960px,100%)}
+      .dnv-modal__frame{position:relative;padding-top:56.25%;background:#000;border-radius:16px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.45)}
+      .dnv-modal__frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+      .dnv-modal__close{position:absolute;top:-46px;right:0;width:40px;height:40px;border:0;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:26px;line-height:1;cursor:pointer}
+      .dnv-modal__close:hover{background:rgba(255,255,255,.26)}
+    </style>
+    <div id="dnv-modal" class="dnv-modal" hidden>
+      <div class="dnv-modal__overlay" data-dnv-close></div>
+      <div class="dnv-modal__dialog" role="dialog" aria-modal="true" aria-label="Partnership video player">
+        <button class="dnv-modal__close" type="button" data-dnv-close aria-label="Close video">&times;</button>
+        <div class="dnv-modal__frame" id="dnv-frame"></div>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var VIDEO_ID = "4Vixhq4Vsig";
+        var modal = document.getElementById("dnv-modal");
+        var frame = document.getElementById("dnv-frame");
+        if (!modal || !frame) return;
+        function openVideo(e) {
+          if (e) e.preventDefault();
+          frame.innerHTML =
+            '<iframe src="https://www.youtube-nocookie.com/embed/' + VIDEO_ID +
+            '?autoplay=1&rel=0" title="Dream Neighborhood partnership video" ' +
+            'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+            "allowfullscreen></iframe>";
+          modal.hidden = false;
+          document.body.style.overflow = "hidden";
+        }
+        function closeVideo() {
+          modal.hidden = true;
+          frame.innerHTML = "";
+          document.body.style.overflow = "";
+        }
+        document.querySelectorAll("[data-video-open]").forEach(function (btn) {
+          btn.addEventListener("click", openVideo);
+        });
+        modal.querySelectorAll("[data-dnv-close]").forEach(function (el) {
+          el.addEventListener("click", closeVideo);
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && !modal.hidden) closeVideo();
+        });
+      })();
+    </script>
+
     <!-- ============== PARTNER FORM (Netlify Forms, AJAX submit) ============== -->
     <script>
       (function () {
@@ -734,15 +853,31 @@
           e.preventDefault();
           var data = new FormData(form);
           var body = new URLSearchParams(data).toString();
+          var calBase = "https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call";
+          var prefill = {
+            name: (data.get("name") || "").toString().trim(),
+            email: (data.get("email") || "").toString().trim(),
+            company: (data.get("company") || "").toString(),
+            platform_type: (data.get("platform_type") || "").toString(),
+            num_sites: (data.get("num_sites") || "").toString(),
+            message: (data.get("message") || "").toString(),
+          };
           fetch('/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: body,
           })
             .then(function () {
+              if (window.DNCalendlyGate && typeof window.DNCalendlyGate.unlock === "function") {
+                window.DNCalendlyGate.unlock(prefill);
+              }
+              var openLink = document.getElementById("partner-calendly-open");
+              if (openLink && window.DNCalendlyGate && typeof window.DNCalendlyGate.buildCalendlyUrl === "function") {
+                openLink.href = window.DNCalendlyGate.buildCalendlyUrl(calBase);
+              }
               form.hidden = true;
               success.hidden = false;
-              success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              success.scrollIntoView({ behavior: "smooth", block: "center" });
             })
             .catch(function () {
               // On failure, fall back to a normal submission so the lead is never lost.

@@ -31,18 +31,23 @@ Recommended source sizes: card images ~900×560 (16:10), walkthrough screenshots
 
 ## Walkthrough media (lightbox partners — currently Winn & Team Doherty)
 
+The lightbox is **three steps**: listing trigger screenshot, looping demo video
+(shows the in-page popup experience), then mobile screenshot.
+
 ### Winn Team Realtors  (added ✓)
 - `winn-team-realtors-1-trigger.png`  — listing page showing the "Explore the Neighborhood" trigger button
-- `winn-team-realtors-2-popup.png`    — the neighborhood popup open
 - `winn-team-realtors-3-mobile.png`   — mobile version (portrait)
 - `winn-team-realtors-demo.mp4`       — short looping, no-sound full-experience video
+
+_(Optional local asset, not used in the lightbox: `winn-team-realtors-2-popup.png` — static popup screenshot; the video covers that moment.)_
 
 ### Team Doherty  (added ✓)
 - `team-doherty-card.png`              — grid card / hero thumbnail
 - `team-doherty-1-trigger.png`         — listing page showing the trigger
-- `team-doherty-2-popup.png`           — neighborhood popup open
 - `team-doherty-3-mobile.png`          — mobile experience (screenshot)
 - `team-doherty-demo.mp4`              — full-experience video
+
+_(Optional: `team-doherty-2-popup.png` — not used in the lightbox; the video replaces that step.)_
 
 ### Visit-site partners  (card heroes added ✓)
 - `burton-real-estate-card.png`

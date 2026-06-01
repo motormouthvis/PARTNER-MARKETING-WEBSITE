@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/styles.css" />
     <link rel="stylesheet" href="/bill/nav.css" />
     <script defer src="/bill/nav.js"></script>
+    <script defer src="/bill/calendly-gate.js"></script>
 
     <style>
       /* ----- Portfolio intro ----- */
@@ -330,7 +331,13 @@
 
         <div class="nav__cta">
           <a class="btn btn--ghost" href="https://realtor.dreamneighborhood.com/accounts/login/" target="_blank" rel="noopener">Log in / Sign up</a>
-          <a class="btn btn--primary" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
+          <a
+            class="btn btn--primary calendly-gate calendly-gate--locked"
+            href="#"
+            data-calendly-gate
+            data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+            >Book a Demo</a
+          >
         </div>
       </div>
     </header>
@@ -579,7 +586,13 @@
           <div>
             <h4>Partners</h4>
             <a href="/bill/partners.html">Become a Partner</a>
-            <a href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
+            <a
+              class="calendly-gate calendly-gate--locked"
+              href="#"
+              data-calendly-gate
+              data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+              >Book a Demo</a
+            >
           </div>
           <div>
             <h4>Company</h4>
@@ -637,15 +650,13 @@
               { src: BASE + "winn-team-realtors-1-trigger", fb: FB.trigger, marker: "winn",
                 alt: "Winn Team Realtors listing page with the Explore the Neighborhood button",
                 caption: "Buyers see a clean \u201cExplore the Neighborhood\u201d button right on the listing page." },
-              { src: BASE + "winn-team-realtors-2-popup", fb: FB.popup,
-                alt: "Neighborhood popup open on the Winn Team Realtors site",
-                caption: "One click opens rich, interactive neighborhood data without ever leaving the site." },
               { src: BASE + "winn-team-realtors-3-mobile", fb: FB.mobile, mobile: true,
                 alt: "Winn Team Realtors neighborhood experience on mobile",
                 caption: "Works beautifully on mobile with the same rich experience." }
             ],
             video: { src: BASE + "winn-team-realtors-demo.mp4", poster: FB.poster,
-              caption: "See it in Action \u2014 Full Experience." }
+              caption:
+                "One click opens rich, interactive neighborhood data without ever leaving the site \u2014 watch the full interaction in action below." }
           },
           "team-doherty": {
             name: "Team Doherty",
@@ -654,15 +665,13 @@
               { src: BASE + "team-doherty-1-trigger", fb: FB.trigger, marker: "doherty",
                 alt: "Team Doherty listing page with the Explore the Neighborhood button",
                 caption: "Buyers see a clean \u201cExplore the Neighborhood\u201d button right on the listing page." },
-              { src: BASE + "team-doherty-2-popup", fb: FB.popup,
-                alt: "Neighborhood popup open on the Team Doherty site",
-                caption: "One click opens rich, interactive neighborhood data without ever leaving the site." },
               { src: BASE + "team-doherty-3-mobile", fb: FB.mobile, mobile: true,
                 alt: "Team Doherty neighborhood experience on mobile",
                 caption: "Works beautifully on mobile with the same rich experience." }
             ],
             video: { src: BASE + "team-doherty-demo.mp4", poster: FB.poster,
-              caption: "See it in Action \u2014 Full Experience." }
+              caption:
+                "One click opens rich, interactive neighborhood data without ever leaving the site \u2014 watch the full interaction in action below." }
           }
         };
 
@@ -710,9 +719,12 @@
         }
 
         function buildBody(p) {
-          var total = p.shots.length + (p.video ? 1 : 0);
+          // Three steps: listing trigger, full-interaction video (replaces a static
+          // popup screenshot), then mobile. `p.shots` is [trigger, mobile] only.
+          var total = p.video ? 3 : p.shots.length;
           var html = "";
-          p.shots.forEach(function (s, i) { html += shotHtml(s, i, total); });
+          if (!p.shots.length) return html;
+          html += shotHtml(p.shots[0], 0, total);
           if (p.video) {
             var media =
               '<div class="pf-shot pf-shot--video">' +
@@ -722,7 +734,11 @@
               '<source src="' + p.video.src + '" type="video/mp4" />' +
               "</video>" +
               "</div>";
-            html += stepHtml(total, total, media, p.video.caption);
+            html += stepHtml(2, total, media, p.video.caption);
+          }
+          if (p.shots.length > 1) {
+            var mobileIdx = p.video ? 2 : 1;
+            html += shotHtml(p.shots[1], mobileIdx, total);
           }
           return html;
         }
@@ -731,7 +747,9 @@
         // "See it live" button immediately to its right.
         function introHtml(p) {
           var sub =
-            '<p class="pf-lightbox__sub">A walk through of the Dream Neighborhood experience or:</p>';
+            '<p class="pf-lightbox__sub">A three step walk through of the Dream Neighborhood experience on ' +
+            p.name +
+            ", or:</p>";
           var btn = p.live
             ? '<span class="pf-lightbox__live"><a class="btn btn--primary" href="' + p.live +
               '" target="_blank" rel="noopener">See it live on ' + p.name + " \u2197</a></span>"

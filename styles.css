@@ -1747,6 +1747,38 @@ a {
   flex-wrap: wrap;
 }
 
+.cta__form-intro {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 640px;
+  margin: 0 auto 20px;
+  line-height: 1.55;
+}
+
+/* Calendly links disabled until realtor/partner form is submitted (see bill/calendly-gate.js) */
+a.calendly-gate.calendly-gate--locked {
+  opacity: 0.42;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+.form-unlock-hint {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(15, 23, 42, 0.55);
+  margin-top: 14px;
+  max-width: 460px;
+  line-height: 1.45;
+}
+.hero--rich-skyline .form-unlock-hint {
+  color: rgba(255, 255, 255, 0.78);
+}
+.hero--rich-skyline .form-unlock-hint a {
+  color: #c6f7e8;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
 /* ---------- FOOTER ---------- */
 .footer {
   background: #ffffff;

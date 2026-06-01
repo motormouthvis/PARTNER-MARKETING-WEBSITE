@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/styles.css" />
     <link rel="stylesheet" href="/bill/nav.css" />
     <script defer src="/bill/nav.js"></script>
+    <script defer src="/bill/calendly-gate.js"></script>
 
     <style>
       /* ----- Sample listing ----- */
@@ -82,7 +83,13 @@
 
         <div class="nav__cta">
           <a class="btn btn--ghost" href="https://realtor.dreamneighborhood.com/accounts/login/" target="_blank" rel="noopener">Log in / Sign up</a>
-          <a class="btn btn--primary" href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
+          <a
+            class="btn btn--primary calendly-gate calendly-gate--locked"
+            href="#"
+            data-calendly-gate
+            data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+            >Book a Demo</a
+          >
         </div>
       </div>
     </header>
@@ -174,7 +181,13 @@
           <div>
             <h4>Partners</h4>
             <a href="/bill/partners.html">Become a Partner</a>
-            <a href="https://www.dreamneighborhood.com/book-a-call" target="_blank" rel="noopener">Book a Demo</a>
+            <a
+              class="calendly-gate calendly-gate--locked"
+              href="#"
+              data-calendly-gate
+              data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
+              >Book a Demo</a
+            >
           </div>
           <div>
             <h4>Company</h4>
