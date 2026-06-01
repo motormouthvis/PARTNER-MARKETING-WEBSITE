@@ -26,11 +26,18 @@ short loop).
 - `winn-team-realtors-3-mobile.png`   — mobile version (portrait)
 - `winn-team-realtors-demo.mp4`       — short looping, no-sound full-experience video
 
-### Team Doherty
-- `team-doherty-1-trigger.png`
-- `team-doherty-2-popup.png`
-- `team-doherty-3-mobile.png`
-- `team-doherty-demo.mp4`
+### Team Doherty  (added ✓)
+- `team-doherty-card.png`              — grid card / hero thumbnail
+- `team-doherty-1-trigger.png`         — listing page showing the trigger
+- `team-doherty-2-popup.png`           — neighborhood popup open
+- `team-doherty-3-mobile.png`          — mobile experience (screenshot)
+- `team-doherty-demo.mp4`              — full-experience video
+
+### Visit-site partners  (card heroes added ✓)
+- `burton-real-estate-card.png`
+- `coach-and-carlson-card.png`
+- `see-nashville-homes-card.png`
+- `realty-candy-card.png`
 
 ## Arrow direction (per site)
 

@@ -130,33 +130,43 @@
       .pf-livebtn { margin-top: 26px; }
       .pf-livebtn .btn { width: 100%; }
 
-      /* Animated arrow pointing at the floating Dream Neighborhood icon.
+      /* Hand-drawn "magic marker" circle that loops around the floating
+         Dream Neighborhood icon, then clears and redraws over and over.
          Direction is set per partner (the icon is in different corners on
          different sites). Winn = bottom-left. */
-      .pf-arrow {
+      .pf-marker {
         position: absolute;
-        width: 54px;
-        height: 54px;
-        color: #127d6b;
-        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        width: 104px;
+        height: 104px;
+        color: #e11d2a;
         pointer-events: none;
       }
-      .pf-arrow svg { width: 100%; height: 100%; }
-
-      .pf-arrow--br { right: 13%; bottom: 14%; animation: pf-arrow-br 0.9s ease-in-out infinite alternate; }
-      .pf-arrow--bl { left: 13%; bottom: 14%; animation: pf-arrow-bl 0.9s ease-in-out infinite alternate; }
-      .pf-arrow--bl svg { transform: scaleX(-1); } /* mirror to point down-left */
-
-      @keyframes pf-arrow-br {
-        from { transform: translate(-16px, -16px); }
-        to   { transform: translate(2px, 2px); }
+      .pf-marker svg { width: 100%; height: 100%; overflow: visible; }
+      .pf-marker__path {
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 3.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: var(--len, 300);
+        stroke-dashoffset: var(--len, 300);
+        filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+        animation: pf-marker-draw 2.8s ease-in-out infinite;
       }
-      @keyframes pf-arrow-bl {
-        from { transform: translate(16px, -16px); }
-        to   { transform: translate(-2px, 2px); }
+
+      .pf-marker--br { right: 1%; bottom: 1%; }
+      .pf-marker--bl { left: 1%; bottom: 1%; }
+
+      @keyframes pf-marker-draw {
+        0%   { stroke-dashoffset: var(--len, 300); opacity: 0; }
+        6%   { opacity: 1; }
+        42%  { stroke-dashoffset: 0; opacity: 1; }
+        72%  { stroke-dashoffset: 0; opacity: 1; }
+        84%  { stroke-dashoffset: 0; opacity: 0; }
+        100% { stroke-dashoffset: var(--len, 300); opacity: 0; }
       }
       @media (prefers-reduced-motion: reduce) {
-        .pf-arrow--br, .pf-arrow--bl { animation: none; }
+        .pf-marker__path { animation: none; stroke-dashoffset: 0; }
       }
 
       /* ----- Testimonials ----- */
@@ -329,7 +339,7 @@
             </span>
           </a>
 
-          <a class="pf-card" href="https://realtycandy.com" target="_blank" rel="noopener">
+          <a class="pf-card" href="https://realtycandy.com/dream-neighborhoods/" target="_blank" rel="noopener">
             <span class="pf-card__shot">
               <img
                 src="/bill/assets/portfolio/realty-candy-card.png"
@@ -529,11 +539,11 @@
         };
 
         function arrowHtml(corner) {
-          var cls = corner === "bottom-right" ? "pf-arrow pf-arrow--br" : "pf-arrow pf-arrow--bl";
+          var cls = corner === "bottom-right" ? "pf-marker pf-marker--br" : "pf-marker pf-marker--bl";
           return (
             '<span class="' + cls + '" aria-hidden="true">' +
-            '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">' +
-            '<path d="M14 14 50 50" /><path d="M50 28 50 50 28 50" />' +
+            '<svg viewBox="0 0 100 100" fill="none">' +
+            '<path class="pf-marker__path" d="M65 21 C41 12 18 25 16 50 C14 75 39 91 63 87 C87 83 92 58 83 39 C76 24 56 14 40 19" />' +
             "</svg></span>"
           );
         }
@@ -581,6 +591,13 @@
           lbBody.innerHTML = buildBody(p);
           lb.hidden = false;
           document.body.style.overflow = "hidden";
+          // Use the real path length so the marker draws cleanly start-to-finish.
+          lbBody.querySelectorAll(".pf-marker__path").forEach(function (path) {
+            try {
+              var len = path.getTotalLength();
+              if (len) path.style.setProperty("--len", len);
+            } catch (e) {}
+          });
           lb.querySelector(".pf-lightbox__close").focus();
         }
 
