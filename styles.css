@@ -134,6 +134,7 @@ a {
   gap: 8px;
   padding: 12px 28px;
   border-radius: var(--radius-pill);
+  font-family: inherit;
   font-weight: 600;
   font-size: 15px;
   line-height: 1;
@@ -904,12 +905,13 @@ a {
 .feature-box {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
   background: linear-gradient(135deg, var(--green-900), var(--green-700));
   color: #fff;
-  padding: 28px 32px;
+  padding: 22px 26px;
   border-radius: var(--radius-lg);
-  margin: 0 0 32px;
+  margin: 0 auto 28px;
+  max-width: 880px;
   box-shadow: 0 18px 40px rgba(13, 90, 77, 0.25);
 }
 
@@ -917,23 +919,23 @@ a {
   flex: 0 0 auto;
   display: grid;
   place-items: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 16px;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
   background: var(--lime-500);
   color: var(--green-900);
 }
 
 .feature-box__title {
   margin: 0 0 6px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: #fff;
 }
 
 .feature-box__text {
   margin: 0;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.55;
   color: rgba(255, 255, 255, 0.9);
 }
@@ -951,7 +953,7 @@ a {
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
-    padding: 24px;
+    padding: 20px 22px;
   }
 }
 
@@ -3499,6 +3501,7 @@ a.review-link[href="/"]:hover {
 .partner-form__actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
   margin-top: 4px;
 }
