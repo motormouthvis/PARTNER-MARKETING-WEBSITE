@@ -1,6 +1,6 @@
 /* =========================================================
    Dream Neighborhood — Bill review site navigation
-   Page-scoped to /bill/ only. Loaded AFTER /styles.css so it
+   Page-scoped to / only. Loaded AFTER /styles.css so it
    wins the cascade. The main site (/) never links this file,
    so it is completely untouched.
    ========================================================= */
@@ -17,8 +17,7 @@
   gap: 10px;
 }
 .nav__links a.nav__main,
-.nav__dropdown-toggle,
-.review-link {
+.nav__dropdown-toggle {
   white-space: nowrap;
 }
 
@@ -193,17 +192,6 @@
     padding: 14px 4px;
     border-bottom: 1px solid #f1f5f9;
     font-size: 16px;
-  }
-  .nav__mobile .nav__links > a.review-link {
-    display: block;
-    width: 100%;
-    margin: 0;
-    padding: 14px 4px;
-    border-bottom: 1px solid #f1f5f9;
-    border-radius: 0;
-    background: none;
-    color: #0f172a;
-    font-weight: 600;
   }
   .nav__mobile .nav__dropdown-toggle {
     font-size: 16px;

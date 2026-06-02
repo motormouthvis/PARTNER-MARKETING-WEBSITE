@@ -2,9 +2,9 @@
 # ship through regular git — Git LFS is no longer used for them.
 #
 # Large PNG masters stay local and out of git (see
-# bill/assets/portfolio/.gitignore). The generated .webp/.jpg/.mp4 files are the
+# assets/portfolio/.gitignore). The generated .webp/.jpg/.mp4 files are the
 # only media the site actually serves.
 #
 # PNG masters were removed from git tracking (they stay local; see
-# bill/assets/portfolio/.gitignore). History still contains older LFS blobs for
+# assets/portfolio/.gitignore). History still contains older LFS blobs for
 # those paths until a history rewrite, which we intentionally avoid.

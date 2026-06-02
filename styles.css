@@ -1757,7 +1757,7 @@ a {
   line-height: 1.55;
 }
 
-/* Calendly links disabled until realtor/partner form is submitted (see bill/calendly-gate.js) */
+/* Calendly links disabled until realtor/partner form is submitted (see calendly-gate.js) */
 a.calendly-gate.calendly-gate--locked {
   opacity: 0.42;
   cursor: not-allowed;
@@ -2912,46 +2912,6 @@ a.calendly-gate.calendly-gate--locked {
 
 .faq-switch .demo-toggle__btn {
   cursor: pointer;
-}
-
-/* =========================================================
-   Review mode switcher (temporary for /bill/ review version)
-   ========================================================= */
-.site-switch {
-  display: flex;
-  justify-content: center;
-  padding: 22px 16px 30px;
-}
-
-.review-link {
-  font-size: 13px;
-  font-weight: 600;
-  color: #127d6b;
-  padding: 5px 12px;
-  border-radius: 9999px;
-  background: #ebf8d1;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-  line-height: 1;
-}
-
-.review-link:hover {
-  background: #d5f25e;
-  color: #0d5a4d;
-}
-
-/* Stronger treatment when on the review version itself */
-.bill-review .review-link,
-a.review-link[href="/"] {
-  background: #127d6b;
-  color: #ebf8d1;
-  border: 1px solid rgba(235, 248, 209, 0.3);
-}
-
-.bill-review .review-link:hover,
-a.review-link[href="/"]:hover {
-  background: #0d5a4d;
-  color: white;
 }
 
 /* =========================================================

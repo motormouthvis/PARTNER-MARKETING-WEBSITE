@@ -1,4 +1,4 @@
-/* Gated Calendly scheduling for /bill/ review site.
+/* Gated Calendly scheduling for / review site.
    Links with [data-calendly-gate] stay disabled until sessionStorage
    dn_calendly_unlock_v1 is set (after the realtor or partner form submits).
    Optional prefill (name, email, etc.) is stored in dn_calendly_prefill_v1 and

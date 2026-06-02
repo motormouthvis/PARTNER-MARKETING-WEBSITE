@@ -26,7 +26,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$PortfolioDir = Join-Path $PSScriptRoot "..\bill\assets\portfolio" | Resolve-Path
+$PortfolioDir = Join-Path $PSScriptRoot "..\assets\portfolio" | Resolve-Path
 $BytesPerMb = 1048576
 
 function Get-Ffmpeg {
@@ -173,5 +173,5 @@ if (-not $ImagesOnly) {
 
 Write-Host ""
 Write-Host "Done. Review in browser, then:"
-Write-Host "  git add bill/assets/portfolio/*.webp bill/assets/portfolio/*.jpg bill/assets/portfolio/*.mp4"
+Write-Host "  git add assets/portfolio/*.webp assets/portfolio/*.jpg assets/portfolio/*.mp4"
 Write-Host "  git commit -m 'Optimize portfolio media for web delivery.'"

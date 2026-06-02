@@ -42,17 +42,17 @@ From the repo root:
 
 ## Workflow when adding a partner
 
-1. Drop the PNG master(s) in `bill/assets/portfolio/` using names from `README.md` there.
+1. Drop the PNG master(s) in `assets/portfolio/` using names from `README.md` there.
 2. Run `.\scripts\compress-portfolio-media.ps1`.
-3. Spot-check `/bill/portfolio.html` locally.
+3. Spot-check `/portfolio.html` locally.
 4. Commit the `.webp`, `.jpg`, and `.mp4` files — not the PNG masters.
 
 ## Git LFS
 
 Delivery assets no longer use Git LFS. The root `.gitattributes` no longer routes
-`*.mp4` or `bill/assets/portfolio/*.png` through LFS — the small WebP/JPEG/MP4
+`*.mp4` or `assets/portfolio/*.png` through LFS — the small WebP/JPEG/MP4
 files ship through regular git, and the large PNG masters stay local (gitignored
-via `bill/assets/portfolio/.gitignore`).
+via `assets/portfolio/.gitignore`).
 
 Portfolio PNG paths were removed from git tracking (they were LFS pointers); only
 `.webp` / `.jpg` / `.mp4` delivery files live in the repo now. Older commits still

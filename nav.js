@@ -1,6 +1,6 @@
 /* Dream Neighborhood — Bill review site nav.
    Builds the mobile hamburger menu from the existing desktop
-   nav markup so every /bill/ page stays in sync automatically.
+   nav markup so every / page stays in sync automatically.
    The main site (/) never loads this file. */
 (function () {
   var nav = document.querySelector(".nav");
