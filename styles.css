@@ -3522,13 +3522,15 @@ a.review-link[href="/"]:hover {
   font-weight: 700;
   color: #ffffff;
 }
-.partner-form__success p {
+.partner-form__success-lead {
   margin: 0;
   color: rgba(255, 255, 255, 0.85);
   font-size: 15px;
+  line-height: 1.55;
 }
-.partner-form__success a {
-  color: var(--lime-500);
-  font-weight: 600;
-  text-decoration: underline;
+.partner-form__success-actions {
+  margin-top: 20px;
+}
+.partner-form__success-actions .btn {
+  text-decoration: none;
 }
