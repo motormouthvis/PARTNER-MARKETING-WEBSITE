@@ -403,53 +403,50 @@ a {
   flex-wrap: wrap;
 }
 
-/* Hero "trusted on 200+ sites" seal badge (no icon) */
+/* Hero trust strip (glass bar + lime rail, option D) */
 .hero__badge {
   position: absolute;
   top: 24px;
   right: 28px;
   z-index: 4;
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  max-width: 232px;
-  padding: 10px 16px;
-  border-radius: 999px;
-  background: radial-gradient(circle at 50% 32%, var(--green-700), var(--green-900));
-  border: 1.5px solid var(--lime-500);
-  box-shadow: 0 12px 28px rgba(13, 90, 77, 0.28);
-  color: #ffffff;
+  display: flex;
+  align-items: stretch;
+  max-width: 280px;
+  border-radius: 10px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(15, 23, 42, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
 }
 
-.hero__badge-icon {
-  width: 18px;
-  height: 18px;
+.hero__badge::before {
+  content: "";
+  width: 4px;
   flex-shrink: 0;
-  color: var(--lime-500);
+  background: var(--lime-500);
 }
 
 .hero__badge-text {
+  display: block;
+  padding: 10px 14px;
   font-size: 13px;
   font-weight: 600;
-  line-height: 1.25;
+  line-height: 1.35;
   letter-spacing: 0.01em;
-  color: #ffffff;
-}
-
-.hero__badge-text strong {
-  font-weight: 800;
-  color: var(--lime-500);
+  color: #f1f5f9;
 }
 
 @media (max-width: 1100px) {
   .hero__badge {
     top: 16px;
     right: 16px;
-    max-width: 210px;
-    padding: 9px 14px;
+    max-width: 260px;
   }
   .hero__badge-text {
     font-size: 12px;
+    padding: 9px 12px;
   }
 }
 
