@@ -403,7 +403,7 @@ a {
   flex-wrap: wrap;
 }
 
-/* Hero trust strip (glass bar + lime rail, option D) */
+/* Hero trust strip (frosted mint + lime rail — reads clean on hero art) */
 .hero__badge {
   position: absolute;
   top: 24px;
@@ -414,28 +414,35 @@ a {
   max-width: 280px;
   border-radius: 10px;
   overflow: hidden;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  background: rgba(15, 23, 42, 0.42);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(235, 248, 209, 0.72) 48%,
+    rgba(255, 255, 255, 0.94) 100%
+  );
+  border: 1px solid rgba(18, 125, 107, 0.22);
+  box-shadow:
+    0 10px 32px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .hero__badge::before {
   content: "";
   width: 4px;
   flex-shrink: 0;
-  background: var(--lime-500);
+  background: linear-gradient(180deg, var(--lime-400), var(--lime-500));
 }
 
 .hero__badge-text {
   display: block;
   padding: 10px 14px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.35;
   letter-spacing: 0.01em;
-  color: #f1f5f9;
+  color: var(--green-900);
 }
 
 @media (max-width: 1100px) {

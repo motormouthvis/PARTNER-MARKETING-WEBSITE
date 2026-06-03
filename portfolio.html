@@ -280,33 +280,132 @@
         .pf-marker__path { animation: none; stroke-dashoffset: 0; }
       }
 
-      /* ----- Testimonials ----- */
-      .pf-tgrid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 22px;
+      /* ----- Testimonials (horizontal marquee, right → left) ----- */
+      .pf-tsection {
+        overflow: hidden;
+        padding-bottom: 56px;
       }
-      @media (max-width: 900px) { .pf-tgrid { grid-template-columns: 1fr; } }
+      .pf-tsection .section-head {
+        margin-bottom: 36px;
+      }
+      .pf-tmarquee {
+        overflow: hidden;
+        width: 100%;
+        margin-bottom: 20px;
+        mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+        -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+      }
+      .pf-tmarquee__track {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 22px;
+        width: max-content;
+        padding: 8px 0 12px;
+        animation: pf-tmarquee-scroll 90s linear infinite;
+      }
+      .pf-tmarquee:hover .pf-tmarquee__track {
+        animation-play-state: paused;
+      }
+      @keyframes pf-tmarquee-scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .pf-tmarquee__track {
+          animation: none;
+          flex-wrap: wrap;
+          justify-content: center;
+          width: 100%;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+        .pf-tmarquee__track .pf-tcard--dup { display: none; }
+        .pf-tmarquee {
+          mask-image: none;
+          -webkit-mask-image: none;
+        }
+        .pf-tcard {
+          height: auto;
+        }
+        .pf-tcard__quote {
+          display: block;
+          -webkit-line-clamp: unset;
+          overflow: visible;
+        }
+      }
       .pf-tcard {
+        flex: 0 0 auto;
+        width: min(340px, 88vw);
+        height: 308px;
         background: #fff;
         border: 1px solid #e2e8f0;
         border-radius: 16px;
-        padding: 26px 24px;
+        padding: 22px 24px;
         box-shadow: 0 8px 26px rgba(15, 23, 42, 0.07);
         display: flex;
         flex-direction: column;
       }
-      .pf-tcard__stars { color: #f59e0b; font-size: 15px; letter-spacing: 2px; }
-      .pf-tcard__quote { margin: 14px 0 0; font-size: 15px; line-height: 1.6; color: #334155; flex: 1; }
-      .pf-tcard__by { margin-top: 18px; display: flex; align-items: center; gap: 12px; }
+      .pf-tcard__stars { color: #f59e0b; font-size: 15px; letter-spacing: 2px; flex-shrink: 0; }
+      .pf-tcard__quote {
+        margin: 14px 0 0;
+        font-size: 14px;
+        line-height: 1.55;
+        color: #334155;
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 8;
+      }
+      .pf-tcard__by {
+        margin-top: auto;
+        padding-top: 14px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+      }
       .pf-tcard__avatar {
         width: 42px; height: 42px; border-radius: 50%;
         background: #127d6b; color: #eafaf2;
         display: inline-flex; align-items: center; justify-content: center;
         font-weight: 800; font-size: 15px; flex: 0 0 42px;
       }
-      .pf-tcard__name { font-size: 15px; font-weight: 800; color: #0f172a; }
-      .pf-tcard__role { font-size: 13px; color: #64748b; }
+      .pf-tcard__name { font-size: 15px; font-weight: 800; color: #0f172a; display: block; }
+      .pf-tcard__biz {
+        display: block;
+        margin-top: 4px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #334155;
+      }
+      .pf-tcard__loc {
+        display: block;
+        margin-top: 2px;
+        font-size: 13px;
+        color: #64748b;
+      }
+      .pf-tcard__biz a {
+        color: #127d6b;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        font-weight: 600;
+      }
+      .pf-tcard__name a {
+        color: #127d6b;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        font-weight: 800;
+      }
+      .pf-tcard__quote a {
+        color: #127d6b;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
     </style>
   </head>
   <body>
@@ -490,21 +589,23 @@
     </section>
 
     <!-- ============== TESTIMONIALS ============== -->
-    <section class="section section--alt">
+    <section class="section section--alt pf-tsection" aria-labelledby="pf-testimonials-heading">
       <div class="container">
         <div class="section-head pf-intro">
           <span class="pill pill--solid">
             <span class="pill__dot" aria-hidden="true"></span>
             TESTIMONIALS
           </span>
-          <h2 class="section-title">What Our Partners Are Saying</h2>
+          <h2 id="pf-testimonials-heading" class="section-title">What Our Partners Are Saying</h2>
           <p class="section-lead">
             Brokerages, teams, and IDX partners use Dream Neighborhood to keep buyers engaged
-            and win more listings.
+            and win more listings—plus real feedback from agents using the neighborhood explorer every day.
           </p>
         </div>
+      </div>
 
-        <div class="pf-tgrid">
+      <div class="pf-tmarquee" role="region" aria-label="Scrolling testimonials">
+        <div class="pf-tmarquee__track">
           <article class="pf-tcard">
             <div class="pf-tcard__stars" aria-label="5 out of 5 stars">★★★★★</div>
             <p class="pf-tcard__quote">
@@ -515,8 +616,9 @@
             <div class="pf-tcard__by">
               <span class="pf-tcard__avatar">WT</span>
               <span>
-                <span class="pf-tcard__name">Winn Team Realtors</span><br />
-                <span class="pf-tcard__role">Clearwater Beach / Tampa Bay, FL</span>
+                <span class="pf-tcard__name">Winn Team</span>
+                <span class="pf-tcard__biz">Winn Team Realtors</span>
+                <span class="pf-tcard__loc">Clearwater Beach, FL</span>
               </span>
             </div>
           </article>
@@ -531,8 +633,9 @@
             <div class="pf-tcard__by">
               <span class="pf-tcard__avatar">TD</span>
               <span>
-                <span class="pf-tcard__name">Team Doherty</span><br />
-                <span class="pf-tcard__role">eXp Realty · Orange County, CA</span>
+                <span class="pf-tcard__name">Team Doherty</span>
+                <span class="pf-tcard__biz">eXp Realty</span>
+                <span class="pf-tcard__loc">Mission Viejo, CA</span>
               </span>
             </div>
           </article>
@@ -540,14 +643,154 @@
           <article class="pf-tcard">
             <div class="pf-tcard__stars" aria-label="5 out of 5 stars">★★★★★</div>
             <p class="pf-tcard__quote">
-              "We bundled Dream Neighborhood into our IDX product and rolled it out across thousands
-              of agent sites with zero friction. It's become a feature our clients ask for by name."
+              "We bundled Dream Neighborhood into our premier <a href="https://aeroidx.com/" target="_blank" rel="noopener">Aero IDX product</a> and are rolling it out across agent sites with zero friction. It's become a feature our clients ask for by name."
             </p>
             <div class="pf-tcard__by">
               <span class="pf-tcard__avatar">RC</span>
               <span>
-                <span class="pf-tcard__name">Realty Candy</span><br />
-                <span class="pf-tcard__role">AeroIDX Partner</span>
+                <span class="pf-tcard__name"><a href="https://www.realtycandy.com/" target="_blank" rel="noopener">Realty Candy</a></span>
+                <span class="pf-tcard__biz"><a href="https://aeroidx.com/" target="_blank" rel="noopener">AeroIDX</a></span>
+                <span class="pf-tcard__loc">St. George, UT</span>
+              </span>
+            </div>
+          </article>
+
+          <article class="pf-tcard">
+            <div class="pf-tcard__stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="pf-tcard__quote">
+              Dream Neighborhood's neighborhood explorer has been outstanding for our team and buyers—we pull up neighborhood data on the fly at showings and they stay engaged. It keeps people on our site with insights competitors don't bundle in one straightforward, customizable place. We've also heard great things about the summary reports. I'd highly recommend it.
+            </p>
+            <div class="pf-tcard__by">
+              <span class="pf-tcard__avatar">CC</span>
+              <span>
+                <span class="pf-tcard__name">Carlson Collier</span>
+                <span class="pf-tcard__biz"><a href="https://coachandcarlson.com" target="_blank" rel="noopener">Coach &amp; Carlson</a></span>
+                <span class="pf-tcard__loc">Fort Pierce, FL</span>
+              </span>
+            </div>
+          </article>
+
+          <article class="pf-tcard">
+            <div class="pf-tcard__stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="pf-tcard__quote">
+              The neighborhood explorer is really easy to use and I could see it being beneficial for my buyers/sellers!
+            </p>
+            <div class="pf-tcard__by">
+              <span class="pf-tcard__avatar">KD</span>
+              <span>
+                <span class="pf-tcard__name">Kevin Daniel</span>
+                <span class="pf-tcard__biz">Independent agent</span>
+                <span class="pf-tcard__loc">United States</span>
+              </span>
+            </div>
+          </article>
+
+          <article class="pf-tcard">
+            <div class="pf-tcard__stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="pf-tcard__quote">
+              My clients love having all their neighborhood data in one convenient place, and prospects are always impressed by the depth of insights I can share with them. Dream Neighborhood has become an essential tool for demonstrating value and helping clients make informed decisions.
+            </p>
+            <div class="pf-tcard__by">
+              <span class="pf-tcard__avatar">AG</span>
+              <span>
+                <span class="pf-tcard__name">Aaron Gathrid</span>
+                <span class="pf-tcard__biz">Independent agent</span>
+                <span class="pf-tcard__loc">United States</span>
+              </span>
+            </div>
+          </article>
+
+          <!-- duplicate row for seamless loop -->
+          <article class="pf-tcard pf-tcard--dup" aria-hidden="true">
+            <div class="pf-tcard__stars">★★★★★</div>
+            <p class="pf-tcard__quote">
+              "Buyers used to bounce to Zillow the second they wanted neighborhood info. Now they
+              stay on our site and explore everything right there. It paid for itself with the
+              first deal."
+            </p>
+            <div class="pf-tcard__by">
+              <span class="pf-tcard__avatar">WT</span>
+              <span>
+                <span class="pf-tcard__name">Winn Team</span>
+                <span class="pf-tcard__biz">Winn Team Realtors</span>
+                <span class="pf-tcard__loc">Clearwater Beach, FL</span>
+              </span>
+            </div>
+          </article>
+
+          <article class="pf-tcard pf-tcard--dup" aria-hidden="true">
+            <div class="pf-tcard__stars">★★★★★</div>
+            <p class="pf-tcard__quote">
+              "Setup was genuinely one line of code, and it showed up on every listing automatically.
+              Our luxury buyers love seeing schools, walkability, and lifestyle without leaving
+              the page."
+            </p>
+            <div class="pf-tcard__by">
+              <span class="pf-tcard__avatar">TD</span>
+              <span>
+                <span class="pf-tcard__name">Team Doherty</span>
+                <span class="pf-tcard__biz">eXp Realty</span>
+                <span class="pf-tcard__loc">Mission Viejo, CA</span>
+              </span>
+            </div>
+          </article>
+
+          <article class="pf-tcard pf-tcard--dup" aria-hidden="true">
+            <div class="pf-tcard__stars">★★★★★</div>
+            <p class="pf-tcard__quote">
+              "We bundled Dream Neighborhood into our premier Aero IDX product and are rolling it out across agent sites with zero friction. It's become a feature our clients ask for by name."
+            </p>
+            <div class="pf-tcard__by">
+              <span class="pf-tcard__avatar">RC</span>
+              <span>
+                <span class="pf-tcard__name">Realty Candy</span>
+                <span class="pf-tcard__biz">AeroIDX</span>
+                <span class="pf-tcard__loc">St. George, UT</span>
+              </span>
+            </div>
+          </article>
+
+          <article class="pf-tcard pf-tcard--dup" aria-hidden="true">
+            <div class="pf-tcard__stars">★★★★★</div>
+            <p class="pf-tcard__quote">
+              Dream Neighborhood's neighborhood explorer has been outstanding for our team and buyers—we pull up neighborhood data on the fly at showings and they stay engaged. It keeps people on our site with insights competitors don't bundle in one straightforward, customizable place. We've also heard great things about the summary reports. I'd highly recommend it.
+            </p>
+            <div class="pf-tcard__by">
+              <span class="pf-tcard__avatar">CC</span>
+              <span>
+                <span class="pf-tcard__name">Carlson Collier</span>
+                <span class="pf-tcard__biz">Coach &amp; Carlson</span>
+                <span class="pf-tcard__loc">Fort Pierce, FL</span>
+              </span>
+            </div>
+          </article>
+
+          <article class="pf-tcard pf-tcard--dup" aria-hidden="true">
+            <div class="pf-tcard__stars">★★★★★</div>
+            <p class="pf-tcard__quote">
+              The neighborhood explorer is really easy to use and I could see it being beneficial for my buyers/sellers!
+            </p>
+            <div class="pf-tcard__by">
+              <span class="pf-tcard__avatar">KD</span>
+              <span>
+                <span class="pf-tcard__name">Kevin Daniel</span>
+                <span class="pf-tcard__biz">Independent agent</span>
+                <span class="pf-tcard__loc">United States</span>
+              </span>
+            </div>
+          </article>
+
+          <article class="pf-tcard pf-tcard--dup" aria-hidden="true">
+            <div class="pf-tcard__stars">★★★★★</div>
+            <p class="pf-tcard__quote">
+              My clients love having all their neighborhood data in one convenient place, and prospects are always impressed by the depth of insights I can share with them. Dream Neighborhood has become an essential tool for demonstrating value and helping clients make informed decisions.
+            </p>
+            <div class="pf-tcard__by">
+              <span class="pf-tcard__avatar">AG</span>
+              <span>
+                <span class="pf-tcard__name">Aaron Gathrid</span>
+                <span class="pf-tcard__biz">Independent agent</span>
+                <span class="pf-tcard__loc">United States</span>
               </span>
             </div>
           </article>
@@ -579,13 +822,7 @@
           <div>
             <h4>Partners</h4>
             <a href="/partners.html">Become a Partner</a>
-            <a
-              class="calendly-gate calendly-gate--locked"
-              href="#"
-              data-calendly-gate
-              data-calendly-href="https://calendly.com/d/cvbg-myt-4x9/dream-neighborhood-demo-call"
-              >Book a Demo</a
-            >
+            <a href="/#contact">Book a Demo</a>
           </div>
           <div>
             <h4>Company</h4>
