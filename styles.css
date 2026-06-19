@@ -3665,3 +3665,149 @@ a.calendly-gate.calendly-gate--locked {
   padding-top: 1.5rem;
   border-top: 1px solid #e2e8f0;
 }
+
+/* ---------- INSTALLATION PAGE ---------- */
+.install-hero__support {
+  font-size: 16px;
+  color: var(--ink-400);
+  margin: 10px 0 0;
+}
+
+.install-methods {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 800px) {
+  .install-methods {
+    grid-template-columns: 1fr;
+  }
+}
+
+.install-method {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.install-method__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.install-method__title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink-900);
+}
+
+.install-method__desc {
+  margin: 0 0 20px;
+  color: var(--ink-400);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.install-note {
+  margin: 14px 0 0;
+  color: var(--ink-400);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.install-code {
+  position: relative;
+}
+
+.install-code__pre {
+  margin: 0;
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: var(--radius-sm);
+  padding: 18px 18px 18px 18px;
+  overflow-x: auto;
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+
+.install-code__pre code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas,
+    "Liberation Mono", monospace;
+  white-space: pre;
+  color: inherit;
+  background: none;
+}
+
+.install-code__copy {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.install-code__copy:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.install-code__copy:focus-visible {
+  outline: 2px solid var(--lime-500);
+  outline-offset: 2px;
+}
+
+.install-code__copy.is-copied {
+  background: var(--lime-500);
+  color: var(--ink-900);
+  border-color: var(--lime-500);
+}
+
+.install-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 880px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.install-benefits li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 16px;
+  color: var(--ink-700);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.install-benefits .check {
+  margin-top: 2px;
+}
+
+@media (max-width: 700px) {
+  .install-benefits {
+    grid-template-columns: 1fr;
+  }
+}
