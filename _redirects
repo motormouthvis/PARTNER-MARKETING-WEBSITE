@@ -1,0 +1,5 @@
+# Keep unapproved/draft content out of the public site.
+# The trailing "!" forces this rule even though the file physically exists,
+# so /drafts/* is never served publicly. Drafts remain available to the team
+# in the Git repository for later use once approvals are received.
+/drafts/*    /404.html    404!
