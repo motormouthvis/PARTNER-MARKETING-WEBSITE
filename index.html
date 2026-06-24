@@ -448,6 +448,97 @@
       </div>
     </section>
 
+    <!-- ============== TESTIMONIAL (social proof) ============== -->
+    <style>
+      .home-quote {
+        max-width: 820px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .home-quote__stars {
+        color: #f59e0b;
+        font-size: 18px;
+        letter-spacing: 3px;
+        margin-bottom: 18px;
+      }
+      .home-quote__text {
+        margin: 0;
+        font-size: clamp(22px, 3vw, 30px);
+        line-height: 1.4;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: var(--ink-900);
+      }
+      .home-quote__text .accent {
+        color: var(--green-700);
+      }
+      .home-quote__by {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        margin-top: 28px;
+        text-align: left;
+      }
+      .home-quote__avatar {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: var(--green-700);
+        color: #eafaf2;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 17px;
+        flex: 0 0 52px;
+      }
+      .home-quote__meta {
+        display: flex;
+        flex-direction: column;
+      }
+      .home-quote__name {
+        font-size: 16px;
+        font-weight: 800;
+        color: var(--ink-900);
+      }
+      .home-quote__loc {
+        font-size: 14px;
+        color: var(--ink-400);
+      }
+      .home-quote__link {
+        display: block;
+        margin-top: 20px;
+        font-weight: 700;
+        color: var(--green-700);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .home-quote__link:hover {
+        color: var(--green-900);
+      }
+    </style>
+    <section class="section section--alt" aria-label="Customer testimonial">
+      <div class="container">
+        <figure class="home-quote">
+          <div class="home-quote__stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote class="home-quote__text">
+            “I absolutely love what you have done! For 40 years, whenever someone
+            has asked my opinion on web or product development, I’ve had plenty to
+            say. <span class="accent">This is the first time I just said ‘Wow.’</span>”
+          </blockquote>
+          <figcaption class="home-quote__by">
+            <span class="home-quote__avatar" aria-hidden="true">WT</span>
+            <span class="home-quote__meta">
+              <span class="home-quote__name">Winn Team Realtors</span>
+              <span class="home-quote__loc">Clearwater Beach, FL</span>
+            </span>
+          </figcaption>
+          <a class="home-quote__link" href="/portfolio.html">See more customer examples →</a>
+        </figure>
+      </div>
+    </section>
+
     <!-- ============== CTA BANNER + REALTOR FORM (unlocks Calendly) ============== -->
     <section id="contact" class="cta">
       <div class="container cta__inner">
