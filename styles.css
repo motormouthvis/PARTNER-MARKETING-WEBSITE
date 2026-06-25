@@ -644,10 +644,17 @@ a {
 
 .partner-card__logo {
   display: flex;
-  align-items: center;
-  gap: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
   padding-bottom: 24px;
   border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.partner-card__logo-img {
+  width: auto;
+  height: 44px;
+  max-width: 100%;
 }
 
 .partner-card__name {
